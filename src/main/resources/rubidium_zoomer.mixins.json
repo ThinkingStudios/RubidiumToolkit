@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.texstudio.rubidium_zoomer.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "rubidium_zoomer.refmap.json",
+  "mixins": [
+    "Zoom.MouseMixin"
+  ],
+  "minVersion": "0.8",
+  "client": [
+    "SodiumConfig.ZoomPage",
+    "Zoom.GameRendererMixin"
+  ]
+}

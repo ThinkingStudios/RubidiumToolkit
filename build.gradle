@@ -1,0 +1,208 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+        jcenter()
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        maven {
+            name 'parchment'
+            url 'https://maven.parchmentmc.org'
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${forgegradle_version}", changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: "${mixingradle_version}"
+        classpath 'org.parchmentmc:librarian:1.+'
+        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
+    }
+}
+
+apply plugin: "com.matthewprenger.cursegradle"
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
+
+boolean dev = System.getenv('RELEASE') == null || System.getenv('RELEASE').equals('false');
+
+ext.buildnumber = 0
+project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : "custom"
+
+version = "mc${minecraft_version}_v${mod_version}" + (dev && !buildnumber.equals("custom") ? "+${buildnumber}" : '')
+group = 'vice.' + String.valueOf(mod_id)
+archivesBaseName = String.valueOf(mod_id)
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+
+minecraft {
+    mappings channel: "${mappings_channel}", version: "${mappings_version}"
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            arg '-mixin.config=' + String.valueOf(mod_id) + '.mixins.json'
+            //jvmArgs '-XX:+UnlockCommercialFeatures' // uncomment for profiling
+            property 'forge.logging.console.level', 'info'
+            property 'fml.earlyprogresswindow', 'false'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                magnesium_extras {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run/server')
+            arg '-mixin.config=' + String.valueOf(mod_id) + '.mixins.json'
+            property 'forge.logging.console.level', 'info'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            mods {
+                magnesium_extras {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            property 'fml.earlyprogresswindow', 'false'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            args '--mod', String.valueOf(mod_id), '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources')
+            mods {
+                magnesium_extras {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+compileJava {
+    options.compilerArgs = ["-Xdiags:verbose"]
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+}
+
+repositories {
+    maven {
+        // Location of the maven for mixed mappings, Registrate, and Flywheel
+        name = "tterrag maven"
+        url = "https://maven.tterrag.com/"
+    }
+    maven {
+        url = "https://www.cursemaven.com"
+    }
+    maven {
+        url = "https://www.cursemaven.com"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    compileOnly fg.deobf("curse.maven:magnesium-532724:3526076")
+    runtimeOnly fg.deobf("curse.maven:magnesium-532724:3526076")
+    compileOnly fg.deobf("curse.maven:rubidium-574856:3888519")
+    runtimeOnly fg.deobf("curse.maven:rubidium-574856:3888519")
+
+    runtimeOnly fg.deobf("curse.maven:dynlights-551736:3574974")
+
+    runtimeOnly fg.deobf("curse.maven:jei-238222:3438494")
+    runtimeOnly fg.deobf("curse.maven:jer-240630:3066754")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:3467445")
+    runtimeOnly fg.deobf("curse.maven:spark-361579:3337641")
+    runtimeOnly fg.deobf("curse.maven:lazydfu-433518:3209972")
+    runtimeOnly fg.deobf("curse.maven:smoothboot-420913:3224252")
+    runtimeOnly fg.deobf("curse.maven:alltheores-405593:3405905")
+    runtimeOnly fg.deobf("curse.maven:cofh-69162:3407019")
+    runtimeOnly fg.deobf("curse.maven:thermalfoundation-222880:3412300")
+    runtimeOnly fg.deobf("curse.maven:thermalexpansion-69163:3404884")
+    runtimeOnly fg.deobf("curse.maven:engineers-313866:3390489")
+    runtimeOnly fg.deobf("curse.maven:immersive-231951:3497359")
+    runtimeOnly fg.deobf("curse.maven:patchouli-306770:3459118")
+    //runtimeOnly fg.deobf("curse.maven:kotrt-543308:3571155")
+
+    compileOnly fg.deobf("curse.maven:ftbchunks-314906:3509329")
+    compileOnly fg.deobf("curse.maven:ftblibrary-404465:3514173")
+
+    runtimeOnly fg.deobf("curse.maven:ftbchunks-314906:3509329")
+    runtimeOnly fg.deobf("curse.maven:architectury-419699:3500014")
+    runtimeOnly fg.deobf("curse.maven:ftblibrary-404465:3514173")
+    runtimeOnly fg.deobf("curse.maven:ftbteams-404468:3492657")
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title": "${mod_id}",
+                "Specification-Vendor": "vice",
+                "Specification-Version": "1",
+                "Implementation-Title": project.name,
+                "Implementation-Version": "${mod_version}",
+                "Implementation-Vendor" :"vice",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs": "${mod_id}.mixins.json"
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    archiveBaseName.set(project.archivesBaseName)
+    archiveVersion.set("${project.version}")
+    archiveClassifier.set('sources')
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    archiveClassifier.set('javadoc')
+}
+
+artifacts {
+    archives jar, sourcesJar, javadocJar
+}
+
+publishing {
+    tasks.publish.dependsOn 'build'
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+
+    repositories {
+        if (project.hasProperty('mavendir')) {
+            maven { url mavendir }
+        }
+    }
+}
