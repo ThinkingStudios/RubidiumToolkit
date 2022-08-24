@@ -7,5 +7,5 @@
 English / [简体中文](README.md) 
 
 ### WHAT IS THIS?
-Magnesium / Rubidium Extras do NOT SUPPORT localization (hardcoded), this Fork modifies the code to support localization.
+Rubidium Zoomer is separate from the zooming section in Magnesium / Rubidium Extras. (1.16.5)
 

@@ -8,7 +8,7 @@
   ],
   "minVersion": "0.8",
   "client": [
-    "SodiumConfig.ZoomPage",
+    "SodiumConfig.ZoomOptionsPage",
     "Zoom.GameRendererMixin"
   ]
 }
