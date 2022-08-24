@@ -1,5 +1,5 @@
 <p align="center">
- <img width="100px" src="icon/Rb-Extra.png" align="center" alt="RubidiumZoomer Logo" />
+ <img width="100px" src="icon/RubidiumZoomer.png" align="center" alt="RubidiumZoomer Logo" />
  <h2 align="center">Rubidium Zoomer</h2>
  <p align="center"></p>
 
