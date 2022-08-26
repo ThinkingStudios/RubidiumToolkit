@@ -1,14 +1,14 @@
-package com.texstudio.rubidium_zoomer.features.Zoom;
+package com.texstudio.rubidium_toolkit.features.Zoom;
 
-import com.texstudio.rubidium_zoomer.RubidiumZoomer;
-import com.texstudio.rubidium_zoomer.config.RubidiumZoomerConfig;
-import com.texstudio.rubidium_zoomer.keybinds.KeyboardInput;
+import com.texstudio.rubidium_toolkit.RubidiumToolkit;
+import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import com.texstudio.rubidium_toolkit.keybinds.KeyboardInput;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = RubidiumZoomer.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = RubidiumToolkit.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ZoomHandler {
     //Used internally in order to make zoom toggling possible.
     private static boolean lastZoomPress = false;
@@ -19,11 +19,11 @@ public class ZoomHandler {
     @SubscribeEvent
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         //Handle zoom mode changes.
-        if (!RubidiumZoomerConfig.zoomMode.get().equals(RubidiumZoomerConfig.ZoomModes.HOLD.toString())) {
+        if (!RubidiumToolkitConfig.zoomMode.get().equals(RubidiumToolkitConfig.ZoomModes.HOLD.toString())) {
             if (!persistentZoom) {
                 persistentZoom = true;
                 lastZoomPress = true;
-                ZoomUtils.zoomDivisor = RubidiumZoomerConfig.zoomValues.zoomDivisor;
+                ZoomUtils.zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
             }
         } else {
             if (persistentZoom) {
@@ -37,21 +37,21 @@ public class ZoomHandler {
             return;
         }
 
-        if (RubidiumZoomerConfig.zoomMode.get().equals(RubidiumZoomerConfig.ZoomModes.HOLD.toString()))
+        if (RubidiumToolkitConfig.zoomMode.get().equals(RubidiumToolkitConfig.ZoomModes.HOLD.toString()))
         {
             //If the zoom needs to be held, then the zoom signal is determined by if the key is pressed or not.
             ZoomUtils.zoomState = KeyboardInput.zoomKey.isDown();
-            ZoomUtils.zoomDivisor = RubidiumZoomerConfig.zoomValues.zoomDivisor;
+            ZoomUtils.zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
         }
-        else if (RubidiumZoomerConfig.zoomMode.get().equals(RubidiumZoomerConfig.ZoomModes.TOGGLE.toString()))
+        else if (RubidiumToolkitConfig.zoomMode.get().equals(RubidiumToolkitConfig.ZoomModes.TOGGLE.toString()))
         {
             //If the zoom needs to be toggled, toggle the zoom signal instead.
             if (KeyboardInput.zoomKey.isDown()) {
                 ZoomUtils.zoomState = !ZoomUtils.zoomState;
-                ZoomUtils.zoomDivisor = RubidiumZoomerConfig.zoomValues.zoomDivisor;
+                ZoomUtils.zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
             }
         }
-        else if (RubidiumZoomerConfig.zoomMode.get().equals(RubidiumZoomerConfig.ZoomModes.PERSISTENT.toString()))
+        else if (RubidiumToolkitConfig.zoomMode.get().equals(RubidiumToolkitConfig.ZoomModes.PERSISTENT.toString()))
         {
             //If persistent zoom is enabled, just keep the zoom on.
             ZoomUtils.zoomState = true;

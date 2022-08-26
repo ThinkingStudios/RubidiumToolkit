@@ -1,6 +1,6 @@
-package com.texstudio.rubidium_zoomer.keybinds;
+package com.texstudio.rubidium_toolkit.keybinds;
 
-import com.texstudio.rubidium_zoomer.RubidiumZoomer;
+import com.texstudio.rubidium_toolkit.RubidiumToolkit;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.api.distmarker.Dist;
@@ -12,11 +12,11 @@ import org.lwjgl.glfw.GLFW;
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class KeyboardInput
 {
-    public static final KeyBinding zoomKey = new KeyBinding(RubidiumZoomer.MODID + ".key.zoom",
+    public static final KeyBinding zoomKey = new KeyBinding(RubidiumToolkit.MODID + ".key.zoom",
             KeyConflictContext.IN_GAME,
             KeyModifier.NONE,
             InputMappings.Type.KEYSYM,
             GLFW.GLFW_KEY_C,
-            RubidiumZoomer.MODID + ".key.category");
+            RubidiumToolkit.MODID + ".key.category");
 
 }

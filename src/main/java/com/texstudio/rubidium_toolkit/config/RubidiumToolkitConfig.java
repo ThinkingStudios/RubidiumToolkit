@@ -1,13 +1,14 @@
-package com.texstudio.rubidium_zoomer.config;
+package com.texstudio.rubidium_toolkit.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import lombok.val;
+import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
 import net.minecraftforge.common.ForgeConfigSpec;
 import java.nio.file.Path;
 import static net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
-public class RubidiumZoomerConfig
+public class RubidiumToolkitConfig
 {
     public static ForgeConfigSpec ConfigSpec;
 
@@ -20,9 +21,19 @@ public class RubidiumZoomerConfig
     public static ConfigValue<Boolean> zoomScrolling;
     public static ConfigValue<Boolean> zoomOverlay;
 
+    // FPS Counter
+    public static ConfigValue<String> fpsCounterMode;
+    public static ConfigValue<Boolean> fpsCounterAlignRight;
+    public static ConfigValue<Integer> fpsCounterPosition;
     static
     {
         val builder = new ConfigBuilder("Dynamic Lights Settings");
+
+        builder.Block("FPS Counter", b -> {
+            fpsCounterMode = b.define("Display FPS Counter (OFF, SIMPLE, ADVANCED)", "ADVANCED");
+            fpsCounterAlignRight = b.define("Right-align FPS Counter", false);
+            fpsCounterPosition = b.define("FPS Counter Distance", 12);
+        });
 
         builder.Block("Zoom", b -> {
             lowerZoomSensitivity = b.define("Lower Zoom Sensitivity", true);
@@ -42,6 +53,23 @@ public class RubidiumZoomerConfig
 
         configData.load();
         ConfigSpec.setConfig(configData);
+    }
+
+    public static enum Complexity implements TextProvider
+    {
+        OFF("Off"),
+        SIMPLE("Simple"),
+        ADVANCED("Advanced");
+
+        private final String name;
+
+        private Complexity(String name) {
+            this.name = name;
+        }
+
+        public String getLocalizedName() {
+            return this.name;
+        }
     }
 
     public enum ZoomTransitionOptions {

@@ -1,4 +1,4 @@
-package com.texstudio.rubidium_zoomer.keybinds;
+package com.texstudio.rubidium_toolkit.keybinds;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

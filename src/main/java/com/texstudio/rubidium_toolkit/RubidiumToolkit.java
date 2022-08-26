@@ -1,4 +1,4 @@
-package com.texstudio.rubidium_zoomer;
+package com.texstudio.rubidium_toolkit;
 
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
@@ -13,23 +13,26 @@ import net.minecraftforge.fml.network.FMLNetworkConstants;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.texstudio.rubidium_zoomer.config.RubidiumZoomerConfig;
+import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 
 import java.lang.reflect.Field;
+import java.nio.file.Path;
 
-@Mod(RubidiumZoomer.MODID)
-public class RubidiumZoomer
+@Mod(RubidiumToolkit.MODID)
+public class RubidiumToolkit
 {
-    public static final String MODID = "rubidium_zoomer";
+    public static final String MODID = "rubidium_toolkit";
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public RubidiumZoomer() {
+    public static Path configPatch = FMLPaths.CONFIGDIR.get().resolve("rubidium_toolkit.toml");
+
+    public RubidiumToolkit() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
 
-        RubidiumZoomerConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve("rubidium_zoomer.toml"));
+        RubidiumToolkitConfig.loadConfig(configPatch);
 
-        //MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(this);
 
         ModLoadingContext.get()
                 .registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));

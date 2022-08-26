@@ -1,4 +1,4 @@
-package com.texstudio.rubidium_zoomer.config;
+package com.texstudio.rubidium_toolkit.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 

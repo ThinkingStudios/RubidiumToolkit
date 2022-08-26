@@ -1,9 +1,9 @@
-package com.texstudio.rubidium_zoomer.mixins.Zoom;
+package com.texstudio.rubidium_toolkit.mixins.Zoom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import com.texstudio.rubidium_zoomer.config.RubidiumZoomerConfig;
-import com.texstudio.rubidium_zoomer.features.Zoom.ZoomUtils;
+import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import com.texstudio.rubidium_toolkit.features.Zoom.ZoomUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -40,12 +40,12 @@ public class GameRendererMixin {
 	)
 	private void zoomTick(CallbackInfo info) {
 		//If zoom transitions are enabled, update the zoom FOV multiplier.
-		if (!RubidiumZoomerConfig.zoomTransition.get().equals(RubidiumZoomerConfig.ZoomTransitionOptions.OFF.toString())) {
+		if (!RubidiumToolkitConfig.zoomTransition.get().equals(RubidiumToolkitConfig.ZoomTransitionOptions.OFF.toString())) {
 			ZoomUtils.updateZoomFovMultiplier();
 		}
 
 		//If the zoom overlay is enabled, update the zoom overlay alpha.
-		if (RubidiumZoomerConfig.zoomOverlay.get()) {
+		if (RubidiumToolkitConfig.zoomOverlay.get()) {
 			ZoomUtils.updateZoomOverlayAlpha();
 		}
 	}
@@ -59,7 +59,7 @@ public class GameRendererMixin {
 	private void getZoomedFov(ActiveRenderInfo camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
 		double fov = info.getReturnValue();
 
-		if (!RubidiumZoomerConfig.zoomTransition.get().equals(RubidiumZoomerConfig.ZoomTransitionOptions.OFF.toString())) {
+		if (!RubidiumToolkitConfig.zoomTransition.get().equals(RubidiumToolkitConfig.ZoomTransitionOptions.OFF.toString())) {
 			//Handle the zoom with smooth transitions enabled.
 			if (ZoomUtils.zoomFovMultiplier != 1.0F) {
 				fov *= MathHelper.lerp(tickDelta, ZoomUtils.lastZoomFovMultiplier, ZoomUtils.zoomFovMultiplier);
@@ -87,7 +87,7 @@ public class GameRendererMixin {
 		method = "render(FJZ)V"
 	)
 	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
-		if (RubidiumZoomerConfig.zoomOverlay.get()) {
+		if (RubidiumToolkitConfig.zoomOverlay.get()) {
 			if (this.minecraft.options.hideGui) {
 				return;
 			}
@@ -95,7 +95,7 @@ public class GameRendererMixin {
 			RenderSystem.defaultAlphaFunc();
 			RenderSystem.enableBlend();
 			//If zoom transitions is on, apply the transition to the overlay.
-			if (!RubidiumZoomerConfig.zoomTransition.get().equals(RubidiumZoomerConfig.ZoomTransitionOptions.OFF.toString())) {
+			if (!RubidiumToolkitConfig.zoomTransition.get().equals(RubidiumToolkitConfig.ZoomTransitionOptions.OFF.toString())) {
 				if (ZoomUtils.zoomFovMultiplier != 0.0F) {
 					float transparency = MathHelper.lerp(tickDelta, ZoomUtils.lastZoomOverlayAlpha, ZoomUtils.zoomOverlayAlpha);
 					this.renderZoomOverlay(transparency);

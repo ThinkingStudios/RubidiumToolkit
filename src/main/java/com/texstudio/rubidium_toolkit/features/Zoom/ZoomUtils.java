@@ -1,6 +1,6 @@
-package com.texstudio.rubidium_zoomer.features.Zoom;
+package com.texstudio.rubidium_toolkit.features.Zoom;
 
-import com.texstudio.rubidium_zoomer.config.RubidiumZoomerConfig;
+import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 
 //The class that contains most of the logic behind the zoom itself.
 public class ZoomUtils {
@@ -11,7 +11,7 @@ public class ZoomUtils {
 	public static boolean lastZoomState = false;
 
 	//The zoom divisor, managed by the zoom press and zoom scrolling. Used by other mixins.
-	public static double zoomDivisor = RubidiumZoomerConfig.zoomValues.zoomDivisor;
+	public static double zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
 
 	//The zoom FOV multipliers. Used by the GameRenderer mixin.
 	public static float zoomFovMultiplier = 1.0F;
@@ -27,20 +27,20 @@ public class ZoomUtils {
 		double lesserChangedZoomDivisor;
 
 		if (increase) {
-			changedZoomDivisor = zoomDivisor + RubidiumZoomerConfig.zoomValues.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor + RubidiumZoomerConfig.zoomValues.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor + RubidiumToolkitConfig.zoomValues.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor + RubidiumToolkitConfig.zoomValues.lesserScrollStep;
 		} else {
-			changedZoomDivisor = zoomDivisor - RubidiumZoomerConfig.zoomValues.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor - RubidiumZoomerConfig.zoomValues.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor - RubidiumToolkitConfig.zoomValues.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor - RubidiumToolkitConfig.zoomValues.lesserScrollStep;
 			lastZoomState = true;
 		}
 
-		if (lesserChangedZoomDivisor <= RubidiumZoomerConfig.zoomValues.zoomDivisor) {
+		if (lesserChangedZoomDivisor <= RubidiumToolkitConfig.zoomValues.zoomDivisor) {
 			changedZoomDivisor = lesserChangedZoomDivisor;
 		}
 
-		if (changedZoomDivisor >= RubidiumZoomerConfig.zoomValues.minimumZoomDivisor) {
-			if (changedZoomDivisor <= RubidiumZoomerConfig.zoomValues.maximumZoomDivisor) {
+		if (changedZoomDivisor >= RubidiumToolkitConfig.zoomValues.minimumZoomDivisor) {
+			if (changedZoomDivisor <= RubidiumToolkitConfig.zoomValues.maximumZoomDivisor) {
 				zoomDivisor = changedZoomDivisor;
 			}
 		}
@@ -48,7 +48,7 @@ public class ZoomUtils {
 
 	//The method used by both the "Reset Zoom" keybind and the "Reset Zoom With Mouse" tweak.
 	public static void resetZoomDivisor() {
-		zoomDivisor = RubidiumZoomerConfig.zoomValues.zoomDivisor;
+		zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
 		lastZoomState = true;
 	}
 
@@ -81,8 +81,8 @@ public class ZoomUtils {
 
 		lastZoomFovMultiplier = zoomFovMultiplier;
 		
-		if (RubidiumZoomerConfig.zoomTransition.get().equals(RubidiumZoomerConfig.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * RubidiumZoomerConfig.zoomValues.smoothMultiplier;
+		if (RubidiumToolkitConfig.zoomTransition.get().equals(RubidiumToolkitConfig.ZoomTransitionOptions.SMOOTH.toString())) {
+			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * RubidiumToolkitConfig.zoomValues.smoothMultiplier;
 		}
 	}
 
@@ -96,8 +96,8 @@ public class ZoomUtils {
 
 		lastZoomOverlayAlpha = zoomOverlayAlpha;
 
-		if (RubidiumZoomerConfig.zoomTransition.get().equals(RubidiumZoomerConfig.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * RubidiumZoomerConfig.zoomValues.smoothMultiplier;
+		if (RubidiumToolkitConfig.zoomTransition.get().equals(RubidiumToolkitConfig.ZoomTransitionOptions.SMOOTH.toString())) {
+			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * RubidiumToolkitConfig.zoomValues.smoothMultiplier;
 		}
 	}
 }
