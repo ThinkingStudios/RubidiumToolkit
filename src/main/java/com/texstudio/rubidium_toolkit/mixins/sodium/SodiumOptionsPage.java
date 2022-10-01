@@ -1,4 +1,4 @@
-package com.texstudio.rubidium_toolkit.mixins.SodiumConfig;
+package com.texstudio.rubidium_toolkit.mixins.sodium;
 
 import com.google.common.collect.ImmutableList;
 import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;

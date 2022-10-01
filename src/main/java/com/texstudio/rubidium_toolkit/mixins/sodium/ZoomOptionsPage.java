@@ -1,4 +1,4 @@
-package com.texstudio.rubidium_toolkit.mixins.SodiumConfig;
+package com.texstudio.rubidium_toolkit.mixins.sodium;
 
 import com.google.common.collect.ImmutableList;
 import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
@@ -135,6 +135,6 @@ public abstract class ZoomOptionsPage
         );
 
 
-        pages.add(new OptionPage(I18n.get("rubidium_toolkit.zoom.option.name"), ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage(I18n.get("rubidium_toolkit.zoom.options.name"), ImmutableList.copyOf(groups)));
     }
 }

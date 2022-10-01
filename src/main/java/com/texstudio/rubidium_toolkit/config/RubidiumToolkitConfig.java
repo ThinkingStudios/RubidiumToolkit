@@ -25,9 +25,10 @@ public class RubidiumToolkitConfig
     public static ConfigValue<String> fpsCounterMode;
     public static ConfigValue<Boolean> fpsCounterAlignRight;
     public static ConfigValue<Integer> fpsCounterPosition;
+
     static
     {
-        val builder = new ConfigBuilder("Dynamic Lights Settings");
+        val builder = new ConfigBuilder("Rubidium Toolkit Settings");
 
         builder.Block("FPS Counter", b -> {
             fpsCounterMode = b.define("Display FPS Counter (OFF, SIMPLE, ADVANCED)", "ADVANCED");

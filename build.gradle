@@ -11,6 +11,7 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${forgegradle_version}", changing: true
@@ -18,6 +19,17 @@ buildscript {
         classpath 'org.parchmentmc:librarian:1.+'
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
     }
+}
+
+repositories {
+    maven {
+        url = "https://www.cursemaven.com"
+    }
+    maven {
+        name = "AperLambda"
+        url = 'https://aperlambda.github.io/maven'
+    }
+    mavenCentral()
 }
 
 apply plugin: "com.matthewprenger.cursegradle"
@@ -104,12 +116,18 @@ repositories {
         url = "https://maven.tterrag.com/"
     }
     maven {
-        url = "https://www.cursemaven.com"
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
     }
     mavenCentral()
 }
 
 dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
+
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
@@ -118,10 +136,8 @@ dependencies {
 
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    compileOnly fg.deobf("curse.maven:magnesium-532724:3526076")
-    runtimeOnly fg.deobf("curse.maven:magnesium-532724:3526076")
-    compileOnly fg.deobf("curse.maven:rubidium-574856:3888519")
-    runtimeOnly fg.deobf("curse.maven:rubidium-574856:3888519")
+    compileOnly fg.deobf("maven.modrinth:rubidium:${rubidium_version}")
+    runtimeOnly fg.deobf("maven.modrinth:rubidium:${rubidium_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
 }

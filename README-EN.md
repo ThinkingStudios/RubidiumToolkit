@@ -8,3 +8,9 @@ English / [简体中文](README.md)
 ### WHAT IS THIS?
 Rubidium Toolkit is a separate part from Magnesium / Rubidium Extras to make up for the missing features of Rubidium Extra.
 
+### License
+Code from [Magnesium/Rubidium Extras](https://github.com/TeamDeusVult/MagnesiumExtras) -> LGPL
+
+Code from [Magnesium/Rubidium Dynamic Lights](https://github.com/TeamDeusVult/DynamicLightsReforged) -> MIT
+
+Language files are licensed under the MIT license

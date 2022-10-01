@@ -3,7 +3,8 @@
     "rubidium_toolkit.key.category": "铷 · 缩放",
 
     "rubidium_toolkit.tools.options.name": "工具",
-    "rubidium_toolkit.zoom.option.name": "缩放",
+    "rubidium_toolkit.zoom.options.name": "缩放",
+    "rubidium_toolkit.dynlights.options.name": "动态光源",
   
     "rubidium_toolkit.option.off": "关",
     "rubidium_toolkit.option.simple": "简略",
@@ -15,6 +16,9 @@
     "rubidium_toolkit.option.vanilla": "原版",
     "rubidium_toolkit.option.multiplied": "乘法",
     "rubidium_toolkit.option.unit.pixels": "像素",
+    "rubidium_toolkit.option.slow": "慢",
+    "rubidium_toolkit.option.fast": "快",
+    "rubidium_toolkit.option.realtime": "实时",
 
     "rubidium_toolkit.fps.display.name": "显示 FPS",
     "rubidium_toolkit.fps.display.tooltip": "显示当前的 FPS 。高级模式还显示最低 FPS ，以及15秒内平均的 FPS ，这对判断性能更有用。",
@@ -34,5 +38,12 @@
     "rubidium_toolkit.zoom.overlay.name": "缩放晕影",
     "rubidium_toolkit.zoom.overlay.tooltip": "缩放时渲染晕影覆盖",
     "rubidium_toolkit.zoom.cinematic_camera.name": "电影摄影机选项",
-    "rubidium_toolkit.zoom.cinematic_camera.tooltip": "电影摄影机模式"
+    "rubidium_toolkit.zoom.cinematic_camera.tooltip": "电影摄影机模式",
+
+    "rubidium_toolkit.dynlights.speed.name": "动态光源速度",
+    "rubidium_toolkit.dynlights.speed.tooltip": "控制动态光源更新的频率。 \n\n照明重新计算可能很昂贵，因此较慢的值将提供更好的性能。\\n\\n关 - 不言自明 \\n慢 - 每秒两次 \\n快 - 每秒五次 \\n实时 - 每 tick",
+    "rubidium_toolkit.dynlights.entity_lights.name": "动态实体光照",
+    "rubidium_toolkit.dynlights.entity_lights.tooltip": "开启此功能将在实体（掉落的物品、生物等）上显示动态光照。\n这可以大大增加照明更新的数量，即使您没有拿着火把。",
+    "rubidium_toolkit.dynlights.block_lights.name": "动态方块光照",
+    "rubidium_toolkit.dynlights.block_lights.tooltip": "启用此功能将在方块实体（熔炉、模组机器等）上显示动态照明。\n这可以大大增加照明更新的数量，即使您没有拿着火把。"
   }

@@ -24,7 +24,7 @@ public class RubidiumToolkit
     public static final String MODID = "rubidium_toolkit";
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static Path configPatch = FMLPaths.CONFIGDIR.get().resolve("rubidium_toolkit.toml");
+    public static Path configPatch = FMLPaths.CONFIGDIR.get().resolve("RubidiumToolkit/rubidium-toolkit.toml");
 
     public RubidiumToolkit() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);

@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 loaderVersion="[36,)" #mandatory
-license="LGPL"
+license="LGPL+MIT"
 
 [[mods]] #mandatory
 modId="rubidium_toolkit" #mandatory
