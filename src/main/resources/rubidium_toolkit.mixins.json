@@ -9,12 +9,6 @@
   ],
   "minVersion": "0.8",
   "client": [
-    "FrameCounter.FpsAccessorMixin",
-    "FrameCounter.FrameCounterMixin",
-    "sodium.DynlightsOptionsPage",
-    "sodium.SodiumOptionsPage",
-    "sodium.ZoomOptionsPage",
-    "Zoom.GameRendererMixin",
     "DynLights.AbstractDecorationEntityMixin",
     "DynLights.AbstractMinecartEntityMixin",
     "DynLights.BlockEntityMixin",
@@ -28,7 +22,18 @@
     "DynLights.PlayerEntityMixin",
     "DynLights.TntEntityMixin",
     "DynLights.WorldMixin",
-    "DynLights.WorldRendererMixin"
+    "DynLights.WorldRendererMixin",
+    "FrameCounter.FpsAccessorMixin",
+    "FrameCounter.FrameCounterMixin",
+    "sodium.DynlightsOptionsPage",
+    "sodium.SodiumOptionsPage",
+    "sodium.ZoomOptionsPage",
+    "TotalDarkness.MixinGameRenderer",
+    "TotalDarkness.MixinLightmapTextureManager",
+    "TotalDarkness.MixinNativeImageBackedTexture",
+    "TotalDarkness.MixinTheEndDimension",
+    "TotalDarkness.MixinTheNetherDimension",
+    "Zoom.GameRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
