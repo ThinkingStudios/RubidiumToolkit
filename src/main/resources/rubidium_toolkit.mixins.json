@@ -1,41 +1,38 @@
 {
   "required": true,
-  "package": "com.texstudio.rubidium_toolkit.mixins",
-  "compatibilityLevel": "JAVA_8",
-  "plugin": "com.texstudio.rubidium_toolkit.dynamic_lights.RbDynLightsMixinPlugin",
-  "refmap": "rubidium_toolkit.refmap.json",
-  "mixins": [
-    "Zoom.MouseMixin"
-  ],
-  "minVersion": "0.8",
+  "package": "com.texstudio.rubidium_toolkit.mixin",
+  "refmap": "rubidium_toolkit.mixins.refmap.json",
+  "compatibilityLevel": "JAVA_17",
   "client": [
-    "DynLights.AbstractDecorationEntityMixin",
-    "DynLights.AbstractMinecartEntityMixin",
-    "DynLights.BlockEntityMixin",
     "DynLights.ClientWorldMixin",
     "DynLights.CommonWorldRendererMixin",
-    "DynLights.EntityMixin",
+    "DynLights.DebugHudMixin",
     "DynLights.EntityRendererMixin",
-    "DynLights.ExplosiveProjectileEntityMixin",
-    "DynLights.LivingEntityMixin",
     "DynLights.MinecraftClientMixin",
-    "DynLights.PlayerEntityMixin",
-    "DynLights.TntEntityMixin",
-    "DynLights.WorldMixin",
-    "DynLights.WorldRendererMixin",
-    "FrameCounter.FpsAccessorMixin",
-    "FrameCounter.FrameCounterMixin",
-    "sodium.DynlightsOptionsPage",
-    "sodium.SodiumOptionsPage",
-    "sodium.ZoomOptionsPage",
-    "TotalDarkness.MixinGameRenderer",
-    "TotalDarkness.MixinLightmapTextureManager",
-    "TotalDarkness.MixinNativeImageBackedTexture",
-    "TotalDarkness.MixinTheEndDimension",
-    "TotalDarkness.MixinTheNetherDimension",
-    "Zoom.GameRendererMixin"
+    "FPSCounter.FpsAccessorMixin",
+    "FPSCounter.FPSCounterMixin",
+    "sodium.DynLightsOptionsMixin",
+    "sodium.SodiumOptionsMixin",
+    "sodium.ZoomOptionsMixin",
+    "Zoom.GameRendererMixin",
+    "Zoom.MouseHandlerMixin",
+    "Zoom.PlayerItemInHandLayerMixin"
   ],
+  "plugin": "com.texstudio.rubidium_toolkit.mixin.Zoom.MixinPlugin",
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "DynLights.BlockEntityTypeMixin",
+    "DynLights.EntityTypeMixin",
+    "DynLights.WorldMixin",
+    "DynLights.lightsource.AbstractDecorationEntityMixin",
+    "DynLights.lightsource.AbstractMinecartEntityMixin",
+    "DynLights.lightsource.BlockEntityMixin",
+    "DynLights.lightsource.EntityMixin",
+    "DynLights.lightsource.ExplosiveProjectileEntityMixin",
+    "DynLights.lightsource.LivingEntityMixin",
+    "DynLights.lightsource.PlayerEntityMixin",
+    "DynLights.lightsource.TntEntityMixin"
+  ]
 }

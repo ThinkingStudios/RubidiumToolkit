@@ -1,57 +1,112 @@
 package com.texstudio.rubidium_toolkit;
 
-import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
-import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
+import com.texstudio.rubidium_toolkit.features.Zoom.api.OkZoomerAPI;
+import com.texstudio.rubidium_toolkit.config.ClientConfig;
+import com.texstudio.rubidium_toolkit.config.ServerConfig;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.RubidiumToolkitNetwork;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.packet.AcknowledgeModPacket;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.packet.DisableZoomPacket;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.packet.DisableZoomScrollingPacket;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.packet.ForceClassicModePacket;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.packet.ForceOverlayPacket;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.packet.ForceSpyglassPacket;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.packet.ForceZoomDivisorPacket;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.packet.Packet;
+import com.texstudio.rubidium_toolkit.features.Zoom.network.packet.ResetRestrictionsPacket;
+import com.mojang.brigadier.Command;
+import net.minecraft.ChatFormatting;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.client.event.RegisterClientCommandsEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.fml.network.FMLNetworkConstants;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import net.minecraftforge.network.NetworkConstants;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.server.command.EnumArgument;
 
-import java.lang.reflect.Field;
-import java.nio.file.Path;
+import java.util.function.Function;
 
-@Mod(RubidiumToolkit.MODID)
-public class RubidiumToolkit
-{
-    public static final String MODID = "rubidium_toolkit";
-    public static final Logger LOGGER = LogManager.getLogger();
+@Mod(RubidiumToolkit.MOD_ID)
+public class RubidiumToolkit {
 
-    public static Path configPatch = FMLPaths.CONFIGDIR.get().resolve("RubidiumToolkit/rubidium-toolkit.toml");
+    public static final String MOD_ID = "rubidium_toolkit";
 
     public RubidiumToolkit() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        MinecraftForge.EVENT_BUS.register(this);
 
-        RubidiumToolkitConfig.loadConfig(configPatch);
+        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 
-        MinecraftForge.EVENT_BUS.register(this);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC, "RubidiumToolkit/" + RubidiumToolkit.MOD_ID + "-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC, "RubidiumToolkit/" + RubidiumToolkit.MOD_ID + "-sever.toml");
 
-        ModLoadingContext.get()
-                .registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+        final var modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modBus.addListener(RubidiumToolkit::commonSetup);
+        modBus.register(ClientConfig.class);
+        modBus.register(ServerConfig.class);
 
-        try {
-            final Field sodiumOptsField = SodiumGameOptionPages.class.getDeclaredField("sodiumOpts");
-            sodiumOptsField.setAccessible(true);
-            SodiumOptionsStorage sodiumOpts = (SodiumOptionsStorage) sodiumOptsField.get(null);
-            sodiumOpts.save();
-        }
-        catch (Throwable t) {
-            LOGGER.error("Could not retrieve sodiumOptsField");
-        }
-
-
+        MinecraftForge.EVENT_BUS.addListener(RubidiumToolkit::registerClientCommands);
+        MinecraftForge.EVENT_BUS.addListener(RubidiumToolkit::onPlayerLogout);
+        MinecraftForge.EVENT_BUS.addListener(RubidiumToolkit::onPlayerLogin);
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
+    static void commonSetup(final FMLCommonSetupEvent event) {
+        class PacketRegister {
+            int pktIndex = 0;
 
+            <T extends Packet> void register(Class<T> clazz, Function<FriendlyByteBuf, T> decode) {
+                RubidiumToolkitNetwork.CHANNEL.messageBuilder(clazz, pktIndex++)
+                        .encoder(Packet::encode)
+                        .decoder(decode)
+                        .consumer((pkt, sup) -> {
+                            pkt.handle(sup.get());
+                            return true;
+                        })
+                        .add();
+            }
+        }
+
+        final var packets = new PacketRegister();
+        packets.register(DisableZoomPacket.class, DisableZoomPacket::decode);
+        packets.register(DisableZoomScrollingPacket.class, DisableZoomScrollingPacket::decode);
+        packets.register(ForceClassicModePacket.class, ForceClassicModePacket::decode);
+        packets.register(ForceZoomDivisorPacket.class, ForceZoomDivisorPacket::decode);
+        packets.register(AcknowledgeModPacket.class, AcknowledgeModPacket::decode);
+        packets.register(ForceSpyglassPacket.class, ForceSpyglassPacket::decode);
+        packets.register(ForceOverlayPacket.class, ForceOverlayPacket::decode);
+        packets.register(ResetRestrictionsPacket.class, ResetRestrictionsPacket::decode);
+    }
+
+    static void registerClientCommands(final RegisterClientCommandsEvent event) {
+        event.getDispatcher().register(Commands.literal(OkZoomerAPI.MOD_ID)
+            .then(Commands.literal("client")
+                .then(Commands.literal("config")
+                    .then(Commands.literal("preset")
+                            .then(Commands.argument("preset", EnumArgument.enumArgument(ClientConfig.ZoomPresets.class))
+                            .executes(context -> {
+                                final var preset = context.getArgument("preset", ClientConfig.ZoomPresets.class);
+                                ClientConfig.resetToPreset(preset);
+                                context.getSource().sendSuccess(new TranslatableComponent("command.rubidium_toolkit.client.config_present", new TextComponent(preset.toString()).withStyle(ChatFormatting.AQUA)), false);
+                                return Command.SINGLE_SUCCESS;
+                            }))))));
+    }
+
+    static void onPlayerLogin(final PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getPlayer() instanceof ServerPlayer player) {
+             ServerConfig.sendPacket(player);
+        }
+    }
+
+    static void onPlayerLogout(final PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getPlayer() instanceof ServerPlayer player && RubidiumToolkitNetwork.EXISTENCE_CHANNEL.isRemotePresent(player.connection.getConnection())) {
+            RubidiumToolkitNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ResetRestrictionsPacket());
+        }
     }
 }
