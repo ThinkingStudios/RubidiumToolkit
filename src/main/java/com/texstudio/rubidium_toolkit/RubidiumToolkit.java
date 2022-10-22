@@ -23,7 +23,8 @@ public class RubidiumToolkit
 {
     public static final String MODID = "rubidium_toolkit";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final String MODNAME = "RubidiumToolkit"
+
+    public static final String MODNAME = "RubidiumToolkit";
 
     //public static Path configPatch = FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODNAME + "/ToolkitConfig.toml");
 
