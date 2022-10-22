@@ -82,7 +82,7 @@ public class RubidiumDynamicLights
         INSTANCE = this;
         log("Initializing Rubidium Dynamic Lights...");
         //this.config.load();
-        DynamicLightsConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve("RubidiumToolkit/rubidium-dynamic-lights.toml"));
+        DynamicLightsConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODNAME + "/DynamicLights.toml"));
 
         //MinecraftForge.EVENT_BUS.register(this);
 

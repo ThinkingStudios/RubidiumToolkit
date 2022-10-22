@@ -23,14 +23,15 @@ public class RubidiumToolkit
 {
     public static final String MODID = "rubidium_toolkit";
     public static final Logger LOGGER = LogManager.getLogger();
+    public static final String MODNAME = "RubidiumToolkit"
 
-    public static Path configPatch = FMLPaths.CONFIGDIR.get().resolve("RubidiumToolkit/rubidium-toolkit.toml");
+    //public static Path configPatch = FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODNAME + "/ToolkitConfig.toml");
 
     public RubidiumToolkit() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
 
-        RubidiumToolkitConfig.loadConfig(configPatch);
+        RubidiumToolkitConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODNAME + "/ToolkitConfig.toml"));
 
         MinecraftForge.EVENT_BUS.register(this);
 
