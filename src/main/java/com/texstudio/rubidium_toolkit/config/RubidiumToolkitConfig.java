@@ -76,7 +76,7 @@ public class RubidiumToolkitConfig
             });
 
             builder.Block("Dimension Settings", b2 -> {
-                darkOverworld = b2.define("Dark Overworld?", true);
+                darkOverworld = b2.define("Dark Overworld?", false);
                 darkDefault = b2.define("Dark By Default?", false);
                 darkNether = b2.define("Dark Nether?", false);
                 darkNetherFogConfigured = b2.defineInRange("Dark Nether Fog Brightness (0->1)", .5, 0, 1d);
