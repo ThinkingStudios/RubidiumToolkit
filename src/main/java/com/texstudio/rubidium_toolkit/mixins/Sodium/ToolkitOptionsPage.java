@@ -80,6 +80,85 @@ public class ToolkitOptionsPage
                 .add(displayFpsPos)
                 .build());
 
+        OptionImpl<SodiumGameOptions, Boolean> tureDarkness = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("rubidium_toolkit.darkness.ture.name"))
+                .setTooltip(I18n.get("rubidium_toolkit.darkness.ture.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding(
+                        (options, value) -> RubidiumToolkitConfig.trueDarknessEnabled.set(value),
+                        (options) -> RubidiumToolkitConfig.trueDarknessEnabled.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+        Option<RubidiumToolkitConfig.DarknessOption> tureDarknessMode =  OptionImpl.createBuilder(RubidiumToolkitConfig.DarknessOption.class, sodiumOpts)
+                .setName(I18n.get("rubidium_toolkit.darkness.ture.mode.name"))
+                .setTooltip(I18n.get("rubidium_toolkit.darkness.ture.mode.tooltip"))
+                .setControl(
+                        (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.DarknessOption.class, new String[] {
+                                I18n.get("rubidium_toolkit.option.pitch_black"),
+                                I18n.get("rubidium_toolkit.option.really_dark"),
+                                I18n.get("rubidium_toolkit.option.dark"),
+                                I18n.get("rubidium_toolkit.option.dim")
+                        }
+                        )
+                )
+                .setBinding(
+                        (opts, value) -> RubidiumToolkitConfig.darknessOption.set(value),
+                        (opts) -> RubidiumToolkitConfig.darknessOption.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+        OptionImpl<SodiumGameOptions, Boolean> blockLightOnly = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("rubidium_toolkit.darkness.only_block_light.name"))
+                //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding(
+                        (options, value) -> RubidiumToolkitConfig.blockLightOnly.set(value),
+                        (options) -> RubidiumToolkitConfig.blockLightOnly.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+        OptionImpl<SodiumGameOptions, Boolean> ignoreMoonLight = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("rubidium_toolkit.darkness.ignore_moon_light.name"))
+                //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding(
+                        (options, value) -> RubidiumToolkitConfig.ignoreMoonPhase.set(value),
+                        (options) -> RubidiumToolkitConfig.ignoreMoonPhase.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+/*
+        Option<Integer> minimumMoonLevel = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
+                .setName(I18n.get("rubidium_toolkit.darkness.position.name"))
+                //.setTooltip(I18n.get("rubidium_toolkit.fps.position.tooltip"))
+                .setControl((option) -> new SliderControl(option, 0, 1, 2, ControlValueFormatter.quantity("")))
+                .setImpact(OptionImpact.LOW)
+                .setBinding(
+                        (opts, value) -> RubidiumToolkitConfig.minimumMoonLevel.set(Double.valueOf(value)),
+                        (opts) -> RubidiumToolkitConfig.minimumMoonLevel.get())
+                .build();
+ */
+
+        OptionImpl<SodiumGameOptions, Boolean> darkOverworld = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
+                .setName(I18n.get("rubidium_toolkit.darkness.dark_overworld.name"))
+                //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
+                .setControl(TickBoxControl::new)
+                .setBinding(
+                        (options, value) -> RubidiumToolkitConfig.ignoreMoonPhase.set(value),
+                        (options) -> RubidiumToolkitConfig.ignoreMoonPhase.get())
+                .setImpact(OptionImpact.LOW)
+                .build();
+
+
+        groups.add(OptionGroup.createBuilder()
+                .add(darkOverworld)
+                //.add(minimumMoonLevel)
+                .add(ignoreMoonLight)
+                .add(blockLightOnly)
+                .add(tureDarkness)
+                .add(tureDarknessMode)
+                .build());
+
         pages.add(new OptionPage(I18n.get("rubidium_toolkit.tools.options.name"),ImmutableList.copyOf(groups)));
     }
 }

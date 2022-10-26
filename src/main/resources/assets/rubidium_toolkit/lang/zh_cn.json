@@ -1,6 +1,6 @@
 {
-    "rubidium_toolkit.key.zoom": "缩放按键",
-    "rubidium_toolkit.key.category": "铷 · 缩放",
+    "rubidium_toolkit.key.zoom": "缩放",
+    "rubidium_toolkit.key.category": "铷·工具箱",
 
     "rubidium_toolkit.tools.options.name": "工具",
     "rubidium_toolkit.zoom.options.name": "缩放",
@@ -19,6 +19,10 @@
     "rubidium_toolkit.option.slow": "慢",
     "rubidium_toolkit.option.fast": "快",
     "rubidium_toolkit.option.realtime": "实时",
+    "rubidium_toolkit.option.pitch_black": "漆黑一片",
+    "rubidium_toolkit.option.really_dark": "真正的黑",
+    "rubidium_toolkit.option.dark": "黑暗",
+    "rubidium_toolkit.option.dim": "维度",
 
     "rubidium_toolkit.fps.display.name": "显示 FPS",
     "rubidium_toolkit.fps.display.tooltip": "显示当前的 FPS 。高级模式还显示最低 FPS ，以及15秒内平均的 FPS ，这对判断性能更有用。",
@@ -45,5 +49,10 @@
     "rubidium_toolkit.dynlights.entity_lights.name": "动态实体光照",
     "rubidium_toolkit.dynlights.entity_lights.tooltip": "开启此功能将在实体（掉落的物品、生物等）上显示动态光照。\n这可以大大增加照明更新的数量，即使您没有拿着火把。",
     "rubidium_toolkit.dynlights.block_lights.name": "动态方块光照",
-    "rubidium_toolkit.dynlights.block_lights.tooltip": "启用此功能将在方块实体（熔炉、模组机器等）上显示动态照明。\n这可以大大增加照明更新的数量，即使您没有拿着火把。"
+    "rubidium_toolkit.dynlights.block_lights.tooltip": "启用此功能将在方块实体（熔炉、模组机器等）上显示动态照明。\n这可以大大增加照明更新的数量，即使您没有拿着火把。",
+
+    "rubidium_toolkit.darkness.ture.name": "真实黑暗",
+    "rubidium_toolkit.darkness.ture.tooltip": "使世界的其他部分更加真实地黑暗。不影响白天或火把的光。",
+    "rubidium_toolkit.darkness.ture.mode.name": "真实黑暗模式",
+    "rubidium_toolkit.darkness.ture.mode.tooltip": "控制多暗才算真正的黑暗。"
   }

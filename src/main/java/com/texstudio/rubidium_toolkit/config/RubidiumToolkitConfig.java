@@ -66,13 +66,13 @@ public class RubidiumToolkitConfig
             zoomTransition = b.define("Zoom Transition Mode (OFF, LINEAR, SMOOTH)", ZoomTransitionOptions.SMOOTH.toString());
             zoomMode = b.define("Zoom Transition Mode (TOGGLE, HOLD, PERSISTENT)", ZoomModes.HOLD.toString());
             cinematicCameraMode = b.define("Cinematic Camera Mode (OFF, VANILLA, MULTIPLIED)", CinematicCameraOptions.OFF.toString());
-            zoomOverlay = b.define("Zoom Overlay?", true);
+            zoomOverlay = b.define("Zoom Overlay", true);
             //zoomValues = b.define("Zoom Advanced Values", new ZoomValues());
         });
 
         builder.Block("True Darkness", b -> {
             trueDarknessEnabled = b.define("Use True Darkness", false);
-            darknessOption = b.defineEnum("Darkness Setting (PITCH_BLACK, REALLY_DARK, DARK, DIM)", DarknessOption.DARK);
+            darknessOption = b.defineEnum("Darkness Mode (PITCH_BLACK, REALLY_DARK, DARK, DIM)", DarknessOption.DARK);
 
             builder.Block("Advanced", b2 -> {
                 blockLightOnly = b2.define("Only Effect Block Lighting", false);
@@ -82,13 +82,13 @@ public class RubidiumToolkitConfig
             });
 
             builder.Block("Dimension Settings", b2 -> {
-                darkOverworld = b2.define("Dark Overworld?", false);
-                darkDefault = b2.define("Dark By Default?", false);
-                darkNether = b2.define("Dark Nether?", false);
+                darkOverworld = b2.define("Dark Overworld", false);
+                darkDefault = b2.define("Dark By Default", false);
+                darkNether = b2.define("Dark Nether", false);
                 darkNetherFogConfigured = b2.defineInRange("Dark Nether Fog Brightness (0->1)", .5, 0, 1d);
-                darkEnd = b2.define("Dark End?", false);
+                darkEnd = b2.define("Dark End", false);
                 darkEndFogConfigured = b.defineInRange("Dark End Fog Brightness (0->1)", 0, 0, 1d);
-                darkSkyless = b2.define("Dark If No Skylight?", false);
+                darkSkyless = b2.define("Dark If No Skylight", false);
             });
         });
 

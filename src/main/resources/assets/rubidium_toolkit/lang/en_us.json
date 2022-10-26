@@ -1,6 +1,6 @@
 {
-  "rubidium_toolkit.key.zoom": "Zoom Key",
-  "rubidium_toolkit.key.category": "Rubidium Zoomer",
+  "rubidium_toolkit.key.zoom": "Zoom",
+  "rubidium_toolkit.key.category": "Rubidium Toolkit",
 
   "rubidium_toolkit.tools.options.name": "Tools",
   "rubidium_toolkit.zoom.options.name": "Zoom",
@@ -19,6 +19,10 @@
   "rubidium_toolkit.option.slow": "Slow",
   "rubidium_toolkit.option.fast": "Fast",
   "rubidium_toolkit.option.realtime": "Realtime",
+  "rubidium_toolkit.option.pitch_black": "Pitch Black",
+  "rubidium_toolkit.option.really_dark": "Really Dark",
+  "rubidium_toolkit.option.dark": "Dark",
+  "rubidium_toolkit.option.dim": "Dim",
 
 
   "rubidium_toolkit.fps.display.name": "Display FPS",
@@ -46,5 +50,11 @@
   "rubidium_toolkit.dynlights.entity_lights.name": "Dynamic Entity Lights",
   "rubidium_toolkit.dynlights.entity_lights.tooltip": "Turning this on will show dynamic lighting on entities (dropped items, mobs, etc). \n\nThis can drastically increase the amount of lighting updates, even when you're not holding a torch.",
   "rubidium_toolkit.dynlights.block_lights.name": "Dynamic Block Lights",
-  "rubidium_toolkit.dynlights.block_lights.tooltip": "Turning this on will show dynamic lighting on tile entities (furnaces, modded machines, etc). \n\nThis can drastically increase the amount of lighting updates, even when you're not holding a torch."
+  "rubidium_toolkit.dynlights.block_lights.tooltip": "Turning this on will show dynamic lighting on tile entities (furnaces, modded machines, etc). \n\nThis can drastically increase the amount of lighting updates, even when you're not holding a torch.",
+
+  "rubidium_toolkit.darkness.ture.name": "Ture Darkness",
+  "rubidium_toolkit.darkness.ture.tooltip": "Makes the rest of the world more realistically dark. Does not effect daytime or torch light.",
+  "rubidium_toolkit.darkness.ture.mode.name": "True Darkness Mode",
+  "rubidium_toolkit.darkness.ture.mode.tooltip": "Controls how dark is considered true darkness.",
+  "rubidium_toolkit.darkness.only_block_light.name": "Only Effect Block Lighting"
 }
