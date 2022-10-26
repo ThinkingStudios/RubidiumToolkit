@@ -5,8 +5,9 @@ import com.electronwill.nightconfig.core.io.WritingMode;
 import lombok.val;
 import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
 import net.minecraftforge.common.ForgeConfigSpec;
+//import static net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+
 import java.nio.file.Path;
-import static net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 
 public class RubidiumToolkitConfig
 {
@@ -14,17 +15,17 @@ public class RubidiumToolkitConfig
 
     // Ok Zoomer
     public static ZoomValues zoomValues = new ZoomValues();
-    public static ConfigValue<Boolean> lowerZoomSensitivity;
-    public static ConfigValue<String> zoomTransition;
-    public static ConfigValue<String> zoomMode;
-    public static ConfigValue<String> cinematicCameraMode;
-    public static ConfigValue<Boolean> zoomScrolling;
-    public static ConfigValue<Boolean> zoomOverlay;
+    public static ForgeConfigSpec.ConfigValue<Boolean> lowerZoomSensitivity;
+    public static ForgeConfigSpec.ConfigValue<String> zoomTransition;
+    public static ForgeConfigSpec.ConfigValue<String> zoomMode;
+    public static ForgeConfigSpec.ConfigValue<String> cinematicCameraMode;
+    public static ForgeConfigSpec.ConfigValue<Boolean> zoomScrolling;
+    public static ForgeConfigSpec.ConfigValue<Boolean> zoomOverlay;
 
     // FPS Counter
-    public static ConfigValue<String> fpsCounterMode;
-    public static ConfigValue<Boolean> fpsCounterAlignRight;
-    public static ConfigValue<Integer> fpsCounterPosition;
+    public static ForgeConfigSpec.ConfigValue<String> fpsCounterMode;
+    public static ForgeConfigSpec.ConfigValue<Boolean> fpsCounterAlignRight;
+    public static ForgeConfigSpec.ConfigValue<Integer> fpsCounterPosition;
 
     // Total Darkness
     public static double darkNetherFogEffective;
@@ -43,6 +44,11 @@ public class RubidiumToolkitConfig
     public static ForgeConfigSpec.BooleanValue darkOverworld;
     public static ForgeConfigSpec.BooleanValue darkDefault;
     public static ForgeConfigSpec.BooleanValue darkNether;
+    // Dynamic Lights
+    public static ForgeConfigSpec.ConfigValue<String> Quality;
+    public static ForgeConfigSpec.ConfigValue<Boolean> EntityLighting;
+    public static ForgeConfigSpec.ConfigValue<Boolean> TileEntityLighting;
+    public static ForgeConfigSpec.ConfigValue<Boolean> OnlyUpdateOnPositionChange;
 
     static
     {
@@ -86,16 +92,43 @@ public class RubidiumToolkitConfig
             });
         });
 
+        //val builder = new ConfigBuilder("Dynamic Lights Settings");
+
+        builder.Block("Dynamic Lights Settings", b -> {
+            Quality = b.define("Quality Mode (OFF, SLOW, FAST, REALTIME)", "REALTIME");
+            EntityLighting = b.define("Dynamic Entity Lighting", true);
+            TileEntityLighting = b.define("Dynamic TileEntity Lighting", true);
+            OnlyUpdateOnPositionChange = b.define("Only Update On Position Change", true);
+        });
+
         ConfigSpec = builder.Save();
     }
 
     public static void loadConfig(Path path) {
-        final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
+        final CommentedFileConfig configData = CommentedFileConfig.builder(path)
+                .sync().autosave().writingMode(WritingMode.REPLACE).build();
 
         configData.load();
         ConfigSpec.setConfig(configData);
     }
 
+    public enum QualityMode implements TextProvider
+    {
+        OFF("Off"),
+        SLOW("Slow"),
+        FAST("Fast"),
+        REALTIME("Realtime");
+
+        private final String name;
+
+        private QualityMode(String name) {
+            this.name = name;
+        }
+
+        public String getLocalizedName() {
+            return this.name;
+        }
+    }
     public static enum Complexity implements TextProvider
     {
         OFF("Off"),

@@ -1,8 +1,9 @@
 package com.texstudio.rubidium_toolkit;
 
+//import com.texstudio.rubidium_toolkit.features.DynamicLights.config.DynamicLightsConfig;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
-import net.minecraftforge.common.MinecraftForge;
+//import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -16,25 +17,24 @@ import org.apache.logging.log4j.Logger;
 import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 
 import java.lang.reflect.Field;
-import java.nio.file.Path;
+//import java.nio.file.Path;
 
 @Mod(RubidiumToolkit.MODID)
 public class RubidiumToolkit
 {
     public static final String MODID = "rubidium_toolkit";
-    public static final Logger LOGGER = LogManager.getLogger();
-
     public static final String MODNAME = "RubidiumToolkit";
-
-    public static Path configPatch = FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODNAME + "/ToolkitConfig.toml");
+    public static final Logger LOGGER = LogManager.getLogger(MODNAME);
+    //public static Path configPatch = FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODNAME + "/ToolkitConfig.toml");
 
     public RubidiumToolkit() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        MinecraftForge.EVENT_BUS.register(this);
+        //MinecraftForge.EVENT_BUS.register(this);
 
-        RubidiumToolkitConfig.loadConfig(configPatch);
+        RubidiumToolkitConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODNAME + "Config.toml"));
+        //DynamicLightsConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODNAME + "/DynamicLights.toml"));
 
-        MinecraftForge.EVENT_BUS.register(this);
+        //MinecraftForge.EVENT_BUS.register(this);
 
         ModLoadingContext.get()
                 .registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));

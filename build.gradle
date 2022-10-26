@@ -15,24 +15,11 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${forgegradle_version}", changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: "${mixingradle_version}"
+        classpath 'org.spongepowered:mixingradle:0.7.+'
         classpath 'org.parchmentmc:librarian:1.+'
-        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
     }
 }
 
-repositories {
-    maven {
-        url = "https://www.cursemaven.com"
-    }
-    maven {
-        name = "AperLambda"
-        url = 'https://aperlambda.github.io/maven'
-    }
-    mavenCentral()
-}
-
-apply plugin: "com.matthewprenger.cursegradle"
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
@@ -122,6 +109,7 @@ repositories {
             includeGroup "maven.modrinth"
         }
     }
+    maven { url "https://aperlambda.github.io/maven" }
     mavenCentral()
 }
 
@@ -140,6 +128,8 @@ dependencies {
     runtimeOnly fg.deobf("maven.modrinth:rubidium:${rubidium_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
+
+    compileOnly 'org.aperlambda:lambdajcommon:1.8.1'
 }
 
 jar {

@@ -27,7 +27,7 @@ import net.minecraft.util.math.MathHelper;
 public class GameRendererMixin {
 	//The zoom overlay's texture identifier.
 	@Unique
-	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation("rubidium_toolkit:textures/misc/zoom_overlay.png");
+	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation("rubidium_toolkit:textures/misc/zoom/zoom_overlay.png");
 
 	@Final
 	@Shadow
