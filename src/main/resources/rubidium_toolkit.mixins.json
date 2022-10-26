@@ -2,7 +2,7 @@
   "required": true,
   "package": "com.texstudio.rubidium_toolkit.mixins",
   "compatibilityLevel": "JAVA_8",
-  "plugin": "com.texstudio.rubidium_toolkit.DynLightsMixinPlugin",
+  "plugin": "com.texstudio.rubidium_toolkit.mixins.DynamicLightsMixinPlugin",
   "refmap": "rubidium_toolkit.refmap.json",
   "mixins": [
     "Zoom.MouseMixin"

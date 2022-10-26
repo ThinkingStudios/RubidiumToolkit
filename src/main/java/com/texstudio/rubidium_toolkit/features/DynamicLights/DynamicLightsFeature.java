@@ -1,7 +1,5 @@
 package com.texstudio.rubidium_toolkit.features.DynamicLights;
 
-import com.texstudio.rubidium_toolkit.DynLightsResourceListener;
-import com.texstudio.rubidium_toolkit.DynamicLightSource;
 import com.texstudio.rubidium_toolkit.RubidiumToolkit;
 import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import com.texstudio.rubidium_toolkit.features.DynamicLights.accessor.WorldRendererAccessor;
@@ -45,7 +43,7 @@ import java.util.function.Predicate;
 class ExecutorHelper {
     public static void onInitializeClient()
     {
-        DynLightsResourceListener reloadListener = new DynLightsResourceListener();
+        DynamicLightsResourceListener reloadListener = new DynamicLightsResourceListener();
 
         IResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
         if (resourceManager instanceof IReloadableResourceManager) {

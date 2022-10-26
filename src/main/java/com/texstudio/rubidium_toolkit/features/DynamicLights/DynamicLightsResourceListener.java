@@ -1,4 +1,4 @@
-package com.texstudio.rubidium_toolkit;
+package com.texstudio.rubidium_toolkit.features.DynamicLights;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,7 +9,7 @@ import net.minecraftforge.resource.ISelectiveResourceReloadListener;
 
 import java.util.function.Predicate;
 
-public class DynLightsResourceListener implements ISelectiveResourceReloadListener
+public class DynamicLightsResourceListener implements ISelectiveResourceReloadListener
 {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().serializeNulls().setLenient().create();
 

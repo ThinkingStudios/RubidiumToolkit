@@ -1,4 +1,4 @@
-package com.texstudio.rubidium_toolkit;
+package com.texstudio.rubidium_toolkit.features.DynamicLights;
 
 import com.texstudio.rubidium_toolkit.features.DynamicLights.DynamicLightsFeature;
 import net.minecraft.client.renderer.WorldRenderer;

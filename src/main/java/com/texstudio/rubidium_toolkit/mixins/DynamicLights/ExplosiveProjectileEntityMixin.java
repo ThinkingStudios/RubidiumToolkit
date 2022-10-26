@@ -1,6 +1,6 @@
 package com.texstudio.rubidium_toolkit.mixins.DynamicLights;
 
-import com.texstudio.rubidium_toolkit.DynamicLightSource;
+import com.texstudio.rubidium_toolkit.features.DynamicLights.DynamicLightSource;
 //import com.texstudio.rubidium_toolkit.features.DynamicLights.config.DynamicLightsConfig;
 import com.texstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import net.minecraft.entity.projectile.DamagingProjectileEntity;

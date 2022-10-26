@@ -1,4 +1,4 @@
-package com.texstudio.rubidium_toolkit;
+package com.texstudio.rubidium_toolkit.mixins;
 
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class DynLightsMixinPlugin implements IMixinConfigPlugin
+public class DynamicLightsMixinPlugin implements IMixinConfigPlugin
 {
     private final HashMap<String, Boolean> conditionalMixins = new HashMap<>();
 
-    public DynLightsMixinPlugin()
+    public DynamicLightsMixinPlugin()
     {
 
     }

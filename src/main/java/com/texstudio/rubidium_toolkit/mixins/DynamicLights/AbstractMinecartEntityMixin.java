@@ -1,6 +1,6 @@
 package com.texstudio.rubidium_toolkit.mixins.DynamicLights;
 
-import com.texstudio.rubidium_toolkit.DynamicLightSource;
+import com.texstudio.rubidium_toolkit.features.DynamicLights.DynamicLightSource;
 import com.texstudio.rubidium_toolkit.features.DynamicLights.DynamicLightsFeature;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
