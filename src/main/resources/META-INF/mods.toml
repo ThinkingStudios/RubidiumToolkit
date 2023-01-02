@@ -1,6 +1,6 @@
 modLoader = "javafml" #mandatory
 loaderVersion = "[40,)" #mandatory
-license = "MIT,LGPL"
+license = "LGPLv2.1"
 
 [[mods]] #mandatory
 modId = "rubidium_toolkit" #mandatory
@@ -23,6 +23,6 @@ side = "SERVER"
 [[dependencies.rubidium_toolkit]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.18.2,1.19)"
+versionRange = "[1.18,)"
 ordering = "NONE"
 side = "BOTH"

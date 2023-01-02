@@ -99,6 +99,7 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 
 	minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
 	compileOnly "maven.modrinth:rubidium:${rubidium_version}"
 	runtimeOnly "maven.modrinth:rubidium:${rubidium_version}"
 

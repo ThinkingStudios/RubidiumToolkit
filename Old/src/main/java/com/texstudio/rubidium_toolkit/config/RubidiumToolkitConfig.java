@@ -54,14 +54,14 @@ public class RubidiumToolkitConfig
             fpsCounterPosition = b.define("FPS Counter Distance", 12);
         });
 
-        builder.Block("Zoom", b -> {
-            lowerZoomSensitivity = b.define("Lower Zoom Sensitivity", true);
-            zoomScrolling = b.define("Zoom Scrolling Enabled", true);
-            zoomTransition = b.define("Zoom Transition Mode (OFF, LINEAR, SMOOTH)", ZoomTransitionOptions.SMOOTH.toString());
-            zoomMode = b.define("Zoom Transition Mode (TOGGLE, HOLD, PERSISTENT)", ZoomModes.HOLD.toString());
+        builder.Block("zoom", b -> {
+            lowerZoomSensitivity = b.define("Lower zoom Sensitivity", true);
+            zoomScrolling = b.define("zoom Scrolling Enabled", true);
+            zoomTransition = b.define("zoom Transition Mode (OFF, LINEAR, SMOOTH)", ZoomTransitionOptions.SMOOTH.toString());
+            zoomMode = b.define("zoom Transition Mode (TOGGLE, HOLD, PERSISTENT)", ZoomModes.HOLD.toString());
             cinematicCameraMode = b.define("Cinematic Camera Mode (OFF, VANILLA, MULTIPLIED)", CinematicCameraOptions.OFF.toString());
-            zoomOverlay = b.define("Zoom Overlay?", true);
-            //zoomValues = b.define("Zoom Advanced Values", new ZoomValues());
+            zoomOverlay = b.define("zoom Overlay?", true);
+            //zoomValues = b.define("zoom Advanced Values", new ZoomValues());
         });
 
         builder.Block("True Darkness", b -> {
