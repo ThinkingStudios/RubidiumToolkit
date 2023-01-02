@@ -1,27 +1,35 @@
-modLoader = "javafml" #mandatory
-loaderVersion = "[40,)" #mandatory
+modLoader = "javafml"
+loaderVersion = "[40,)"
 license = "LGPLv2.1"
 
-[[mods]] #mandatory
-modId = "rubidium_toolkit" #mandatory
-version = "${version}" #mandatory
-displayName = "Rubidium Toolkit" #mandatory
-logoFile = "icon.png"
-credits = "EnnuiL, Matyrobbrt, TexTrue"
-authors = "TexTrueStudio" #optional
+[[mods]]
+modId = "rubidium_toolkit"
+version = "${version}"
+displayName = "Rubidium Toolkit"
+displayURL="https://github.com/TexTrueStudio/RubidiumToolkit" #optional
+logoFile="icon.png" #optional
+credits="EnnuiL, Matyrobbrt, TeamDeusVult" #optional
+authors="TexTrue, TexTrueStudio, BocchiKessokuTeam" #optional
 description = '''
 Add some missing features of Rubidium Extra.
 '''
 
-[[dependencies.rubidium_toolkit]] #optional
-modId = "forge" #mandatory
-mandatory = true #mandatory
-versionRange = "[40,)" #mandatory
+[[dependencies.rubidium_toolkit]]
+modId = "forge"
+mandatory = true
+versionRange = "[40,)"
 ordering = "NONE"
-side = "SERVER"
+side = "BOTH"
 
 [[dependencies.rubidium_toolkit]]
 modId = "minecraft"
+mandatory = true
+versionRange = "[1.18,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.rubidium_toolkit]]
+modId = "rubidium"
 mandatory = true
 versionRange = "[1.18,)"
 ordering = "NONE"
