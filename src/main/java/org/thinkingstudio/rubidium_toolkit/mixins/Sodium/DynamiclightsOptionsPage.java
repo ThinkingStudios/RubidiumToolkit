@@ -7,6 +7,7 @@ import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
+import net.minecraft.client.resource.language.I18n;
 import org.thinkingstudio.rubidium_toolkit.features.DynamicLights.DynamicLightsFeature;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import net.minecraft.client.gui.screen.Screen;
@@ -17,7 +18,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.minecraft.client.resources.I18n;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,14 +39,14 @@ public class DynamiclightsOptionsPage {
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, RubidiumToolkitConfig.QualityMode> qualityMode = OptionImpl.createBuilder(RubidiumToolkitConfig.QualityMode.class, dynamicLightsOpts)
-                .setName(I18n.get("rubidium_toolkit.dynlights.speed.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.dynlights.speed.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.dynlights.speed.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.dynlights.speed.tooltip"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.QualityMode.class, new String[] {
-                                I18n.get("rubidium_toolkit.option.off"),
-                                I18n.get("rubidium_toolkit.option.slow"),
-                                I18n.get("rubidium_toolkit.option.fast"),
-                                I18n.get("rubidium_toolkit.option.realtime")
+                                I18n.translate("rubidium_toolkit.option.off"),
+                                I18n.translate("rubidium_toolkit.option.slow"),
+                                I18n.translate("rubidium_toolkit.option.fast"),
+                                I18n.translate("rubidium_toolkit.option.realtime")
                         }
                         )
                 )
@@ -61,8 +61,8 @@ public class DynamiclightsOptionsPage {
 
 
         OptionImpl<SodiumGameOptions, Boolean> entityLighting = OptionImpl.createBuilder(Boolean.class, dynamicLightsOpts)
-                .setName(I18n.get("rubidium_toolkit.dynlights.entity_lights.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.dynlights.entity_lights.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.dynlights.entity_lights.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.dynlights.entity_lights.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.EntityLighting.set(value),
@@ -71,8 +71,8 @@ public class DynamiclightsOptionsPage {
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> tileEntityLighting = OptionImpl.createBuilder(Boolean.class, dynamicLightsOpts)
-                .setName(I18n.get("rubidium_toolkit.dynlights.block_lights.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.dynlights.block_lights.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.dynlights.block_lights.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.dynlights.block_lights.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.TileEntityLighting.set(value),
@@ -88,6 +88,6 @@ public class DynamiclightsOptionsPage {
                 .build()
         );
 
-        pages.add(new OptionPage(I18n.get("rubidium_toolkit.dynlights.options.name"), ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage(I18n.translate("rubidium_toolkit.dynlights.options.name"), ImmutableList.copyOf(groups)));
     }
 }

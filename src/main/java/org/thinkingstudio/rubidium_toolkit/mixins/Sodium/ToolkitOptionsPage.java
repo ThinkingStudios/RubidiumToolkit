@@ -1,6 +1,7 @@
 package org.thinkingstudio.rubidium_toolkit.mixins.Sodium;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.client.resource.language.I18n;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
@@ -15,7 +16,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.minecraft.client.resources.I18n;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,8 @@ public class ToolkitOptionsPage
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, Boolean> tureDarkness = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.darkness.ture.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.darkness.ture.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.darkness.ture.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.darkness.ture.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.trueDarknessEnabled.set(value),
@@ -45,14 +45,14 @@ public class ToolkitOptionsPage
                 .build();
 
         Option<RubidiumToolkitConfig.DarknessOption> tureDarknessMode =  OptionImpl.createBuilder(RubidiumToolkitConfig.DarknessOption.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.darkness.ture.mode.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.darkness.ture.mode.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.darkness.ture.mode.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.darkness.ture.mode.tooltip"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.DarknessOption.class, new String[] {
-                                I18n.get("rubidium_toolkit.option.pitch_black"),
-                                I18n.get("rubidium_toolkit.option.really_dark"),
-                                I18n.get("rubidium_toolkit.option.dark"),
-                                I18n.get("rubidium_toolkit.option.dim")
+                                I18n.translate("rubidium_toolkit.option.pitch_black"),
+                                I18n.translate("rubidium_toolkit.option.really_dark"),
+                                I18n.translate("rubidium_toolkit.option.dark"),
+                                I18n.translate("rubidium_toolkit.option.dim")
                         }
                         )
                 )
@@ -63,7 +63,7 @@ public class ToolkitOptionsPage
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> blockLightOnly = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.darkness.only_block_light.name"))
+                .setName(I18n.translate("rubidium_toolkit.darkness.only_block_light.name"))
                 //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
@@ -73,7 +73,7 @@ public class ToolkitOptionsPage
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> ignoreMoonLight = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.darkness.ignore_moon_light.name"))
+                .setName(I18n.translate("rubidium_toolkit.darkness.ignore_moon_light.name"))
                 //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
@@ -94,7 +94,7 @@ public class ToolkitOptionsPage
  */
 
         OptionImpl<SodiumGameOptions, Boolean> darkOverworld = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.darkness.overworld.name"))
+                .setName(I18n.translate("rubidium_toolkit.darkness.overworld.name"))
                 //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
@@ -104,7 +104,7 @@ public class ToolkitOptionsPage
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> darkDefault = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.darkness.default.name"))
+                .setName(I18n.translate("rubidium_toolkit.darkness.default.name"))
                 //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
@@ -114,7 +114,7 @@ public class ToolkitOptionsPage
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> darkNether = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.darkness.nether.name"))
+                .setName(I18n.translate("rubidium_toolkit.darkness.nether.name"))
                 //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
@@ -124,7 +124,7 @@ public class ToolkitOptionsPage
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> darkEnd = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.darkness.end.name"))
+                .setName(I18n.translate("rubidium_toolkit.darkness.end.name"))
                 //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
@@ -134,7 +134,7 @@ public class ToolkitOptionsPage
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> darkSkyless = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.darkness.skyless.name"))
+                .setName(I18n.translate("rubidium_toolkit.darkness.skyless.name"))
                 //.setTooltip(I18n.get("rubidium_toolkit.darkness.only_block_light.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
@@ -157,6 +157,6 @@ public class ToolkitOptionsPage
                 .add(tureDarknessMode)
                 .build());
 
-        pages.add(new OptionPage(I18n.get("rubidium_toolkit.tools.options.name"),ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage(I18n.translate("rubidium_toolkit.tools.options.name"),ImmutableList.copyOf(groups)));
     }
 }

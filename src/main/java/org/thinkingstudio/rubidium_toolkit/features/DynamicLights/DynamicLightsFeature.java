@@ -1,5 +1,11 @@
 package org.thinkingstudio.rubidium_toolkit.features.DynamicLights;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.entity.TntEntity;
+import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraftforge.client.model.animation.TileEntityRendererAnimation;
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.DynamicLights.accessor.WorldRendererAccessor;
@@ -128,7 +134,7 @@ public class DynamicLightsFeature
     public static int getLightmapWithDynamicLight(@NotNull Entity entity, int lightmap)
     {
 
-        int posLightLevel = (int) getDynamicLightLevel(entity.blockPosition());
+        int posLightLevel = (int) getDynamicLightLevel(entity.getBlockPos());
         int entityLuminance = ((DynamicLightSource) entity).getLuminance();
 
         return getLightmapWithDynamicLight(Math.max(posLightLevel, entityLuminance), lightmap);
@@ -146,7 +152,7 @@ public class DynamicLightsFeature
             // lightmap is (skyLevel << 20 | blockLevel << 4)
 
             // Get vanilla block light level.
-            int blockLevel = LightTexture.block(lightmap);
+            int blockLevel = LightmapTextureManager.getBlockLightCoordinates(lightmap);
             if (dynamicLightLevel > blockLevel) {
                 // Equivalent to a << 4 bitshift with a little quirk: this one ensure more precision (more decimals are saved).
                 int luminance = (int) (dynamicLightLevel * 16.0);
@@ -215,7 +221,7 @@ public class DynamicLightsFeature
      * @param lightSource the light source to add
      */
     public static void addLightSource(@NotNull DynamicLightSource lightSource) {
-        if (!lightSource.getDynamicLightWorld().isClientSide())
+        if (!lightSource.getDynamicLightWorld().isClient())
             return;
         if (!DynamicLightsFeature.isEnabled())
             return;
@@ -235,7 +241,7 @@ public class DynamicLightsFeature
      * @return {@code true} if the light source is tracked, else {@code false}
      */
     public static boolean containsLightSource(@NotNull DynamicLightSource lightSource) {
-        if (!lightSource.getDynamicLightWorld().isClientSide())
+        if (!lightSource.getDynamicLightWorld().isClient())
             return false;
 
         boolean result;
@@ -272,8 +278,8 @@ public class DynamicLightsFeature
             it = LightSources.next();
             if (it.equals(lightSource)) {
                 LightSources.remove();
-                if (Minecraft.getInstance().levelRenderer != null)
-                    lightSource.lambdynlights_scheduleTrackedChunksRebuild(Minecraft.getInstance().levelRenderer);
+                if (MinecraftClient.getInstance().worldRenderer != null)
+                    lightSource.lambdynlights_scheduleTrackedChunksRebuild(MinecraftClient.getInstance().worldRenderer);
                 break;
             }
         }
@@ -293,10 +299,10 @@ public class DynamicLightsFeature
         while (LightSources.hasNext()) {
             it = LightSources.next();
             LightSources.remove();
-            if (Minecraft.getInstance().levelRenderer != null) {
+            if (MinecraftClient.getInstance().worldRenderer != null) {
                 if (it.getLuminance() > 0)
                     it.resetDynamicLight();
-                it.lambdynlights_scheduleTrackedChunksRebuild(Minecraft.getInstance().levelRenderer);
+                it.lambdynlights_scheduleTrackedChunksRebuild(MinecraftClient.getInstance().worldRenderer);
             }
         }
 
@@ -318,10 +324,10 @@ public class DynamicLightsFeature
             it = LightSources.next();
             if (filter.test(it)) {
                 LightSources.remove();
-                if (Minecraft.getInstance().levelRenderer != null) {
+                if (MinecraftClient.getInstance().worldRenderer != null) {
                     if (it.getLuminance() > 0)
                         it.resetDynamicLight();
-                    it.lambdynlights_scheduleTrackedChunksRebuild(Minecraft.getInstance().levelRenderer);
+                    it.lambdynlights_scheduleTrackedChunksRebuild(MinecraftClient.getInstance().worldRenderer);
                 }
                 break;
             }
@@ -347,14 +353,14 @@ public class DynamicLightsFeature
      * Removes TNT light sources from tracked light sources.
      */
     public static void removeTntLightSources() {
-        removeLightSources(entity -> entity instanceof TNTEntity);
+        removeLightSources(entity -> entity instanceof TntEntity);
     }
 
     /**
      * Removes block entities light source from tracked light sources.
      */
     public static void removeBlockEntitiesLightSource() {
-        removeLightSources(lightSource -> lightSource instanceof TileEntity);
+        removeLightSources(lightSource -> lightSource instanceof TileEntityRendererAnimation);
     }
 
     /**
@@ -374,11 +380,11 @@ public class DynamicLightsFeature
      * @param chunkPos the packed chunk position
      */
     public static void scheduleChunkRebuild(@NotNull WorldRenderer renderer, long chunkPos) {
-        scheduleChunkRebuild(renderer, BlockPos.getX(chunkPos), BlockPos.getY(chunkPos), BlockPos.getZ(chunkPos));
+        scheduleChunkRebuild(renderer, BlockPos.unpackLongX(chunkPos), BlockPos.unpackLongY(chunkPos), BlockPos.unpackLongZ(chunkPos));
     }
 
     public static void scheduleChunkRebuild(@NotNull WorldRenderer renderer, int x, int y, int z) {
-        if (Minecraft.getInstance().level != null)
+        if (MinecraftClient.getInstance().world != null)
             ((WorldRendererAccessor) renderer).dynlights_setSectionDirty(x, y, z, false);
     }
 

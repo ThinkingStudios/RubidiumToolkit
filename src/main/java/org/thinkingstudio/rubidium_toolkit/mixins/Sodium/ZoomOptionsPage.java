@@ -1,6 +1,7 @@
 package org.thinkingstudio.rubidium_toolkit.mixins.Sodium;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.client.resource.language.I18n;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
@@ -16,7 +17,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.minecraft.client.resources.I18n;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +38,8 @@ public abstract class ZoomOptionsPage
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, Boolean> lowerSensitivity = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.zoom.lower_sensitivity.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.zoom.lower_sensitivity.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.zoom.lower_sensitivity.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.zoom.lower_sensitivity.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.lowerZoomSensitivity.set(value),
@@ -48,8 +48,8 @@ public abstract class ZoomOptionsPage
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> zoomScrolling = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.zoom.scrolling.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.zoom.scrolling.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.zoom.scrolling.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.zoom.scrolling.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.zoomScrolling.set(value),
@@ -58,8 +58,8 @@ public abstract class ZoomOptionsPage
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> zoomOverlay = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.zoom.overlay.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.zoom.overlay.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.zoom.overlay.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.zoom.overlay.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.zoomOverlay.set(value),
@@ -78,12 +78,12 @@ public abstract class ZoomOptionsPage
 
 
         Option<RubidiumToolkitConfig.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(RubidiumToolkitConfig.ZoomTransitionOptions.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.zoom.transition.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.zoom.transition.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.zoom.transition.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.zoom.transition.tooltip"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.ZoomTransitionOptions.class, new String[] {
-                        I18n.get("rubidium_toolkit.option.off"),
-                        I18n.get("rubidium_toolkit.option.smooth")
+                        I18n.translate("rubidium_toolkit.option.off"),
+                        I18n.translate("rubidium_toolkit.option.smooth")
                         }
                     )
                 )
@@ -94,13 +94,13 @@ public abstract class ZoomOptionsPage
                 .build();
 
         Option<RubidiumToolkitConfig.ZoomModes> zoomMode =  OptionImpl.createBuilder(RubidiumToolkitConfig.ZoomModes.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.zoom.keybind.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.zoom.keybind.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.zoom.keybind.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.zoom.keybind.tooltip"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.ZoomModes.class, new String[] {
-                        I18n.get("rubidium_toolkit.option.hold"),
-                        I18n.get("rubidium_toolkit.option.toggle"),
-                        I18n.get("rubidium_toolkit.option.persistent")
+                        I18n.translate("rubidium_toolkit.option.hold"),
+                        I18n.translate("rubidium_toolkit.option.toggle"),
+                        I18n.translate("rubidium_toolkit.option.persistent")
                         }
                     )
                 )
@@ -111,12 +111,12 @@ public abstract class ZoomOptionsPage
                 .build();
 
         Option<RubidiumToolkitConfig.CinematicCameraOptions> cinematicCameraMode =  OptionImpl.createBuilder(RubidiumToolkitConfig.CinematicCameraOptions.class, sodiumOpts)
-                .setName(I18n.get("rubidium_toolkit.zoom.cinematic_camera.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.zoom.cinematic_camera.tooltip"))
+                .setName(I18n.translate("rubidium_toolkit.zoom.cinematic_camera.name"))
+                .setTooltip(I18n.translate("rubidium_toolkit.zoom.cinematic_camera.tooltip"))
                 .setControl((option) -> new CyclingControl<>(option, RubidiumToolkitConfig.CinematicCameraOptions.class, new String[] {
-                        I18n.get("rubidium_toolkit.option.off"),
-                        I18n.get("rubidium_toolkit.option.vanilla"),
-                        I18n.get("rubidium_toolkit.option.multiplied")
+                        I18n.translate("rubidium_toolkit.option.off"),
+                        I18n.translate("rubidium_toolkit.option.vanilla"),
+                        I18n.translate("rubidium_toolkit.option.multiplied")
                         }
                     )
                 )
@@ -135,6 +135,6 @@ public abstract class ZoomOptionsPage
         );
 
 
-        pages.add(new OptionPage(I18n.get("rubidium_toolkit.zoom.options.name"), ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage(I18n.translate("rubidium_toolkit.zoom.options.name"), ImmutableList.copyOf(groups)));
     }
 }

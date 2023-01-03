@@ -1,21 +1,21 @@
 package org.thinkingstudio.rubidium_toolkit.features.TotalDarkness;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.util.math.Vector3d;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.dimension.DimensionType;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mod.EventBusSubscriber(modid = RubidiumToolkit.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -57,14 +57,14 @@ public class Darkness
 		if (!RubidiumToolkitConfig.trueDarknessEnabled.get())
 			return false;
 
-		final RegistryKey<World> dimType = world.dimension();
+		final RegistryKey<World> dimType = world.getRegistryKey();
 		if (dimType == World.OVERWORLD) {
 			return RubidiumToolkitConfig.darkOverworld.get();
 		} else if (dimType == World.NETHER) {
 			return RubidiumToolkitConfig.darkNether.get();
 		} else if (dimType == World.END) {
 			return RubidiumToolkitConfig.darkEnd.get();
-		} else if (world.dimensionType().hasSkyLight()) {
+		} else if (world.getDimension().hasSkyLight()) {
 			return RubidiumToolkitConfig.darkDefault.get();
 		} else {
 			return RubidiumToolkitConfig.darkSkyless.get();
@@ -73,11 +73,11 @@ public class Darkness
 
 	private static float skyFactor(World world) {
 		if (!RubidiumToolkitConfig.blockLightOnly.get() && isDark(world)) {
-			if (world.dimensionType().hasSkyLight()) {
-				final float angle = world.getTimeOfDay(0);
+			if (world.getDimension().hasSkyLight()) {
+				final float angle = world.getSkyAngle(0);
 				if (angle > 0.25f && angle < 0.75f) {
 					final float oldWeight = Math.max(0, (Math.abs(angle - 0.5f) - 0.2f)) * 20;
-					final float moon = RubidiumToolkitConfig.ignoreMoonPhase.get() ? 0 : world.getMoonBrightness();
+					final float moon = RubidiumToolkitConfig.ignoreMoonPhase.get() ? 0 : world.getMoonSize();
 					final float moonInterpolated = (float) MathHelper.lerp(moon, RubidiumToolkitConfig.minimumMoonLevel.get(), RubidiumToolkitConfig.maximumMoonLevel.get());
 					return MathHelper.lerp(oldWeight * oldWeight * oldWeight, moonInterpolated, 1f) ;
 				} else {
@@ -109,12 +109,12 @@ public class Darkness
 		return r * 0.2126f + g * 0.7152f + b * 0.0722f;
 	}
 
-	public static void updateLuminance(float tickDelta, Minecraft client, GameRenderer worldRenderer, float prevFlicker) {
-		final ClientWorld world = client.level;
+	public static void updateLuminance(float tickDelta, MinecraftClient client, GameRenderer worldRenderer, float prevFlicker) {
+		final ClientWorld world = client.world;
 		if (world != null) {
 
-			if (!isDark(world) || client.player.hasEffect(Effects.NIGHT_VISION) ||
-							(client.player.hasEffect(Effects.CONDUIT_POWER) && client.player.getWaterVision() > 0) || world.getSkyFlashTime() > 0) {
+			if (!isDark(world) || client.player.hasStatusEffect(StatusEffects.NIGHT_VISION) ||
+							(client.player.hasStatusEffect(StatusEffects.CONDUIT_POWER) && client.player.getUnderwaterVisibility() > 0) || world.getLightningTicksLeft() > 0) {
 				enabled = false;
 				return;
 			} else {
@@ -122,8 +122,8 @@ public class Darkness
 			}
 
 			final float dimSkyFactor = Darkness.skyFactor(world);
-			final float ambient = world.getSkyDarken(1.0F);
-			final DimensionType dim = world.dimensionType();
+			final float ambient = world.method_23783(1.0F);
+			final DimensionType dim = world.getDimension();
 			final boolean blockAmbient = !Darkness.isDark(world);
 
 			for (int skyIndex = 0; skyIndex < 16; ++skyIndex) {
@@ -134,7 +134,7 @@ public class Darkness
 				float min = Math.max(skyFactor * 0.05f, RubidiumToolkitConfig.darknessOption.get().value);
 				final float rawAmbient = ambient * skyFactor;
 				final float minAmbient = rawAmbient * (1 - min) + min;
-				final float skyBase = dim.brightness(skyIndex) * minAmbient;
+				final float skyBase = dim.method_28516(skyIndex) * minAmbient;
 
 				min = Math.max(0.35f * skyFactor, RubidiumToolkitConfig.darknessOption.get().value);
 				float v = skyBase * (rawAmbient * (1 - min) + min);
@@ -142,8 +142,8 @@ public class Darkness
 				float skyGreen = v;
 				float skyBlue = skyBase;
 
-				if (worldRenderer.getDarkenWorldAmount(tickDelta) > 0.0F) {
-					final float skyDarkness = worldRenderer.getDarkenWorldAmount(tickDelta);
+				if (worldRenderer.getSkyDarkness(tickDelta) > 0.0F) {
+					final float skyDarkness = worldRenderer.getSkyDarkness(tickDelta);
 					skyRed = skyRed * (1.0F - skyDarkness) + skyRed * 0.7F * skyDarkness;
 					skyGreen = skyGreen * (1.0F - skyDarkness) + skyGreen * 0.6F * skyDarkness;
 					skyBlue = skyBlue * (1.0F - skyDarkness) + skyBlue * 0.6F * skyDarkness;
@@ -156,7 +156,7 @@ public class Darkness
 						blockFactor = 1 - blockFactor * blockFactor * blockFactor * blockFactor;
 					}
 
-					final float blockBase = blockFactor * dim.brightness(blockIndex) * (prevFlicker * 0.1F + 1.5F);
+					final float blockBase = blockFactor * dim.method_28516(blockIndex) * (prevFlicker * 0.1F + 1.5F);
 					min = 0.4f * blockFactor;
 					final float blockGreen = blockBase * ((blockBase * (1 - min) + min) * (1 - min) + min);
 					final float blockBlue = blockBase * (blockBase * blockBase * (1 - min) + min);
@@ -172,7 +172,7 @@ public class Darkness
 					blue = blue * (0.99F - min) + min;
 
 					//the end
-					if (world.dimension() == World.END) {
+					if (world.getRegistryKey() == World.END) {
 						red = skyFactor * 0.22F + blockBase * 0.75f;
 						green = skyFactor * 0.28F + blockGreen * 0.75f;
 						blue = skyFactor * 0.25F + blockBlue * 0.75f;

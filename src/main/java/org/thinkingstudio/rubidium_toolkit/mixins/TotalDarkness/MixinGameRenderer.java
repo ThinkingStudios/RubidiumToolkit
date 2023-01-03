@@ -1,11 +1,11 @@
 package org.thinkingstudio.rubidium_toolkit.mixins.TotalDarkness;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.client.util.math.MatrixStack;
 import org.thinkingstudio.rubidium_toolkit.features.TotalDarkness.Darkness;
 import org.thinkingstudio.rubidium_toolkit.features.TotalDarkness.LightmapAccess;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.LightTexture;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,11 +18,11 @@ public class MixinGameRenderer
 {
 	@Final
 	@Shadow
-	private Minecraft minecraft;
+	private MinecraftClient minecraft;
 
 	@Final
 	@Shadow
-	private LightTexture lightTexture;
+	private LightmapTextureManager lightTexture;
 
 	@Inject(method = "renderLevel", at = @At(value = "HEAD"))
 	private void onRenderWorld(float tickDelta, long nanos, MatrixStack matrixStack, CallbackInfo ci) {
