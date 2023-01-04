@@ -11,8 +11,6 @@
     "dynamic_lights.MinecraftClientMixin",
     "entity_distance.MaxDistanceEntity",
     "entity_distance.MaxDistanceTileEntity",
-    "FPSCounter.FpsAccessorMixin",
-    "FPSCounter.FPSCounterMixin",
     "sodium.DynamicLightsOptionsPage",
     "sodium.SodiumOptionsPage",
     "sodium.ZoomOptionsPage",
