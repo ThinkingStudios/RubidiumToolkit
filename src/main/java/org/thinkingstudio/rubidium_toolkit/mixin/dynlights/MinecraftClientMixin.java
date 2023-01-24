@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixin.dynamic_lights;
+package org.thinkingstudio.rubidium_toolkit.mixin.dynlights;
 
 import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
 import net.minecraft.client.Minecraft;

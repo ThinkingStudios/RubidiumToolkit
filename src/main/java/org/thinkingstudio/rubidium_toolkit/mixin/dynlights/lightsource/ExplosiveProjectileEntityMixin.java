@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixin.dynamic_lights.lightsource;
+package org.thinkingstudio.rubidium_toolkit.mixin.dynlights.lightsource;
 
 import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.DynamicLightHandlers;

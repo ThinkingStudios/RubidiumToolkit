@@ -1,7 +1,7 @@
 {
   "toast.rubidium_toolkit.title": "铷 · 工具",
   "toast.rubidium_toolkit.acknowledge_mod": "此服务器允许该模组",
-  "toast.rubidium_toolkit.acknowledge_mod_restrictions": "此服务器限制 mod",
+  "toast.rubidium_toolkit.acknowledge_mod_restrictions": "此服务器限制此 mod",
   "command.rubidium_toolkit.client.config_present": "配置已重置为预设 %s!",
 
   "key.rubidium_toolkit.category": "铷 · 工具",
@@ -30,9 +30,9 @@
   "rubidium_toolkit.options.dark": "黑暗",
   "rubidium_toolkit.options.dim": "维度",
   "rubidium_toolkit.options.unit.pixels": "像素",
-  "rubidium_toolkit.option.slow": "慢",
-  "rubidium_toolkit.option.fast": "快",
-  "rubidium_toolkit.option.realtime": "实时",
+  "rubidium_toolkit.options.slow": "慢",
+  "rubidium_toolkit.options.fast": "快",
+  "rubidium_toolkit.options.realtime": "实时",
 
   "rubidium_toolkit.tools.option.name": "工具",
   "rubidium_toolkit.zoom.option.name": "缩放",

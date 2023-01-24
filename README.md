@@ -3,17 +3,16 @@
  <h2 align="center">Rubidium Toolkit</h2>
  <p align="center"></p>
 
-[English](README-EN.md) / 简体中文 
+English / [简体中文](README-ZHCN.md) 
 
-### 这是干什么的？
-Rubidium Toolkit 是从 Magnesium/Rubidium Extras 的分支，用于弥补 Rubidium Extra 缺失的功能。
+### WHAT IS THIS?
+Rubidium Toolkit is a Magnesium/Rubidium Extras fork, this mod is used to make up for the missing features of Rubidium Extra.
 
-### 许可证 & 代码使用
-来自 [Magnesium/Rubidium Extras](https://github.com/TeamDeusVult/MagnesiumExtras) 的代码由(LGPLv2.1)
+### License & Code Usage
+Code from [Magnesium/Rubidium Extras](https://github.com/TeamDeusVult/MagnesiumExtras) is licensed under the LGPL license.
 
-来自 [Magnesium/Rubidium Dynamic Lights](https://github.com/TeamDeusVult/DynamicLightsReforged) 的代码(MIT)
+Code from [Magnesium/Rubidium Dynamic Lights](https://github.com/TeamDeusVult/DynamicLightsReforged) is licensed under the MIT License.
 
-来自 [OKZoomerForge](https://github.com/Matyrobbrt/OkZoomerForge) 的代码(MIT)
+Code from [OKZoomerForge](https://github.com/Matyrobbrt/OkZoomerForge) is licensed under the MIT License.
 
-语言文件由MIT许可证许可
-
+Language files licensed under the MIT License.

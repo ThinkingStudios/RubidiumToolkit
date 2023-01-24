@@ -24,14 +24,8 @@ loom {
 }
 
 repositories {
-    maven { url 'https://jitpack.io' }
-    maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-        content {
-            includeGroup "maven.modrinth"
-        }
-    }
+    maven { url "https://jitpack.io" }
+    maven { url "https://api.modrinth.com/maven" }
 }
 
 dependencies {
@@ -41,17 +35,16 @@ dependencies {
 
     modImplementation "maven.modrinth:rubidium:${project.rubidium_version}"
 
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compileOnly "org.projectlombok:lombok:1.18.22"
+    annotationProcessor "org.projectlombok:lombok:1.18.22"
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testCompileOnly "org.projectlombok:lombok:1.18.22"
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.22"
 
-    compileOnly group:'com.google.auto.service', name:'auto-service', version:'1.0.1'
-    annotationProcessor group:'com.google.auto.service', name:'auto-service', version:'1.0.1'
+    compileOnly "com.google.auto.service:auto-service:1.0.1"
+    annotationProcessor "com.google.auto.service:auto-service:1.0.1"
 
-    implementation "com.github.LlamaLad7:MixinExtras:0.1.1"
-    include "com.github.LlamaLad7:MixinExtras:0.1.1"
+    implementation(include("com.github.LlamaLad7:MixinExtras:0.1.1"))
     annotationProcessor "com.github.LlamaLad7:MixinExtras:0.1.1"
 }
 

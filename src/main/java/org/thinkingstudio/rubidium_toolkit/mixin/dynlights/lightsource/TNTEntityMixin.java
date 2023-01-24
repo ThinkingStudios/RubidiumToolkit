@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixin.dynamic_lights.lightsource;
+package org.thinkingstudio.rubidium_toolkit.mixin.dynlights.lightsource;
 
 import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PrimedTnt.class)
-public abstract class TntEntityMixin extends Entity implements DynamicLightSource {
+public abstract class TNTEntityMixin extends Entity implements DynamicLightSource {
 	@Shadow
 	public abstract int getFuse();
 
@@ -25,7 +25,7 @@ public abstract class TntEntityMixin extends Entity implements DynamicLightSourc
 	@Unique
 	private int lambdynlights$luminance;
 
-	public TntEntityMixin(EntityType<?> type, Level world) {
+	public TNTEntityMixin(EntityType<?> type, Level world) {
 		super(type, world);
 	}
 

@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixin.dynamic_lights;
+package org.thinkingstudio.rubidium_toolkit.mixin.dynlights;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
