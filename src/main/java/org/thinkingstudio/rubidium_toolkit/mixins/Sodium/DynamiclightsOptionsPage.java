@@ -8,7 +8,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
 import net.minecraft.client.resource.language.I18n;
-import org.thinkingstudio.rubidium_toolkit.features.DynamicLights.DynamicLightsFeature;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Final;
