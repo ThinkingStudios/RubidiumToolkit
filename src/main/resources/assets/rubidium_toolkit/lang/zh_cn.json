@@ -41,7 +41,7 @@
   "rubidium_toolkit.tools.max_block_distance.name": "最大实体方块渲染距离",
   "rubidium_toolkit.tools.max_block_distance.tooltip": "隐藏此范围的实体方块. 巨大的性能提升, 尤其是在大型红石机器周围。",
   "rubidium_toolkit.tools.vertical_block_distance.name": "垂直实体方块渲染距离",
-  "rubidium_toolkit.tools.vertical_block_distance.tooltip": "将实体方块隐藏在这么多的方块下面，提高在山洞上面的性能（如果你的机器出于某种原因在山洞里）。这个值最好设置得比水平距离要低。",
+  "rubidium_toolkit.tools.vertical_block_distance.tooltip": "将实体方块隐藏在这么多的方块下面，提高在地上的性能（如果你的机器出于某种原因在地下）。这个值最好设置得比水平距离要低。",
 
   "rubidium_toolkit.zoom.lower_sensitivity.name": "降低变焦灵敏度",
   "rubidium_toolkit.zoom.lower_sensitivity.tooltip": "缩放时降低鼠标灵敏度。",
