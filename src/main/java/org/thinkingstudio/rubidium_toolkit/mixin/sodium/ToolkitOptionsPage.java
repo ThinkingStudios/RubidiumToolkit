@@ -35,8 +35,8 @@ public class ToolkitOptionsPage {
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName(Component.nullToEmpty("Enable Max Entity Distance"))
-                .setTooltip(Component.nullToEmpty("Toggles off entity culling."))
+                .setName(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.enable_max_entity_distance.name")))
+                .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.enable_max_entity_distance.tooltip")))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfigClient.enableDistanceChecks.set(value),
@@ -52,9 +52,9 @@ public class ToolkitOptionsPage {
         );
 
         OptionImpl<SodiumGameOptions, Integer> maxEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.nullToEmpty("Max Entity Distance"))
-                .setTooltip(Component.nullToEmpty("Hides and does not tick entities beyond this many blocks. Huge performance increase, especially around modded farms."))
-                .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.translateVariable("Blocks")))
+                .setName(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.max_entity_distance.name")))
+                .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.max_entity_distance.tooltip")))
+                .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfigClient.maxEntityRenderDistanceSquare.set(value * value),
                         (options) ->  Math.toIntExact(Math.round(Math.sqrt(RubidiumToolkitConfigClient.maxEntityRenderDistanceSquare.get()))))
@@ -62,9 +62,9 @@ public class ToolkitOptionsPage {
                 .build();
 
         OptionImpl<SodiumGameOptions, Integer> maxEntityDistanceVertical = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.nullToEmpty("Vertical Entity Distance"))
-                .setTooltip(Component.nullToEmpty("Hides and does not tick entities underneath this many blocks, improving performance above caves. This should ideally be set lower than the horizontal distance."))
-                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("Blocks")))
+                .setName(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.vertical_entity_distance.name")))
+                .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.vertical_entity_distance.tooltip")))
+                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfigClient.maxEntityRenderDistanceY.set(value ),
                         (options) -> RubidiumToolkitConfigClient.maxEntityRenderDistanceY.get())
@@ -81,9 +81,9 @@ public class ToolkitOptionsPage {
 
 
         OptionImpl<SodiumGameOptions, Integer> maxTileEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.nullToEmpty("Max Tile Distance"))
-                .setTooltip(Component.nullToEmpty("Hides block entities beyond this many blocks. Huge performance increase, especially around lots of modded machines."))
-                .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.translateVariable("Blocks")))
+                .setName(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.max_block_distance.name")))
+                .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.max_block_distance.tooltip")))
+                .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfigClient.maxBlockEntityRenderDistanceSquare.set(value * value),
                         (options) -> Math.toIntExact(Math.round(Math.sqrt(RubidiumToolkitConfigClient.maxBlockEntityRenderDistanceSquare.get()))))
@@ -91,9 +91,9 @@ public class ToolkitOptionsPage {
                 .build();
 
         OptionImpl<SodiumGameOptions, Integer> maxTileEntityDistanceVertical = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName(Component.nullToEmpty("Vertical Tile Distance"))
-                .setTooltip(Component.nullToEmpty("Hides block entities underneath this many blocks, improving performance above caves (if you have your machines in caves, for some reason). This should ideally be set lower than the horizontal distance."))
-                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("Blocks")))
+                .setName(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.vertical_block_distance.name")))
+                .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.tools.vertical_block_distance.tooltip")))
+                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfigClient.maxBlockEntityRenderDistanceY.set(value ),
                         (options) -> RubidiumToolkitConfigClient.maxBlockEntityRenderDistanceY.get())
