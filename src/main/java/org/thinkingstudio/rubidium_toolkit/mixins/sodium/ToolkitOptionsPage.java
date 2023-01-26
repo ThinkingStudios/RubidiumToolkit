@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.Sodium;
+package org.thinkingstudio.rubidium_toolkit.mixins.sodium;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.resource.language.I18n;

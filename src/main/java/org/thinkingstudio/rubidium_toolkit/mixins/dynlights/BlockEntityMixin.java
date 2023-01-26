@@ -61,7 +61,7 @@ public abstract class BlockEntityMixin implements DynamicLightSource
         return this.level;
     }
 
-    @Inject(method = "setRemoved", at = @At("TAIL"))
+    @Inject(method = "markRemoved", at = @At("TAIL"))
     private void onRemoved(CallbackInfo ci)
     {
         this.setDynamicLightEnabled(false);

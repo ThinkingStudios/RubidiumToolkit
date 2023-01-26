@@ -46,7 +46,7 @@ public class ZoomUtils {
 		}
 	}
 
-	//The method used by both the "Reset Zoom" keybind and the "Reset Zoom With Mouse" tweak.
+	//The method used by both the "Reset zoom" keybind and the "Reset zoom With Mouse" tweak.
 	public static void resetZoomDivisor() {
 		zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
 		lastZoomState = true;

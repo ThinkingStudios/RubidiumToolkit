@@ -15,14 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = WorldRenderer.class, priority = 900)
 public abstract class CommonWorldRendererMixin implements WorldRendererAccessor
 {
-    @Invoker("setSectionDirty")
+    @Invoker("scheduleChunkRender")
     @Override
     public abstract void dynlights_setSectionDirty(int x, int y, int z, boolean important);
 
 
 
     @Inject(
-            method = "getLightColor(Lnet/minecraft/world/IBlockDisplayReader;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;)I",
+            method = "getLightmapCoordinates(Lnet/minecraft/world/BlockRenderView;Lnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;)I",
             at = @At("TAIL"),
             cancellable = true
     )

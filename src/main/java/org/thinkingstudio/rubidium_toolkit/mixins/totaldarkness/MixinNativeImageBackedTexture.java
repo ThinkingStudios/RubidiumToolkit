@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.TotalDarkness;
+package org.thinkingstudio.rubidium_toolkit.mixins.totaldarkness;
 
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;

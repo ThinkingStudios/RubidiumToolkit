@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.Zoom;
+package org.thinkingstudio.rubidium_toolkit.mixins.zoom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -46,11 +46,7 @@ public class GameRendererMixin {
 	}
 	
 	//Handles zooming of both modes (Transitionless and with Smooth Transitions).
-	@Inject(
-		at = @At("RETURN"),
-		method = "getFov",
-		cancellable = true
-	)
+	@Inject(at = @At("RETURN"), method = "getFov", cancellable = true)
 	private void getZoomedFov(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
 		double fov = info.getReturnValue();
 
@@ -77,10 +73,7 @@ public class GameRendererMixin {
 	}
 
 	//This applies the zoom overlay itself.
-	@Inject(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/GameSettings;hideGui:Z"),
-		method = "render(FJZ)V"
-	)
+	@Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z"), method = "render(FJZ)V")
 	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
 		if (RubidiumToolkitConfig.zoomOverlay.get()) {
 			if (this.minecraft.options.hudHidden) {

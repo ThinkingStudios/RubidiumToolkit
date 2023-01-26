@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.TotalDarkness;
+package org.thinkingstudio.rubidium_toolkit.mixins.totaldarkness;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
@@ -24,7 +24,7 @@ public class MixinGameRenderer
 	@Shadow
 	private LightmapTextureManager lightTexture;
 
-	@Inject(method = "renderLevel", at = @At(value = "HEAD"))
+	@Inject(method = "renderWorld", at = @At(value = "HEAD"))
 	private void onRenderWorld(float tickDelta, long nanos, MatrixStack matrixStack, CallbackInfo ci) {
 		final LightmapAccess lightmap = (LightmapAccess) lightTexture;
 

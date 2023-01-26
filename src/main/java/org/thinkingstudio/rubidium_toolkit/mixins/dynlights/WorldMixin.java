@@ -18,16 +18,12 @@ import java.util.Iterator;
 @Mixin(World.class)
 public abstract class WorldMixin {
     @Shadow
-    public abstract boolean isClientSide();
+    public abstract boolean isClient();
 
-    @Inject(
-            method = "tickBlockEntities",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/tileentity/ITickableTileEntity;tick()V", shift = At.Shift.BEFORE),
-            locals = LocalCapture.CAPTURE_FAILEXCEPTION
-    )
+    @Inject(method = "tickBlockEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Tickable;tick()V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
     private void onBlockEntityTick(CallbackInfo ci, Profiler iprofiler, Iterator iterator, BlockEntity tileentity, BlockPos blockpos)
     {
-        if (this.isClientSide() && DynamicLightsFeature.isEnabled()) {
+        if (this.isClient() && DynamicLightsFeature.isEnabled()) {
             ((DynamicLightSource) tileentity).dynamicLightTick();
         }
     }

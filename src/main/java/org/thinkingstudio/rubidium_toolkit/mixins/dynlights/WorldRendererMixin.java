@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {
-    @Inject(at = @At("HEAD"), method = "renderLevel")
+    @Inject(at = @At("HEAD"), method = "render")
     public void render(MatrixStack l, float outlinelayerbuffer, long i2, boolean j2, Sprite.Info k2, GameRenderer l2, LightmapTextureManager i3, Matrix4f irendertypebuffer, CallbackInfo ci)
     {
         MinecraftClient.getInstance().getProfiler().visit("dynamic_lighting");

@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.Zoom;
+package org.thinkingstudio.rubidium_toolkit.mixins.zoom;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
@@ -54,8 +54,8 @@ public class MouseMixin {
 	
 	//This mixin handles the "Reduce Sensitivity" option and extracts the g variable for the cinematic cameras.
 	@ModifyVariable(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/MouseHelper;minecraft:Lnet/minecraft/client/Minecraft;", ordinal = 2),
-		method = "turnPlayer",
+		at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;minecraft:Lnet/minecraft/client/MinecraftClient;", ordinal = 2),
+		method = "updateMouse",
 		ordinal = 2
 	)
 	private double applyReduceSensitivity(double g) {
@@ -78,8 +78,8 @@ public class MouseMixin {
 	
 	//Extracts the e variable for the cinematic cameras.
 	@Inject(
-		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MouseHelper;isMouseGrabbed()Z"),
-		method = "turnPlayer",
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Mouse;isCursorLocked()Z"),
+		method = "updateMouse",
 		locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	private void obtainCinematicCameraValues(CallbackInfo info, double d, double e) {
@@ -88,8 +88,8 @@ public class MouseMixin {
 
 	//Applies the cinematic camera on the mouse's X.
 	@ModifyVariable(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/MouseHelper;accumulatedDX:D", ordinal = 2, shift = At.Shift.BEFORE),
-		method = "turnPlayer",
+		at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;cursorDeltaX:D", ordinal = 2, shift = At.Shift.BEFORE),
+		method = "updateMouse",
 		ordinal = 2
 	)
 	private double applyCinematicModeX(double l) {
@@ -114,8 +114,8 @@ public class MouseMixin {
 	
 	//Applies the cinematic camera on the mouse's Y.
 	@ModifyVariable(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/MouseHelper;accumulatedDY:D", ordinal = 2, shift = At.Shift.BEFORE),
-		method = "turnPlayer",
+		at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;cursorDeltaY:D", ordinal = 2, shift = At.Shift.BEFORE),
+		method = "updateMouse",
 		ordinal = 2
 	)
 	private double applyCinematicModeY(double m) {
@@ -140,8 +140,8 @@ public class MouseMixin {
 	
 	//Handles zoom scrolling.
 	@Inject(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/MouseHelper;accumulatedScroll:D", ordinal = 7),
-		method = "onScroll",
+		at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;eventDeltaWheel:D", ordinal = 7),
+		method = "onMouseScroll",
 		cancellable = true
 	)
 	private void zoomerOnMouseScroll(CallbackInfo info) {
@@ -170,7 +170,7 @@ public class MouseMixin {
 	//Handles the zoom scrolling reset through the middle button.
 	@Inject(
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/settings/KeyBinding;set(Lnet/minecraft/client/util/InputMappings$Input;Z)V"),
-			method = "onPress(JIII)V",
+			method = "onMouseButton(JIII)V",
 			cancellable = true,
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)

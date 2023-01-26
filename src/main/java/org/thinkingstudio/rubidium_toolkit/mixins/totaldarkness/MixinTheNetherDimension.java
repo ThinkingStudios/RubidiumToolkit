@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.TotalDarkness;
+package org.thinkingstudio.rubidium_toolkit.mixins.totaldarkness;
 
 import net.minecraft.client.render.SkyProperties;
 import net.minecraft.client.util.math.Vector3d;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(SkyProperties.Nether.class)
 public class MixinTheNetherDimension {
 
-	@Inject(method = "getBrightnessDependentFogColor", at = @At(value = "RETURN"), cancellable = true)
+	@Inject(method = "adjustFogColor", at = @At(value = "RETURN"), cancellable = true)
 	private void onAdjustSkyColor(CallbackInfoReturnable<Vector3d> ci) {
 		if (!RubidiumToolkitConfig.trueDarknessEnabled.get())
 			return;
