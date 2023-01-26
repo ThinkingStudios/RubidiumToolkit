@@ -31,6 +31,6 @@ side = "BOTH"
 [[dependencies.rubidium_toolkit]]
 modId = "rubidium"
 mandatory = true
-versionRange = "[1.18,)"
+versionRange = "[0.5,)"
 ordering = "NONE"
 side = "BOTH"
