@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.features.Zoom;
+package org.thinkingstudio.rubidium_toolkit.features.zoom;
 
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 

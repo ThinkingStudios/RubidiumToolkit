@@ -7,7 +7,7 @@ import net.minecraft.client.render.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
-import org.thinkingstudio.rubidium_toolkit.features.Zoom.ZoomUtils;
+import org.thinkingstudio.rubidium_toolkit.features.zoom.ZoomUtils;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,7 +26,7 @@ public class GameRendererMixin {
 
 	@Final
 	@Shadow
-	private MinecraftClient minecraft;
+	private MinecraftClient client;
 
 	//Handle transitioned zoom FOV multiplier and zoom overlay alphas each tick.
 	@Inject(
@@ -67,7 +67,7 @@ public class GameRendererMixin {
 		//Regardless of the mode, if the zoom is over, update the terrain in order to stop terrain glitches.
 		if (ZoomUtils.lastZoomState) {
 			if (changingFov) {
-				this.minecraft.worldRenderer.scheduleTerrainUpdate();
+				this.client.worldRenderer.scheduleTerrainUpdate();
 			}
 		}
 	}
@@ -76,7 +76,7 @@ public class GameRendererMixin {
 	@Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z"), method = "render(FJZ)V")
 	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
 		if (RubidiumToolkitConfig.zoomOverlay.get()) {
-			if (this.minecraft.options.hudHidden) {
+			if (this.client.options.hudHidden) {
 				return;
 			}
 
@@ -109,14 +109,14 @@ public class GameRendererMixin {
 		RenderSystem.defaultBlendFunc();
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, f);
 
-		this.minecraft.getTextureManager().bindTexture(ZOOM_OVERLAY);
+		this.client.getTextureManager().bindTexture(ZOOM_OVERLAY);
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferBuilder = tessellator.getBuffer();
 		bufferBuilder.begin(7, VertexFormats.POSITION_TEXTURE);
 
-		bufferBuilder.vertex(0.0D, this.minecraft.getWindow().getScaledHeight(), -90.0D).texture(0.0F, 1.0F).next();
-		bufferBuilder.vertex(this.minecraft.getWindow().getScaledWidth(), this.minecraft.getWindow().getScaledHeight(), -90.0D).texture(1.0F, 1.0F).next();
-		bufferBuilder.vertex((double)this.minecraft.getWindow().getScaledWidth(), 0.0D, -90.0D).texture(1.0F, 0.0F).next();
+		bufferBuilder.vertex(0.0D, this.client.getWindow().getScaledHeight(), -90.0D).texture(0.0F, 1.0F).next();
+		bufferBuilder.vertex(this.client.getWindow().getScaledWidth(), this.client.getWindow().getScaledHeight(), -90.0D).texture(1.0F, 1.0F).next();
+		bufferBuilder.vertex((double)this.client.getWindow().getScaledWidth(), 0.0D, -90.0D).texture(1.0F, 0.0F).next();
 		bufferBuilder.vertex(0.0D, 0.0D, -90.0D).texture(0.0F, 0.0F).next();
 
 		tessellator.draw();

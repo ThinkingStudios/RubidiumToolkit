@@ -22,23 +22,6 @@ public class RubidiumToolkitConfig
     public static ForgeConfigSpec.ConfigValue<Boolean> zoomScrolling;
     public static ForgeConfigSpec.ConfigValue<Boolean> zoomOverlay;
 
-    // Total Darkness
-    public static double darkNetherFogEffective;
-    public static double darkEndFogEffective;
-    public static ForgeConfigSpec.BooleanValue trueDarknessEnabled;
-    public static ForgeConfigSpec.EnumValue<DarknessOption> darknessOption;
-    //advanced
-    public static ForgeConfigSpec.DoubleValue darkNetherFogConfigured;
-    public static ForgeConfigSpec.BooleanValue darkEnd;
-    public static ForgeConfigSpec.DoubleValue darkEndFogConfigured;
-    public static ForgeConfigSpec.BooleanValue darkSkyless;
-    public static ForgeConfigSpec.BooleanValue blockLightOnly;
-    public static ForgeConfigSpec.BooleanValue ignoreMoonPhase;
-    public static ForgeConfigSpec.DoubleValue minimumMoonLevel;
-    public static ForgeConfigSpec.DoubleValue maximumMoonLevel;
-    public static ForgeConfigSpec.BooleanValue darkOverworld;
-    public static ForgeConfigSpec.BooleanValue darkDefault;
-    public static ForgeConfigSpec.BooleanValue darkNether;
     // Dynamic Lights
     public static ForgeConfigSpec.ConfigValue<String> Quality;
     public static ForgeConfigSpec.ConfigValue<Boolean> EntityLighting;
@@ -57,28 +40,6 @@ public class RubidiumToolkitConfig
             cinematicCameraMode = b.define("Cinematic Camera Mode (OFF, VANILLA, MULTIPLIED)", CinematicCameraOptions.OFF.toString());
             zoomOverlay = b.define("zoom Overlay", true);
             //zoomValues = b.define("zoom Advanced Values", new ZoomValues());
-        });
-
-        builder.Block("True Darkness", b -> {
-            trueDarknessEnabled = b.define("Use True Darkness", false);
-            darknessOption = b.defineEnum("Darkness Mode (PITCH_BLACK, REALLY_DARK, DARK, DIM)", DarknessOption.DARK);
-
-            builder.Block("Advanced", b2 -> {
-                blockLightOnly = b2.define("Only Effect Block Lighting", false);
-                ignoreMoonPhase = b2.define("Ignore Moon Light", false);
-                minimumMoonLevel = b2.defineInRange("Minimum Moon Brightness (0->1)", 0, 0, 1d);
-                maximumMoonLevel = b2.defineInRange("Maximum Moon Brightness (0->1)", 0.25d, 0, 1d);
-            });
-
-            builder.Block("Dimension Settings", b2 -> {
-                darkOverworld = b2.define("Dark Overworld", false);
-                darkDefault = b2.define("Dark By Default", false);
-                darkNether = b2.define("Dark Nether", false);
-                darkNetherFogConfigured = b2.defineInRange("Dark Nether Fog Brightness (0->1)", .5, 0, 1d);
-                darkEnd = b2.define("Dark End", false);
-                darkEndFogConfigured = b.defineInRange("Dark End Fog Brightness (0->1)", 0, 0, 1d);
-                darkSkyless = b2.define("Dark If No Skylight", false);
-            });
         });
 
         builder.Block("Dynamic Lights", b -> {

@@ -32,16 +32,16 @@ public abstract class EntityMixin implements DynamicLightSource {
     public boolean removed;
 
     @Shadow
-    public abstract double offsetX();
+    public abstract double getX();
 
     @Shadow
     public abstract double getEyeY();
 
     @Shadow
-    public abstract double offsetZ();
+    public abstract double getZ();
 
     @Shadow
-    public abstract double offsetY();
+    public abstract double getY();
 
     @Shadow
     public int chunkX;
@@ -88,7 +88,7 @@ public abstract class EntityMixin implements DynamicLightSource {
 
     @Override
     public double getDynamicLightX() {
-        return this.offsetX();
+        return this.getX();
     }
 
     @Override
@@ -98,7 +98,7 @@ public abstract class EntityMixin implements DynamicLightSource {
 
     @Override
     public double getDynamicLightZ() {
-        return this.offsetZ();
+        return this.getZ();
     }
 
     @Override
@@ -134,9 +134,9 @@ public abstract class EntityMixin implements DynamicLightSource {
     public boolean lambdynlights_updateDynamicLight(@NotNull WorldRenderer renderer) {
         if (!this.shouldUpdateDynamicLight())
             return false;
-        double deltaX = this.offsetX() - this.lambdynlights_prevX;
-        double deltaY = this.offsetY() - this.lambdynlights_prevY;
-        double deltaZ = this.offsetZ() - this.lambdynlights_prevZ;
+        double deltaX = this.getX() - this.lambdynlights_prevX;
+        double deltaY = this.getY() - this.lambdynlights_prevY;
+        double deltaZ = this.getZ() - this.lambdynlights_prevZ;
 
         int luminance = this.getLuminance();
 
@@ -151,9 +151,9 @@ public abstract class EntityMixin implements DynamicLightSource {
 
 
         if (Math.abs(deltaX) > minDelta || Math.abs(deltaY) > minDelta || Math.abs(deltaZ) > minDelta || luminance != this.lambdynlights_lastLuminance) {
-            this.lambdynlights_prevX = this.offsetX();
-            this.lambdynlights_prevY = this.offsetY();
-            this.lambdynlights_prevZ = this.offsetZ();
+            this.lambdynlights_prevX = this.getX();
+            this.lambdynlights_prevY = this.getY();
+            this.lambdynlights_prevZ = this.getZ();
             this.lambdynlights_lastLuminance = luminance;
 
             LongOpenHashSet newPos = new LongOpenHashSet();

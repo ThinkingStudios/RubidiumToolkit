@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins;
+package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
 
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;

@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class TntEntityMixin extends Entity implements DynamicLightSource
 {
     @Shadow
-    private int life;
+    private int fuseTimer;
 
     //private double lambdynlights_startFuseTimer = 80.0;
     private int lambdynlights_luminance;
@@ -58,7 +58,7 @@ public abstract class TntEntityMixin extends Entity implements DynamicLightSourc
         if (this.isOnFire()) {
             this.lambdynlights_luminance = 15;
         } else {
-            this.lambdynlights_luminance = (int) (-(life * life) * 10.0) + 10;
+            this.lambdynlights_luminance = (int) (-(fuseTimer * fuseTimer) * 10.0) + 10;
         }
     }
 

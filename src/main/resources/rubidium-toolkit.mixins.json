@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "rubidium-toolkit.refmap.json",
+  "package": "com.texstudio.rubidium_toolkit.mixins",
+  "mixins": [
+    "zoom.MouseMixin"
+  ],
+  "client": [
+    "sodium.DynamiclightsOptionsPage",
+    "sodium.ToolkitOptionsPage",
+    "sodium.ZoomOptionsPage",
+    "zoom.GameRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

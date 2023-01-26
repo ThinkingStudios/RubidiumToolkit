@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
-import org.thinkingstudio.rubidium_toolkit.features.Zoom.ZoomUtils;
+import org.thinkingstudio.rubidium_toolkit.features.zoom.ZoomUtils;
 import org.thinkingstudio.rubidium_toolkit.keybinds.KeyboardInput;
 
 
@@ -22,24 +22,24 @@ import org.thinkingstudio.rubidium_toolkit.keybinds.KeyboardInput;
 public class MouseMixin {
 	@Final
 	@Shadow
-	private MinecraftClient minecraft;
+	private MinecraftClient client;
 	
 	@Final
 	@Shadow
-	private final SmoothUtil smoothTurnX = new SmoothUtil();
+	private final SmoothUtil cursorXSmoother = new SmoothUtil();
 	
 	@Final
 	@Shadow
-	private final SmoothUtil smoothTurnY = new SmoothUtil();
+	private final SmoothUtil cursorYSmoother = new SmoothUtil();
 
 	@Shadow
-	private double accumulatedDX;
+	private double cursorDeltaX;
 
 	@Shadow
-	private double accumulatedDY;
+	private double cursorDeltaY;
 	
 	@Shadow
-	private double accumulatedScroll;
+	private double eventDeltaWheel;
 	
 	@Unique
 	private final SmoothUtil cursorXZoomSmoother = new SmoothUtil();
@@ -59,7 +59,7 @@ public class MouseMixin {
 		ordinal = 2
 	)
 	private double applyReduceSensitivity(double g) {
-		double modifiedMouseSensitivity = this.minecraft.options.mouseSensitivity;
+		double modifiedMouseSensitivity = this.client.options.mouseSensitivity;
 
 		if (RubidiumToolkitConfig.lowerZoomSensitivity.get())
 		{
@@ -95,11 +95,11 @@ public class MouseMixin {
 	private double applyCinematicModeX(double l) {
 		if (!RubidiumToolkitConfig.cinematicCameraMode.get().equals(RubidiumToolkitConfig.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
-				if (this.minecraft.options.smoothCameraEnabled) {
-					l = this.smoothTurnX.smooth(this.accumulatedDX * this.adjustedG, (this.extractedE * this.adjustedG));
+				if (this.client.options.smoothCameraEnabled) {
+					l = this.cursorXSmoother.smooth(this.cursorDeltaX * this.adjustedG, (this.extractedE * this.adjustedG));
 					this.cursorXZoomSmoother.clear();
 				} else {
-					l = this.cursorXZoomSmoother.smooth(this.accumulatedDX * this.adjustedG, (this.extractedE * this.adjustedG));
+					l = this.cursorXZoomSmoother.smooth(this.cursorDeltaX * this.adjustedG, (this.extractedE * this.adjustedG));
 				}
 				if (RubidiumToolkitConfig.cinematicCameraMode.get().equals(RubidiumToolkitConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
 					l *= RubidiumToolkitConfig.zoomValues.cinematicMultiplier;
@@ -121,11 +121,11 @@ public class MouseMixin {
 	private double applyCinematicModeY(double m) {
 		if (!RubidiumToolkitConfig.cinematicCameraMode.get().equals(RubidiumToolkitConfig.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
-				if (this.minecraft.options.smoothCameraEnabled) {
-					m = this.smoothTurnY.smooth(this.accumulatedDY * this.adjustedG, (this.extractedE * this.adjustedG));
+				if (this.client.options.smoothCameraEnabled) {
+					m = this.cursorYSmoother.smooth(this.cursorDeltaY * this.adjustedG, (this.extractedE * this.adjustedG));
 					this.cursorYZoomSmoother.clear();
 				} else {
-					m = this.cursorYZoomSmoother.smooth(this.accumulatedDY * this.adjustedG, (this.extractedE * this.adjustedG));
+					m = this.cursorYZoomSmoother.smooth(this.cursorDeltaY * this.adjustedG, (this.extractedE * this.adjustedG));
 				}
 				if (RubidiumToolkitConfig.cinematicCameraMode.get().equals(RubidiumToolkitConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
 					m *= RubidiumToolkitConfig.zoomValues.cinematicMultiplier;
@@ -145,7 +145,7 @@ public class MouseMixin {
 		cancellable = true
 	)
 	private void zoomerOnMouseScroll(CallbackInfo info) {
-		if (this.accumulatedScroll != 0.0) {
+		if (this.eventDeltaWheel != 0.0) {
 			if (RubidiumToolkitConfig.zoomScrolling.get()) {
 				if (RubidiumToolkitConfig.zoomMode.get().equals(RubidiumToolkitConfig.ZoomModes.PERSISTENT.toString())) {
 					if (!KeyboardInput.zoomKey.isPressed())
@@ -155,9 +155,9 @@ public class MouseMixin {
 				}
 				
 				if (ZoomUtils.zoomState) {
-					if (this.accumulatedScroll > 0.0) {
+					if (this.eventDeltaWheel > 0.0) {
 						ZoomUtils.changeZoomDivisor(true);
-					} else if (this.accumulatedScroll < 0.0) {
+					} else if (this.eventDeltaWheel < 0.0) {
 						ZoomUtils.changeZoomDivisor(false);
 					}
 					
@@ -169,7 +169,7 @@ public class MouseMixin {
 
 	//Handles the zoom scrolling reset through the middle button.
 	@Inject(
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/settings/KeyBinding;set(Lnet/minecraft/client/util/InputMappings$Input;Z)V"),
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;setKeyPressed(Lnet/minecraft/client/util/InputUtil$Key;Z)V"),
 			method = "onMouseButton(JIII)V",
 			cancellable = true,
 			locals = LocalCapture.CAPTURE_FAILHARD
