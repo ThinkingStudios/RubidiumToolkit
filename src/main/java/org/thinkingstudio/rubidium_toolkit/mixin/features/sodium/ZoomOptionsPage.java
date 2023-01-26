@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixin.sodium;
+package org.thinkingstudio.rubidium_toolkit.mixin.features.sodium;
 
 import com.google.common.collect.ImmutableList;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfigClient;

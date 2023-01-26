@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public class MinecraftClientMixin {
 	@Inject(method = "setLevel", at = @At("HEAD"))
-	private void onSetWorld(ClientLevel world, CallbackInfo ci) {
+	private void onSetLevel(ClientLevel world, CallbackInfo ci) {
 		ToolkitDynLights.get().clearLightSources();
 	}
 }

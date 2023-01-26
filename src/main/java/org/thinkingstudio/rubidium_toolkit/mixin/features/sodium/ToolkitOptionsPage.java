@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixin.sodium;
+package org.thinkingstudio.rubidium_toolkit.mixin.features.sodium;
 
 import com.google.common.collect.ImmutableList;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;

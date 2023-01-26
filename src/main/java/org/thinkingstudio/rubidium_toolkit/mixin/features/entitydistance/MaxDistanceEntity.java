@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixin.entitydistance;
+package org.thinkingstudio.rubidium_toolkit.mixin.features.entitydistance;
 
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;

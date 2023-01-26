@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixin.entitydistance;
+package org.thinkingstudio.rubidium_toolkit.mixin.features.entitydistance;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
