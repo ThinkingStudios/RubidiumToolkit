@@ -1,9 +1,10 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.dynlights.lightsource;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.DynamicLightSource;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.DynamicLightHandlers;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.config.DynamicLightsConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ConfigEnums;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandlers;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -81,7 +82,7 @@ public abstract class EntityMixin implements DynamicLightSource {
 				if ((!DynamicLightsConfig.TileEntityLighting.get() && this.getType() != EntityType.PLAYER)
 						|| !DynamicLightHandlers.canLightUp((Entity) (Object) this))
 					this.lambdynlights$luminance = 0;
-				RubidiumDynLights.updateTracking(this);
+				ToolkitDynLights.updateTracking(this);
 			}
 		}
 	}
@@ -123,16 +124,16 @@ public abstract class EntityMixin implements DynamicLightSource {
 	@Override
 	public boolean shouldUpdateDynamicLight() {
 		var mode = DynamicLightsConfig.Quality.get();
-		if (Objects.equals(mode, DynamicLightsConfig.QualityMode.OFF))
+		if (Objects.equals(mode, ConfigEnums.QualityMode.OFF))
 			return false;
 
 		long currentTime = System.currentTimeMillis();
 
-		if (Objects.equals(mode, DynamicLightsConfig.QualityMode.SLOW) && currentTime < lambdynlights_lastUpdate + 500)
+		if (Objects.equals(mode, ConfigEnums.QualityMode.SLOW) && currentTime < lambdynlights_lastUpdate + 500)
 			return false;
 
 
-		if (Objects.equals(mode, DynamicLightsConfig.QualityMode.FAST) && currentTime < lambdynlights_lastUpdate + 200)
+		if (Objects.equals(mode, ConfigEnums.QualityMode.FAST) && currentTime < lambdynlights_lastUpdate + 200)
 			return false;
 
 		lambdynlights_lastUpdate = currentTime;
@@ -175,8 +176,8 @@ public abstract class EntityMixin implements DynamicLightSource {
 				var entityChunkPos = this.chunkPosition;
 				var chunkPos = new BlockPos.MutableBlockPos(entityChunkPos.x, SectionPos.posToSectionCoord(this.getEyeY()), entityChunkPos.z);
 
-				RubidiumDynLights.scheduleChunkRebuild(renderer, chunkPos);
-				RubidiumDynLights.updateTrackedChunks(chunkPos, this.lambdynlights$trackedLitChunkPos, newPos);
+				ToolkitDynLights.scheduleChunkRebuild(renderer, chunkPos);
+				ToolkitDynLights.updateTrackedChunks(chunkPos, this.lambdynlights$trackedLitChunkPos, newPos);
 
 				var directionX = (this.blockPosition().getX() & 15) >= 8 ? Direction.EAST : Direction.WEST;
 				var directionY = (Mth.fastFloor(this.getEyeY()) & 15) >= 8 ? Direction.UP : Direction.DOWN;
@@ -193,8 +194,8 @@ public abstract class EntityMixin implements DynamicLightSource {
 						chunkPos.move(directionZ.getOpposite()); // origin
 						chunkPos.move(directionY); // Y
 					}
-					RubidiumDynLights.scheduleChunkRebuild(renderer, chunkPos);
-					RubidiumDynLights.updateTrackedChunks(chunkPos, this.lambdynlights$trackedLitChunkPos, newPos);
+					ToolkitDynLights.scheduleChunkRebuild(renderer, chunkPos);
+					ToolkitDynLights.updateTrackedChunks(chunkPos, this.lambdynlights$trackedLitChunkPos, newPos);
 				}
 			}
 
@@ -211,7 +212,7 @@ public abstract class EntityMixin implements DynamicLightSource {
 	public void lambdynlights$scheduleTrackedChunksRebuild(@NotNull LevelRenderer renderer) {
 		if (Minecraft.getInstance().level == this.level)
 			for (long pos : this.lambdynlights$trackedLitChunkPos) {
-				RubidiumDynLights.scheduleChunkRebuild(renderer, pos);
+				ToolkitDynLights.scheduleChunkRebuild(renderer, pos);
 			}
 	}
 }

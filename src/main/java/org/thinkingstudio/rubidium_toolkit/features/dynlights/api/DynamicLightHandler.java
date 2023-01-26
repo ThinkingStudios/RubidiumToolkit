@@ -1,7 +1,7 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights.api;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.config.DynamicLightsConfig;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,7 +69,7 @@ public interface DynamicLightHandler<T> {
 		return entity -> {
 			int luminance = 0;
 			for (var equipped : entity.getAllSlots()) {
-				luminance = Math.max(luminance, RubidiumDynLights.getLuminanceFromItemStack(equipped, entity.isUnderWater()));
+				luminance = Math.max(luminance, ToolkitDynLights.getLuminanceFromItemStack(equipped, entity.isUnderWater()));
 			}
 			return Math.max(luminance, handler.getLuminance(entity));
 		};

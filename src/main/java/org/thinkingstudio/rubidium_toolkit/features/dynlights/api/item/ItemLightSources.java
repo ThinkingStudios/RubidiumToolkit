@@ -1,7 +1,7 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.item;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item;
 
 import com.google.gson.JsonParser;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -54,7 +54,7 @@ public final class ItemLightSources {
 					register(data);
 			});
 		} catch (IOException | IllegalStateException e) {
-			RubidiumDynLights.get().warn("Failed to load item light source \"" + id + "\".");
+			ToolkitDynLights.get().warn("Failed to load item light source \"" + id + "\".");
 		}
 	}
 
@@ -66,7 +66,7 @@ public final class ItemLightSources {
 	private static void register(@NotNull ItemLightSource data) {
 		for (var other : ITEM_LIGHT_SOURCES) {
 			if (other.item() == data.item()) {
-				RubidiumDynLights.get().warn("Failed to register item light source \"" + data.id() + "\", duplicates item \""
+				ToolkitDynLights.get().warn("Failed to register item light source \"" + data.id() + "\", duplicates item \""
 						+ Registry.ITEM.getKey(data.item()) + "\" found in \"" + other.id() + "\".");
 				return;
 			}
@@ -83,7 +83,7 @@ public final class ItemLightSources {
 	public static void registerItemLightSource(@NotNull ItemLightSource data) {
 		for (var other : STATIC_ITEM_LIGHT_SOURCES) {
 			if (other.item() == data.item()) {
-				RubidiumDynLights.get().warn("Failed to register item light source \"" + data.id() + "\", duplicates item \""
+				ToolkitDynLights.get().warn("Failed to register item light source \"" + data.id() + "\", duplicates item \""
 						+ Registry.ITEM.getKey(data.item()) + "\" found in \"" + other.id() + "\".");
 				return;
 			}

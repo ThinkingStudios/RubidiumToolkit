@@ -1,8 +1,8 @@
 package org.thinkingstudio.rubidium_toolkit.features.zoom.zoom;
 
+import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfigClient;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.OkZoomerAPI;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.ZoomOverlay;
-import org.thinkingstudio.rubidium_toolkit.config.ClientConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
@@ -39,7 +39,7 @@ public class ZoomerZoomOverlay implements ZoomOverlay {
 
     @Override
     public boolean getActive() {
-        if (client.options.hideGui && ClientConfig.DISABLE_OVERLAY_NO_HUD.get()) {
+        if (client.options.hideGui && RubidiumToolkitConfigClient.DISABLE_OVERLAY_NO_HUD.get()) {
             return false;
         }
         return this.active;
@@ -78,10 +78,10 @@ public class ZoomerZoomOverlay implements ZoomOverlay {
 
         lastZoomOverlayAlpha = zoomOverlayAlpha;
 
-        if (ClientConfig.ZOOM_TRANSITION.get().equals(ConfigEnums.ZoomTransitionOptions.SMOOTH)) {
-            zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * ClientConfig.SMOOTH_MULTIPLIER.get();
-        } else if (ClientConfig.ZOOM_TRANSITION.get().equals(ConfigEnums.ZoomTransitionOptions.LINEAR)) {
-            double linearStep = Mth.clamp(1.0F / this.divisor, ClientConfig.MINIMUM_LINEAR_STEP.get(), ClientConfig.MAXIMUM_LINEAR_STEP.get());
+        if (RubidiumToolkitConfigClient.ZOOM_TRANSITION.get().equals(ConfigEnums.ZoomTransitionOptions.SMOOTH)) {
+            zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * RubidiumToolkitConfigClient.SMOOTH_MULTIPLIER.get();
+        } else if (RubidiumToolkitConfigClient.ZOOM_TRANSITION.get().equals(ConfigEnums.ZoomTransitionOptions.LINEAR)) {
+            double linearStep = Mth.clamp(1.0F / this.divisor, RubidiumToolkitConfigClient.MINIMUM_LINEAR_STEP.get(), RubidiumToolkitConfigClient.MAXIMUM_LINEAR_STEP.get());
 
             zoomOverlayAlpha = Mth.approach(zoomOverlayAlpha, zoomMultiplier, (float) linearStep);
         }

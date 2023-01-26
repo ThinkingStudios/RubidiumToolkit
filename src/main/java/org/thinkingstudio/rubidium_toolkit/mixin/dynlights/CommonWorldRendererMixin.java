@@ -1,8 +1,9 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.dynlights;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.accessor.WorldRendererAccessor;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.config.DynamicLightsConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ConfigEnums;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor.WorldRendererAccessor;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -26,10 +27,10 @@ public abstract class CommonWorldRendererMixin implements WorldRendererAccessor 
 			cancellable = true
 	)
 	private static void onGetLightmapCoordinates(BlockAndTintGetter world, BlockState j, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
-		if (!world.getBlockState(pos).isSolidRender(world, pos) && DynamicLightsConfig.Quality.get() != DynamicLightsConfig.QualityMode.OFF)
+		if (!world.getBlockState(pos).isSolidRender(world, pos) && DynamicLightsConfig.Quality.get() != ConfigEnums.QualityMode.OFF)
 		{
 			int vanilla = cir.getReturnValue();
-			int value = RubidiumDynLights.get().getLightmapWithDynamicLight(pos, vanilla);
+			int value = ToolkitDynLights.get().getLightmapWithDynamicLight(pos, vanilla);
 
 			cir.setReturnValue(value);
 		}

@@ -7,10 +7,10 @@
  * see the LICENSE file.
  */
 
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights.api;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.item.ItemLightSource;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.item.ItemLightSources;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item.ItemLightSource;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item.ItemLightSources;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 

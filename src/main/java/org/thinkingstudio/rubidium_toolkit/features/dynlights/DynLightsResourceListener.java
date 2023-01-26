@@ -1,8 +1,8 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.item.ItemLightSources;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item.ItemLightSources;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 

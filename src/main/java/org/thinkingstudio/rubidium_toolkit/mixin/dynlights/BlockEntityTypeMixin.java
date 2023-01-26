@@ -1,7 +1,7 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.dynlights;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.accessor.DynamicLightHandlerHolder;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.DynamicLightHandler;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor.DynamicLightHandlerHolder;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandler;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;

@@ -1,11 +1,9 @@
-package org.thinkingstudio.rubidium_toolkit;
+package org.thinkingstudio.rubidium_toolkit.features.zoom;
 
-import org.thinkingstudio.rubidium_toolkit.features.zoom.APIImpl;
-import org.thinkingstudio.rubidium_toolkit.features.zoom.ZoomKeyBinds;
+import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfigClient;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.OkZoomerAPI;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.ZoomInstance;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.ZoomOverlay;
-import org.thinkingstudio.rubidium_toolkit.config.ClientConfig;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.events.ManageKeyBindsEvent;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.events.ManageZoomEvent;
 //import config.org.thinkingstudio.rubidium_toolkit.ConfigEnums;
@@ -34,7 +32,7 @@ import org.lwjgl.glfw.GLFW;
 import static org.thinkingstudio.rubidium_toolkit.config.ConfigEnums.*;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = OkZoomerAPI.MOD_ID, value = Dist.CLIENT)
-public class RubidiumToolkitClient {
+public class ToolkitZoomClient {
 
     private static boolean shouldCancelOverlay;
 
@@ -53,8 +51,8 @@ public class RubidiumToolkitClient {
                 }
             }
         });
-        MinecraftForge.EVENT_BUS.addListener(RubidiumToolkitClient::clientTick);
-        MinecraftForge.EVENT_BUS.addListener(RubidiumToolkitClient::onMouseInput);
+        MinecraftForge.EVENT_BUS.addListener(ToolkitZoomClient::clientTick);
+        MinecraftForge.EVENT_BUS.addListener(ToolkitZoomClient::onMouseInput);
 
         ItemProperties.registerGeneric(new ResourceLocation(OkZoomerAPI.MOD_ID, "scoping"),
                 (ClampedItemPropertyFunction) (stack, clientWorld, entity, i) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack && entity.getUseItem().is(SpyglassHelper.SPYGLASSES) ? 1.0F : 0.0F);
@@ -86,12 +84,12 @@ public class RubidiumToolkitClient {
     }
 
     static void onMouseInput(final InputEvent.MouseInputEvent event) {
-        if (ClientConfig.ALLOW_SCROLLING.get() && !RubidiumToolkitNetwork.getDisableZoomScrolling()) {
-            if (ClientConfig.ZOOM_MODE.get().equals(ZoomModes.PERSISTENT) && !ZoomKeyBinds.ZOOM_KEY.isDown()) {
+        if (RubidiumToolkitConfigClient.ALLOW_SCROLLING.get() && !RubidiumToolkitNetwork.getDisableZoomScrolling()) {
+            if (RubidiumToolkitConfigClient.ZOOM_MODE.get().equals(ZoomModes.PERSISTENT) && !ZoomKeyBinds.ZOOM_KEY.isDown()) {
                 return;
             }
 
-            if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_MIDDLE && ZoomKeyBinds.ZOOM_KEY.isDown() && ClientConfig.RESET_ZOOM_WITH_MOUSE.get()) {
+            if (event.getButton() == GLFW.GLFW_MOUSE_BUTTON_MIDDLE && ZoomKeyBinds.ZOOM_KEY.isDown() && RubidiumToolkitConfigClient.RESET_ZOOM_WITH_MOUSE.get()) {
                 ZoomUtils.resetZoomDivisor(true);
             }
         }
@@ -100,7 +98,7 @@ public class RubidiumToolkitClient {
     private static final TranslatableComponent TOAST_TITLE = new TranslatableComponent("toast.rubidium_toolkit.title");
 
     public static void sendToast(Component description) {
-        if (ClientConfig.SHOW_RESTRICTION_TOASTS.get()) {
+        if (RubidiumToolkitConfigClient.SHOW_RESTRICTION_TOASTS.get()) {
             Minecraft.getInstance().getToasts().addToast(SystemToast.multiline(Minecraft.getInstance(), SystemToast.SystemToastIds.TUTORIAL_HINT, TOAST_TITLE, description));
         }
     }

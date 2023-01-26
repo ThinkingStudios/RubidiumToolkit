@@ -1,6 +1,6 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.accessor;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.DynamicLightHandler;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

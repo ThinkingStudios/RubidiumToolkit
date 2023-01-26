@@ -9,7 +9,7 @@
 
 package org.thinkingstudio.rubidium_toolkit.mixin.dynlights;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,13 +31,13 @@ public class DebugHudMixin {
 	@Inject(method = "getGameInformation", at = @At("RETURN"))
 	private void onGetLeftText(CallbackInfoReturnable<List<String>> cir) {
 		var list = cir.getReturnValue();
-		var ldl = RubidiumDynLights.get();
+		var ldl = ToolkitDynLights.get();
 		var builder = new StringBuilder("Dynamic Light Sources: ");
 		builder.append(ldl.getLightSourcesCount())
 				.append(" (U: ")
 				.append(ldl.getLastUpdateCount());
 
-		if (!RubidiumDynLights.isEnabled()) {
+		if (!ToolkitDynLights.isEnabled()) {
 			builder.append(" ; ");
 			builder.append(ChatFormatting.RED);
 			builder.append("Disabled");

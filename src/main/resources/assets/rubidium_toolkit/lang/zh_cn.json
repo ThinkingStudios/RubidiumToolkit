@@ -71,6 +71,7 @@
   "rubidium_toolkit.zoom.disable_overlay_no_hud.name": "禁用覆盖无HUD",
   "rubidium_toolkit.zoom.disable_overlay_no_hud.tooltip": "如果在 HUD 隐藏时应该禁用缩放晕影。 （F1 模式）",
 
+  "rubidium_toolkit.dynlights.placeholder.dummy.name": "Dummy",
   "rubidium_toolkit.dynlights.speed.name": "动态光源速度",
   "rubidium_toolkit.dynlights.speed.tooltip": "控制动态光源更新的频率。 \n\n照明重新计算可能很昂贵，因此较慢的值将提供更好的性能。\n\n关 - 不言自明 \n慢 - 每秒两次 \n快 - 每秒五次 \n实时 - 每 tick",
   "rubidium_toolkit.dynlights.entity_lights.name": "动态实体光照",

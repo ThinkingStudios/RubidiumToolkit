@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.accessor;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor;
 
 /**
  * Represents an accessor for WorldRenderer.

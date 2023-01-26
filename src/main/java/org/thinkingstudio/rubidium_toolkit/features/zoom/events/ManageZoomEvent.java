@@ -1,7 +1,7 @@
 package org.thinkingstudio.rubidium_toolkit.features.zoom.events;
 
+import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfigClient;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.ZoomKeyBinds;
-import org.thinkingstudio.rubidium_toolkit.config.ClientConfig;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.network.RubidiumToolkitNetwork;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.utils.ZoomUtils;
 import net.minecraft.client.Minecraft;
@@ -37,7 +37,7 @@ public class ManageZoomEvent {
 		}
 
 		// Handle zoom mode changes.
-		if (!ClientConfig.ZOOM_MODE.get().equals(ConfigEnums.ZoomModes.HOLD)) {
+		if (!RubidiumToolkitConfigClient.ZOOM_MODE.get().equals(ConfigEnums.ZoomModes.HOLD)) {
 			if (!persistentZoom) {
 				persistentZoom = true;
 				lastZooming = true;
@@ -63,9 +63,9 @@ public class ManageZoomEvent {
 		// This makes toggling usable and the zoom divisor adjustable
 		if (zooming == lastZooming) return;
 
-		doSpyglassSound = ClientConfig.USE_SPYGLASS_SOUNDS.get();
+		doSpyglassSound = RubidiumToolkitConfigClient.USE_SPYGLASS_SOUNDS.get();
 
-		switch (ClientConfig.ZOOM_MODE.get()) {
+		switch (RubidiumToolkitConfigClient.ZOOM_MODE.get()) {
 			case HOLD -> {
 				// If the zoom needs to be held, then the zoom signal is determined by if the key is pressed or not
 				ZoomUtils.ZOOMER_ZOOM.setZoom(zooming);
@@ -88,7 +88,7 @@ public class ManageZoomEvent {
 		}
 
 		if (client.player != null && doSpyglassSound && !spyglassUse) {
-			boolean soundDirection = !ClientConfig.ZOOM_MODE.get().equals(ConfigEnums.ZoomModes.PERSISTENT)
+			boolean soundDirection = !RubidiumToolkitConfigClient.ZOOM_MODE.get().equals(ConfigEnums.ZoomModes.PERSISTENT)
 				? ZoomUtils.ZOOMER_ZOOM.getZoom()
 				: keyPress;
 

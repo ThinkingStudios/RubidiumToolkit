@@ -1,7 +1,7 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.sodium;
 
 import com.google.common.collect.ImmutableList;
-import org.thinkingstudio.rubidium_toolkit.config.ClientConfig;
+import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfigClient;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnums;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
@@ -42,8 +42,8 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.lower_sensitivity.tooltip")))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> ClientConfig.REDUCE_SENSITIVITY.set(value),
-                        (options) -> ClientConfig.REDUCE_SENSITIVITY.get())
+                        (options, value) -> RubidiumToolkitConfigClient.REDUCE_SENSITIVITY.set(value),
+                        (options) -> RubidiumToolkitConfigClient.REDUCE_SENSITIVITY.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -52,8 +52,8 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.scrolling.tooltip")))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> ClientConfig.ALLOW_SCROLLING.set(value),
-                        (options) -> ClientConfig.ALLOW_SCROLLING.get())
+                        (options, value) -> RubidiumToolkitConfigClient.ALLOW_SCROLLING.set(value),
+                        (options) -> RubidiumToolkitConfigClient.ALLOW_SCROLLING.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -68,8 +68,8 @@ public class ZoomOptionsPage
                         })
                 )
                 .setBinding(
-                        (options, value) -> ClientConfig.ZOOM_OVERLAY.set(ConfigEnums.ZoomOverlays.valueOf(value.toString())),
-                        (options) -> ConfigEnums.ZoomOverlays.valueOf(String.valueOf(ClientConfig.ZOOM_OVERLAY.get()))
+                        (options, value) -> RubidiumToolkitConfigClient.ZOOM_OVERLAY.set(ConfigEnums.ZoomOverlays.valueOf(value.toString())),
+                        (options) -> ConfigEnums.ZoomOverlays.valueOf(String.valueOf(RubidiumToolkitConfigClient.ZOOM_OVERLAY.get()))
                 )
                 .setImpact(OptionImpact.LOW)
                 .build();
@@ -86,8 +86,8 @@ public class ZoomOptionsPage
                         )
                 )
                 .setBinding(
-                        (opts, value) -> ClientConfig.ZOOM_TRANSITION.set(ConfigEnums.ZoomTransitionOptions.valueOf(value.toString())),
-                        (opts) -> ConfigEnums.ZoomTransitionOptions.valueOf(String.valueOf(ClientConfig.ZOOM_TRANSITION.get())))
+                        (opts, value) -> RubidiumToolkitConfigClient.ZOOM_TRANSITION.set(ConfigEnums.ZoomTransitionOptions.valueOf(value.toString())),
+                        (opts) -> ConfigEnums.ZoomTransitionOptions.valueOf(String.valueOf(RubidiumToolkitConfigClient.ZOOM_TRANSITION.get())))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -103,8 +103,8 @@ public class ZoomOptionsPage
                         )
                 )
                 .setBinding(
-                        (opts, value) -> ClientConfig.ZOOM_MODE.set(ConfigEnums.ZoomModes.valueOf(value.toString())),
-                        (opts) -> ConfigEnums.ZoomModes.valueOf(String.valueOf(ClientConfig.ZOOM_MODE.get())))
+                        (opts, value) -> RubidiumToolkitConfigClient.ZOOM_MODE.set(ConfigEnums.ZoomModes.valueOf(value.toString())),
+                        (opts) -> ConfigEnums.ZoomModes.valueOf(String.valueOf(RubidiumToolkitConfigClient.ZOOM_MODE.get())))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -120,8 +120,8 @@ public class ZoomOptionsPage
                         )
                 )
                 .setBinding(
-                        (opts, value) -> ClientConfig.CINEMATIC_CAMERA.set(ConfigEnums.CinematicCameraOptions.valueOf(value.toString())),
-                        (opts) -> ConfigEnums.CinematicCameraOptions.valueOf(String.valueOf(ClientConfig.CINEMATIC_CAMERA.get())))
+                        (opts, value) -> RubidiumToolkitConfigClient.CINEMATIC_CAMERA.set(ConfigEnums.CinematicCameraOptions.valueOf(value.toString())),
+                        (opts) -> ConfigEnums.CinematicCameraOptions.valueOf(String.valueOf(RubidiumToolkitConfigClient.CINEMATIC_CAMERA.get())))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -130,8 +130,8 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.allow_scrolling.tooltip")))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> ClientConfig.ALLOW_SCROLLING.set(value),
-                        (options) -> ClientConfig.ALLOW_SCROLLING.get())
+                        (options, value) -> RubidiumToolkitConfigClient.ALLOW_SCROLLING.set(value),
+                        (options) -> RubidiumToolkitConfigClient.ALLOW_SCROLLING.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -140,8 +140,8 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.extra_key_binds.tooltip")))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> ClientConfig.EXTRA_KEY_BINDS.set(value),
-                        (options) -> ClientConfig.EXTRA_KEY_BINDS.get())
+                        (options, value) -> RubidiumToolkitConfigClient.EXTRA_KEY_BINDS.set(value),
+                        (options) -> RubidiumToolkitConfigClient.EXTRA_KEY_BINDS.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -157,8 +157,8 @@ public class ZoomOptionsPage
                         )
                 )
                 .setBinding(
-                        (opts, value) -> ClientConfig.SPYGLASS_DEPENDENCY.set(ConfigEnums.SpyglassDependency.valueOf(value.toString())),
-                        (opts) -> ConfigEnums.SpyglassDependency.valueOf(String.valueOf(ClientConfig.SPYGLASS_DEPENDENCY.get())))
+                        (opts, value) -> RubidiumToolkitConfigClient.SPYGLASS_DEPENDENCY.set(ConfigEnums.SpyglassDependency.valueOf(value.toString())),
+                        (opts) -> ConfigEnums.SpyglassDependency.valueOf(String.valueOf(RubidiumToolkitConfigClient.SPYGLASS_DEPENDENCY.get())))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -167,8 +167,8 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.disable_overlay_no_hud.tooltip")))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> ClientConfig.DISABLE_OVERLAY_NO_HUD.set(value),
-                        (options) -> ClientConfig.DISABLE_OVERLAY_NO_HUD.get())
+                        (options, value) -> RubidiumToolkitConfigClient.DISABLE_OVERLAY_NO_HUD.set(value),
+                        (options) -> RubidiumToolkitConfigClient.DISABLE_OVERLAY_NO_HUD.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 

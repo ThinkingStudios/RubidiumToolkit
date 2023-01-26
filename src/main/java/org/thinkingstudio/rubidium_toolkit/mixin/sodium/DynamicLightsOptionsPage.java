@@ -1,8 +1,9 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.sodium;
 
 import com.google.common.collect.ImmutableList;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.config.DynamicLightsConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ConfigEnums;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import me.jellysquid.mods.sodium.client.gui.options.OptionGroup;
@@ -41,11 +42,11 @@ public class DynamicLightsOptionsPage {
     {
         List<OptionGroup> groups = new ArrayList<>();
 
-        OptionImpl<SodiumGameOptions, DynamicLightsConfig.QualityMode> qualityMode = OptionImpl.createBuilder(DynamicLightsConfig.QualityMode.class, dynamicLightsOpts)
+        OptionImpl<SodiumGameOptions, ConfigEnums.QualityMode> qualityMode = OptionImpl.createBuilder(ConfigEnums.QualityMode.class, dynamicLightsOpts)
                 .setName(Component.nullToEmpty(I18n.get("rubidium_toolkit.dynlights.speed.name")))
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.dynlights.speed.tooltip")))
                 .setControl(
-                        (option) -> new CyclingControl<>(option, DynamicLightsConfig.QualityMode.class, new Component[] {
+                        (option) -> new CyclingControl<>(option, ConfigEnums.QualityMode.class, new Component[] {
                                 Component.nullToEmpty(I18n.get("rubidium_toolkit.option.off")),
                                 Component.nullToEmpty(I18n.get("rubidium_toolkit.options.slow")),
                                 Component.nullToEmpty(I18n.get("rubidium_toolkit.options.fast")),
@@ -53,10 +54,10 @@ public class DynamicLightsOptionsPage {
                         }))
                 .setBinding(
                         (options, value) -> {
-                            DynamicLightsConfig.Quality.set(DynamicLightsConfig.QualityMode.valueOf(value.toString()));
-                            RubidiumDynLights.get().clearLightSources();
+                            DynamicLightsConfig.Quality.set(ConfigEnums.QualityMode.valueOf(value.toString()));
+                            ToolkitDynLights.get().clearLightSources();
                         },
-                        (options) -> DynamicLightsConfig.QualityMode.valueOf(String.valueOf(DynamicLightsConfig.Quality.get())))
+                        (options) -> ConfigEnums.QualityMode.valueOf(String.valueOf(DynamicLightsConfig.Quality.get())))
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 

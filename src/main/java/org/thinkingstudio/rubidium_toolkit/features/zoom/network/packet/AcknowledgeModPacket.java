@@ -1,6 +1,6 @@
 package org.thinkingstudio.rubidium_toolkit.features.zoom.network.packet;
 
-import org.thinkingstudio.rubidium_toolkit.RubidiumToolkitClient;
+import org.thinkingstudio.rubidium_toolkit.features.zoom.ToolkitZoomClient;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.network.RubidiumToolkitNetwork;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.utils.ZoomUtils;
 import net.minecraft.network.FriendlyByteBuf;
@@ -35,6 +35,6 @@ public record AcknowledgeModPacket() implements Packet {
     }
 
     private void doSendToast(Component component) {
-        RubidiumToolkitClient.sendToast(component);
+        ToolkitZoomClient.sendToast(component);
     }
 }

@@ -1,8 +1,8 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights.api;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.accessor.DynamicLightHandlerHolder;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.config.DynamicLightsConfig;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor.DynamicLightHandlerHolder;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -33,14 +33,14 @@ public final class DynamicLightHandlers {
 			return luminance;
 		});
 		registerDynamicLightHandler(EntityType.ITEM,
-				entity -> RubidiumDynLights.getLuminanceFromItemStack(entity.getItem(), entity.isUnderWater()));
+				entity -> ToolkitDynLights.getLuminanceFromItemStack(entity.getItem(), entity.isUnderWater()));
 		registerDynamicLightHandler(EntityType.ITEM_FRAME, entity -> {
 			var world = entity.getCommandSenderWorld();
-			return RubidiumDynLights.getLuminanceFromItemStack(entity.getItem(), !world.getFluidState(entity.blockPosition()).isEmpty());
+			return ToolkitDynLights.getLuminanceFromItemStack(entity.getItem(), !world.getFluidState(entity.blockPosition()).isEmpty());
 		});
 		registerDynamicLightHandler(EntityType.GLOW_ITEM_FRAME, entity -> {
 			var world = entity.getCommandSenderWorld();
-			return Math.max(14, RubidiumDynLights.getLuminanceFromItemStack(entity.getItem(),
+			return Math.max(14, ToolkitDynLights.getLuminanceFromItemStack(entity.getItem(),
 					!world.getFluidState(entity.blockPosition()).isEmpty()));
 		});
 		registerDynamicLightHandler(EntityType.MAGMA_CUBE, entity -> (entity.squish > 0.6) ? 11 : 8);

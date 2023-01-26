@@ -1,6 +1,6 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.dynlights;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.DynamicLightSource;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.entity.LevelEntityGetter;

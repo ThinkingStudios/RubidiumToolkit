@@ -9,7 +9,7 @@ import org.thinkingstudio.rubidium_toolkit.features.zoom.api.overlays.SpyglassZo
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.transitions.InstantTransitionMode;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.transitions.SmoothTransitionMode;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnums;
-import org.thinkingstudio.rubidium_toolkit.config.ClientConfig;
+import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfigClient;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.utils.ZoomUtils;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.zoom.LinearTransitionMode;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.zoom.MultipliedCinematicCameraMouseModifier;
@@ -95,7 +95,7 @@ public class RubidiumToolkitNetwork {
     }
 
     public static ConfigEnums.SpyglassDependency getSpyglassDependency() {
-        return spyglassDependency != null ? spyglassDependency : ClientConfig.SPYGLASS_DEPENDENCY.get();
+        return spyglassDependency != null ? spyglassDependency : RubidiumToolkitConfigClient.SPYGLASS_DEPENDENCY.get();
     }
 
     public static ConfigEnums.ZoomOverlays getSpyglassOverlay() {
@@ -124,9 +124,9 @@ public class RubidiumToolkitNetwork {
     public static void configureZoomInstance() {
         // Sets zoom transition
         ZoomUtils.ZOOMER_ZOOM.setTransitionMode(
-                switch (ClientConfig.ZOOM_TRANSITION.get()) {
-                    case SMOOTH -> new SmoothTransitionMode((float) (double) ClientConfig.SMOOTH_MULTIPLIER.get());
-                    case LINEAR -> new LinearTransitionMode(ClientConfig.MINIMUM_LINEAR_STEP.get(), ClientConfig.MAXIMUM_LINEAR_STEP.get());
+                switch (RubidiumToolkitConfigClient.ZOOM_TRANSITION.get()) {
+                    case SMOOTH -> new SmoothTransitionMode((float) (double) RubidiumToolkitConfigClient.SMOOTH_MULTIPLIER.get());
+                    case LINEAR -> new LinearTransitionMode(RubidiumToolkitConfigClient.MINIMUM_LINEAR_STEP.get(), RubidiumToolkitConfigClient.MAXIMUM_LINEAR_STEP.get());
                     default -> new InstantTransitionMode();
                 }
         );
@@ -140,17 +140,17 @@ public class RubidiumToolkitNetwork {
         }
 
         // Sets zoom divisor
-        ZoomUtils.ZOOMER_ZOOM.setDefaultZoomDivisor(ClientConfig.ZOOM_DIVISOR.get());
+        ZoomUtils.ZOOMER_ZOOM.setDefaultZoomDivisor(RubidiumToolkitConfigClient.ZOOM_DIVISOR.get());
 
         // Sets mouse modifier
         configureZoomModifier();
 
         // Enforce spyglass overlay if necessary
-        final var overlay = spyglassOverlay == ConfigEnums.ZoomOverlays.OFF ? ClientConfig.ZOOM_OVERLAY.get() : spyglassOverlay;
+        final var overlay = spyglassOverlay == ConfigEnums.ZoomOverlays.OFF ? RubidiumToolkitConfigClient.ZOOM_OVERLAY.get() : spyglassOverlay;
 
         // Sets zoom overlay
         final var overlayTextureId = new ResourceLocation(
-                (ClientConfig.USE_SPYGLASS_TEXTURE.get() || overlay == ConfigEnums.ZoomOverlays.SPYGLASS)
+                (RubidiumToolkitConfigClient.USE_SPYGLASS_TEXTURE.get() || overlay == ConfigEnums.ZoomOverlays.SPYGLASS)
                         ? "textures/misc/spyglass_scope.png"
                         : OkZoomerAPI.MOD_ID + ":textures/misc/zoom_overlay.png");
 
@@ -164,12 +164,12 @@ public class RubidiumToolkitNetwork {
     }
 
     public static void configureZoomModifier() {
-        final var cinematicCamera = ClientConfig.CINEMATIC_CAMERA.get();
-        boolean reduceSensitivity = ClientConfig.REDUCE_SENSITIVITY.get();
+        final var cinematicCamera = RubidiumToolkitConfigClient.CINEMATIC_CAMERA.get();
+        boolean reduceSensitivity = RubidiumToolkitConfigClient.REDUCE_SENSITIVITY.get();
         if (cinematicCamera != ConfigEnums.CinematicCameraOptions.OFF) {
             MouseModifier cinematicModifier = switch (cinematicCamera) {
                 case VANILLA -> new CinematicCameraMouseModifier();
-                case MULTIPLIED -> new MultipliedCinematicCameraMouseModifier(ClientConfig.CINEMATIC_MULTIPLIER.get());
+                case MULTIPLIED -> new MultipliedCinematicCameraMouseModifier(RubidiumToolkitConfigClient.CINEMATIC_MULTIPLIER.get());
                 default -> null;
             };
             ZoomUtils.ZOOMER_ZOOM.setMouseModifier(reduceSensitivity

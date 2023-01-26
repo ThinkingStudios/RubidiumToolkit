@@ -71,6 +71,7 @@
   "rubidium_toolkit.zoom.disable_overlay_no_hud.name": "Disable Overlay No HUD",
   "rubidium_toolkit.zoom.disable_overlay_no_hud.tooltip": "If the OkZoomer overlay should be disabled when the HUD is hidden. (F1 mode)",
 
+  "rubidium_toolkit.dynlights.placeholder.dummy.name": "Dummy",
   "rubidium_toolkit.dynlights.speed.name": "Dynamic Lights Speed",
   "rubidium_toolkit.dynlights.speed.tooltip": "Controls how often dynamic lights will update. \n\n\nLighting recalculation can be expensive, so slower values will give better performance. \n\n\nOff - Self explanatory \nSlow - Twice a second \nFast - Five times a second \nRealtime - Every tick",
   "rubidium_toolkit.dynlights.entity_lights.name": "Dynamic Entity Lights",

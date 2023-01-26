@@ -2,38 +2,17 @@ package org.thinkingstudio.rubidium_toolkit.config;
 
 //import it.unimi.dsi.fastutil.floats.FloatIntPair;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 
 @MethodsReturnNonnullByDefault
 public class ConfigEnums {
-	public enum Complexity implements StringRepresentable
-	{
-		OFF("Off"),
-		SIMPLE("Simple"),
-		ADVANCED("Advanced");
 
-		private final String name;
-
-		Complexity(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String getSerializedName() {
-			return this.name;
-		}
-	}
-	public enum DarknessOptions {
-		PITCH_BLACK(0f),
-		REALLY_DARK (0.04f),
-		DARK(0.08f),
-		DIM(0.12f);
-
-		public final float value;
-
-		DarknessOptions(float value) {
-			this.value = value;
-		}
+	public enum ZoomPresets {
+		DEFAULT,
+		CLASSIC,
+		PERSISTENT,
+		SPYGLASS
 	}
 	public enum CinematicCameraOptions implements StringRepresentable {
 		OFF,
@@ -88,6 +67,24 @@ public class ConfigEnums {
 		@Override
 		public String getSerializedName() {
 			return this.toString();
+		}
+	}
+
+	public enum QualityMode {
+
+		OFF("Off"),
+		SLOW("Slow"),
+		FAST("Fast"),
+		REALTIME("Realtime");
+
+		private final String name;
+
+		private QualityMode(String name) {
+			this.name = name;
+		}
+
+		public Component getLocalizedName() {
+			return Component.nullToEmpty(this.name);
 		}
 	}
 }

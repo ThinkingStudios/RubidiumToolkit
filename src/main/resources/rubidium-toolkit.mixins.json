@@ -5,10 +5,10 @@
   "refmap": "rubidium_toolkit.mixins.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "entity_distance.MaxDistanceEntity",
-    "entity_distance.MaxDistanceTileEntity",
+    "entitydistance.MaxDistanceEntity",
+    "entitydistance.MaxDistanceBlockEntity",
     "sodium.DynamicLightsOptionsPage",
-    "sodium.SodiumOptionsPage",
+    "sodium.ToolkitOptionsPage",
     "sodium.ZoomOptionsPage"
   ],
   "injectors": {

@@ -19,7 +19,7 @@ public interface OkZoomerAPI {
     /**
      * OkZoomer's mod ID
      */
-    String MOD_ID = RubidiumToolkit.MOD_ID;
+    String MOD_ID = RubidiumToolkit.MODID;
     Logger LOGGER = LogManager.getLogger("OK Zoomer API Core");
 
     /**

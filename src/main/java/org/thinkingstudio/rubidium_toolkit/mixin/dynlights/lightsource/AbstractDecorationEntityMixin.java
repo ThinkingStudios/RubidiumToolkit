@@ -1,9 +1,9 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.dynlights.lightsource;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.DynamicLightSource;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.DynamicLightHandlers;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.config.DynamicLightsConfig;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandlers;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.HangingEntity;
@@ -30,7 +30,7 @@ public abstract class AbstractDecorationEntityMixin extends Entity implements Dy
 					this.resetDynamicLight();
 				else
 					this.dynamicLightTick();
-				RubidiumDynLights.updateTracking(this);
+				ToolkitDynLights.updateTracking(this);
 			}
 		}
 	}

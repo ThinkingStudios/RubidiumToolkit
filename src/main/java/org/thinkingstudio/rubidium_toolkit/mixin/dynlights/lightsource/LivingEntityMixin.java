@@ -1,9 +1,9 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.dynlights.lightsource;
 
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.DynamicLightSource;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.DynamicLightHandlers;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.config.DynamicLightsConfig;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandlers;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -36,7 +36,7 @@ public abstract class LivingEntityMixin extends Entity implements DynamicLightSo
 			boolean submergedInFluid = !this.level.getFluidState(eyePos).isEmpty();
 			for (var equipped : this.getAllSlots()) {
 				if (!equipped.isEmpty())
-					luminance = Math.max(luminance, RubidiumDynLights.getLuminanceFromItemStack(equipped, submergedInFluid));
+					luminance = Math.max(luminance, ToolkitDynLights.getLuminanceFromItemStack(equipped, submergedInFluid));
 			}
 
 			this.lambdynlights$luminance = luminance;

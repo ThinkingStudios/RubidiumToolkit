@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.config;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import java.util.function.Consumer;

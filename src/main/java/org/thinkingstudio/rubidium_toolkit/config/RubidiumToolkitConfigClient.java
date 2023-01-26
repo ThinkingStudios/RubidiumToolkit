@@ -7,7 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-public class ClientConfig {
+public class RubidiumToolkitConfigClient {
     public static final ForgeConfigSpec SPEC;
 
     // Features
@@ -38,15 +38,19 @@ public class ClientConfig {
     public static final ForgeConfigSpec.BooleanValue USE_SPYGLASS_SOUNDS;
     public static final ForgeConfigSpec.BooleanValue SHOW_RESTRICTION_TOASTS;
 
-    public static ForgeConfigSpec.ConfigValue<Integer> maxTileEntityRenderDistanceSquare;
-    public static ForgeConfigSpec.ConfigValue<Integer> maxTileEntityRenderDistanceY;
+    public static ForgeConfigSpec.ConfigValue<Integer> maxBlockEntityRenderDistanceSquare;
+    public static ForgeConfigSpec.ConfigValue<Integer> maxBlockEntityRenderDistanceY;
 
     public static ForgeConfigSpec.ConfigValue<Integer> maxEntityRenderDistanceSquare;
     public static ForgeConfigSpec.ConfigValue<Integer> maxEntityRenderDistanceY;
-    public static ForgeConfigSpec.ConfigValue<Boolean> fog;
     public static ForgeConfigSpec.ConfigValue<Boolean> enableDistanceChecks;
-    public static ForgeConfigSpec.BooleanValue TRUE_DARKNESS_ENABLE;
-    public static ForgeConfigSpec.EnumValue<ConfigEnums.DarknessOptions> DARKNESS_OPTIONS;
+
+    // Dynamic Lights
+    public static ForgeConfigSpec.EnumValue<ConfigEnums.QualityMode> Quality;
+    public static ForgeConfigSpec.ConfigValue<Boolean> EntityLighting;
+    public static ForgeConfigSpec.ConfigValue<Boolean> TileEntityLighting;
+
+    public static ForgeConfigSpec.ConfigValue<Boolean> OnlyUpdateOnPositionChange;
     
     static {
         final var builder = new ForgeConfigSpec.Builder();
@@ -135,72 +139,61 @@ public class ClientConfig {
         }
 
         {
-            builder.push("TrueDarkness");
-
-            TRUE_DARKNESS_ENABLE = builder.comment("Use True Darkness")
-                    .define("true_darkness_enable",false);
-            DARKNESS_OPTIONS = builder.comment("Controls how dark is considered true darkness.",
-                            "'PITCH_BLACK' ",
-                            "'REALLY_DARK' ",
-                            "'DARK' ",
-                            "'DIM' ")
-                    .defineEnum("darkness_options", ConfigEnums.DarknessOptions.DARK);
-
-            builder.pop();
-        }
-
-        {
             builder.push("EntityDistance");
 
             enableDistanceChecks = builder.define("Enable Max Distance Checks", true);
 
-            maxTileEntityRenderDistanceSquare = builder.define("(TileEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
-            maxTileEntityRenderDistanceY = builder.define("(TileEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
+            maxBlockEntityRenderDistanceSquare = builder.define("(TileEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
+            maxBlockEntityRenderDistanceY = builder.define("(TileEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
 
             maxEntityRenderDistanceSquare = builder.define("(Entity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
             maxEntityRenderDistanceY = builder.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
 
             builder.pop();
         }
+/*
+        {
+            builder.push("Dynamic Lights");
+
+            Quality = builder.defineEnum("Quality Mode (OFF, SLOW, FAST, REALTIME)", ConfigEnums.QualityMode.REALTIME);
+            EntityLighting = builder.define("Dynamic Entity Lighting", true);
+            TileEntityLighting = builder.define("Dynamic TileEntity Lighting", true);
+            OnlyUpdateOnPositionChange = builder.define("Only Update On Position Change", true);
+        }
+
+ */
         
         SPEC = builder.build();
     }
 
-    public enum ZoomPresets {
-        DEFAULT,
-        CLASSIC,
-        PERSISTENT,
-        SPYGLASS
-    }
+    public static void resetToPreset(ConfigEnums.ZoomPresets preset) {
+        RubidiumToolkitConfigClient.CINEMATIC_CAMERA.set(preset == ConfigEnums.ZoomPresets.CLASSIC ? ConfigEnums.CinematicCameraOptions.VANILLA : ConfigEnums.CinematicCameraOptions.OFF);
+        RubidiumToolkitConfigClient.REDUCE_SENSITIVITY.set(preset != ConfigEnums.ZoomPresets.CLASSIC);
+        RubidiumToolkitConfigClient.ZOOM_TRANSITION.set(preset == ConfigEnums.ZoomPresets.CLASSIC ? ConfigEnums.ZoomTransitionOptions.OFF : ConfigEnums.ZoomTransitionOptions.SMOOTH);
+        RubidiumToolkitConfigClient.ZOOM_MODE.set(preset == ConfigEnums.ZoomPresets.PERSISTENT ? ConfigEnums.ZoomModes.PERSISTENT : ConfigEnums.ZoomModes.HOLD);
+        RubidiumToolkitConfigClient.ALLOW_SCROLLING.set(preset == ConfigEnums.ZoomPresets.CLASSIC || preset == ConfigEnums.ZoomPresets.SPYGLASS);
+        RubidiumToolkitConfigClient.EXTRA_KEY_BINDS.set(preset != ConfigEnums.ZoomPresets.CLASSIC);
+        RubidiumToolkitConfigClient.ZOOM_OVERLAY.set(preset == ConfigEnums.ZoomPresets.SPYGLASS ? ConfigEnums.ZoomOverlays.SPYGLASS : ConfigEnums.ZoomOverlays.OFF);
+        RubidiumToolkitConfigClient.SPYGLASS_DEPENDENCY.set(preset == ConfigEnums.ZoomPresets.SPYGLASS ? ConfigEnums.SpyglassDependency.BOTH : ConfigEnums.SpyglassDependency.OFF);
 
-    public static void resetToPreset(ZoomPresets preset) {
-        ClientConfig.CINEMATIC_CAMERA.set(preset == ZoomPresets.CLASSIC ? ConfigEnums.CinematicCameraOptions.VANILLA : ConfigEnums.CinematicCameraOptions.OFF);
-        ClientConfig.REDUCE_SENSITIVITY.set(preset != ZoomPresets.CLASSIC);
-        ClientConfig.ZOOM_TRANSITION.set(preset == ZoomPresets.CLASSIC ? ConfigEnums.ZoomTransitionOptions.OFF : ConfigEnums.ZoomTransitionOptions.SMOOTH);
-        ClientConfig.ZOOM_MODE.set(preset == ZoomPresets.PERSISTENT ? ConfigEnums.ZoomModes.PERSISTENT : ConfigEnums.ZoomModes.HOLD);
-        ClientConfig.ALLOW_SCROLLING.set(preset == ZoomPresets.CLASSIC || preset == ZoomPresets.SPYGLASS);
-        ClientConfig.EXTRA_KEY_BINDS.set(preset != ZoomPresets.CLASSIC);
-        ClientConfig.ZOOM_OVERLAY.set(preset == ZoomPresets.SPYGLASS ? ConfigEnums.ZoomOverlays.SPYGLASS : ConfigEnums.ZoomOverlays.OFF);
-        ClientConfig.SPYGLASS_DEPENDENCY.set(preset == ZoomPresets.SPYGLASS ? ConfigEnums.SpyglassDependency.BOTH : ConfigEnums.SpyglassDependency.OFF);
+        RubidiumToolkitConfigClient.RESET_ZOOM_WITH_MOUSE.set(preset != ConfigEnums.ZoomPresets.CLASSIC);
+        RubidiumToolkitConfigClient.USE_SPYGLASS_TEXTURE.set(preset == ConfigEnums.ZoomPresets.SPYGLASS);
+        RubidiumToolkitConfigClient.USE_SPYGLASS_SOUNDS.set(preset == ConfigEnums.ZoomPresets.SPYGLASS);
+        RubidiumToolkitConfigClient.SHOW_RESTRICTION_TOASTS.set(true);
 
-        ClientConfig.RESET_ZOOM_WITH_MOUSE.set(preset != ZoomPresets.CLASSIC);
-        ClientConfig.USE_SPYGLASS_TEXTURE.set(preset == ZoomPresets.SPYGLASS);
-        ClientConfig.USE_SPYGLASS_SOUNDS.set(preset == ZoomPresets.SPYGLASS);
-        ClientConfig.SHOW_RESTRICTION_TOASTS.set(true);
-
-        ClientConfig.ZOOM_DIVISOR.set(switch (preset) {
+        RubidiumToolkitConfigClient.ZOOM_DIVISOR.set(switch (preset) {
             case PERSISTENT -> 1.0D;
             case SPYGLASS -> 10.0D;
             default -> 4.0D;
         });
-        ClientConfig.MINIMUM_ZOOM_DIVISOR.set(1D);
-        ClientConfig.MAXIMUM_LINEAR_STEP.set(50D);
-        ClientConfig.UPPER_SCROLL_STEPS.set(preset == ZoomPresets.SPYGLASS ? 16 : 20);
-        ClientConfig.LOWER_SCROLL_STEPS.set(preset == ZoomPresets.SPYGLASS ? 8 : 4);
-        ClientConfig.SMOOTH_MULTIPLIER.set(preset == ZoomPresets.SPYGLASS ? 0.5D : 0.75D);
-        ClientConfig.CINEMATIC_MULTIPLIER.set(4D);
-        ClientConfig.MINIMUM_LINEAR_STEP.set(0.125D);
-        ClientConfig.MAXIMUM_LINEAR_STEP.set(0.25D);
+        RubidiumToolkitConfigClient.MINIMUM_ZOOM_DIVISOR.set(1D);
+        RubidiumToolkitConfigClient.MAXIMUM_LINEAR_STEP.set(50D);
+        RubidiumToolkitConfigClient.UPPER_SCROLL_STEPS.set(preset == ConfigEnums.ZoomPresets.SPYGLASS ? 16 : 20);
+        RubidiumToolkitConfigClient.LOWER_SCROLL_STEPS.set(preset == ConfigEnums.ZoomPresets.SPYGLASS ? 8 : 4);
+        RubidiumToolkitConfigClient.SMOOTH_MULTIPLIER.set(preset == ConfigEnums.ZoomPresets.SPYGLASS ? 0.5D : 0.75D);
+        RubidiumToolkitConfigClient.CINEMATIC_MULTIPLIER.set(4D);
+        RubidiumToolkitConfigClient.MINIMUM_LINEAR_STEP.set(0.125D);
+        RubidiumToolkitConfigClient.MAXIMUM_LINEAR_STEP.set(0.25D);
 
         SPEC.save();
     }

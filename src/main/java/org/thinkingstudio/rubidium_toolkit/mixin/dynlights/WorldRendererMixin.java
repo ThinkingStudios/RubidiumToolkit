@@ -2,7 +2,7 @@ package org.thinkingstudio.rubidium_toolkit.mixin.dynlights;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
@@ -20,6 +20,6 @@ public class WorldRendererMixin
     public void render(PoseStack outlinebuffersource, float i, long j, boolean k, Camera l, GameRenderer i1, LightTexture lightTexture, Matrix4f multibuffersource, CallbackInfo ci)
     {
         Minecraft.getInstance().getProfiler().popPush("dynamic_lighting");
-        RubidiumDynLights.get().updateAll((LevelRenderer) (Object) this);
+        ToolkitDynLights.get().updateAll((LevelRenderer) (Object) this);
     }
 }

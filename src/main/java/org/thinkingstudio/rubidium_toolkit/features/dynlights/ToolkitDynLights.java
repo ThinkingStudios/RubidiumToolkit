@@ -1,17 +1,14 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights;
 
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.accessor.WorldRendererAccessor;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.DynamicLightHandlers;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.item.ItemLightSources;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.config.DynamicLightsConfig;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor.WorldRendererAccessor;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item.ItemLightSources;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.packs.resources.ReloadableResourceManager;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.PrimedTnt;
@@ -27,8 +24,6 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.network.NetworkConstants;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,30 +33,12 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Predicate;
 
-class ExecutorHelper {
-	public static void onInitializeClient()
-	{
-		DynLightsResourceListener reloadListener = new DynLightsResourceListener();
+@Mod(RubidiumToolkit.MODID)
+public class ToolkitDynLights {
 
-		ResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
-		if (resourceManager instanceof ReloadableResourceManager) {
-			ReloadableResourceManager reloadableResourceManager = (ReloadableResourceManager) resourceManager;
-			reloadableResourceManager.registerReloadListener(reloadListener);
-		}
-
-		DynamicLightHandlers.registerDefaultHandlers();
-	}
-}
-
-
-@Mod(RubidiumDynLights.MODID)
-public class RubidiumDynLights {
-
-	public static final String MODID = RubidiumToolkit.MOD_ID;
 	private static final double MAX_RADIUS = 7.75;
 	private static final double MAX_RADIUS_SQUARED = MAX_RADIUS * MAX_RADIUS;
-	private static RubidiumDynLights INSTANCE;
-	public final Logger logger = LogManager.getLogger(MODID);
+	private static ToolkitDynLights INSTANCE;
 
 	private final Set<DynamicLightSource> dynamicLightSources = new HashSet<>();
 	private final ReentrantReadWriteLock lightSourcesLock = new ReentrantReadWriteLock();
@@ -70,11 +47,11 @@ public class RubidiumDynLights {
 
 	public static boolean isEnabled() { return !Objects.equals(DynamicLightsConfig.Quality.get(), "OFF"); }
 
-	public RubidiumDynLights() {
+	public ToolkitDynLights() {
 		INSTANCE = this;
 		log("Initializing Rubidium Dynamic Lights ...");
 		//this.config.load();
-		DynamicLightsConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve("RubidiumToolkit/rubidium_dynamic_lights.toml"));
+		DynamicLightsConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve("RubidiumToolkit/"+ RubidiumToolkit.MODNAME +"DynLights.toml"));
 
 		MinecraftForge.EVENT_BUS.register(this);
 
@@ -82,7 +59,7 @@ public class RubidiumDynLights {
 				.registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 
 
-		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ExecutorHelper::onInitializeClient);
+		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> DynLightsExecutorHelper::onInitializeClient);
 	}
 
 
@@ -367,7 +344,7 @@ public class RubidiumDynLights {
 	 * @param info the message to print
 	 */
 	public void log(String info) {
-		this.logger.info("[LambDynLights] " + info);
+		RubidiumToolkit.LOGGER.info("[RubidiumToolkit-DynLights] " + info);
 	}
 
 	/**
@@ -376,7 +353,7 @@ public class RubidiumDynLights {
 	 * @param info the message to print
 	 */
 	public void warn(String info) {
-		this.logger.warn("[LambDynLights] " + info);
+		RubidiumToolkit.LOGGER.warn("[RubidiumToolkit-DynLights] " + info);
 	}
 
 	/**
@@ -453,7 +430,7 @@ public class RubidiumDynLights {
 	 *
 	 * @return the mod instance
 	 */
-	public static RubidiumDynLights get() {
+	public static ToolkitDynLights get() {
 		return INSTANCE;
 	}
 }

@@ -20,7 +20,7 @@ import net.minecraftforge.server.ServerLifecycleHooks;
 
 import java.util.ArrayList;
 
-public class ServerConfig {
+public class RubidiumToolkitConfigServer {
     public static final ForgeConfigSpec SPEC;
 
     public static final BooleanValue ALLOW_ZOOM;
@@ -61,7 +61,7 @@ public class ServerConfig {
         ZoomUtils.LOGGER.info("THe RubidiumToolkit server config has been changed!");
         final var currentServer = ServerLifecycleHooks.getCurrentServer();
         if (currentServer != null) {
-            currentServer.getPlayerList().getPlayers().forEach(ServerConfig::sendPacket);
+            currentServer.getPlayerList().getPlayers().forEach(RubidiumToolkitConfigServer::sendPacket);
         }
     }
 

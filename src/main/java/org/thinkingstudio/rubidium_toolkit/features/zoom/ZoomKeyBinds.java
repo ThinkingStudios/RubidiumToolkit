@@ -1,6 +1,6 @@
 package org.thinkingstudio.rubidium_toolkit.features.zoom;
 
-import org.thinkingstudio.rubidium_toolkit.config.ClientConfig;
+import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfigClient;
 import org.lwjgl.glfw.GLFW;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
@@ -24,7 +24,7 @@ public class ZoomKeyBinds {
 
 	// The method used to check if the zoom manipulation key binds should be disabled, can be used by other mods.
 	public static boolean areExtraKeyBindsEnabled() {
-		return ClientConfig.EXTRA_KEY_BINDS.get();
+		return RubidiumToolkitConfigClient.EXTRA_KEY_BINDS.get();
 	}
 
 	// The method used to get the extra keybinds, if disabled, return null.

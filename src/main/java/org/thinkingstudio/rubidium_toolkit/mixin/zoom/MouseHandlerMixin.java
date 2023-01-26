@@ -1,10 +1,10 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.zoom;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfigClient;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.APIImpl;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.ZoomKeyBinds;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.ZoomInstance;
-import org.thinkingstudio.rubidium_toolkit.config.ClientConfig;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.network.RubidiumToolkitNetwork;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnums;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.utils.ZoomUtils;
@@ -100,8 +100,8 @@ public abstract class MouseHandlerMixin {
     )
     private void okzoomer$handleZoom(long l, double d, double e, CallbackInfo info) {
         if (this.accumulatedScroll != 0.0) {
-            if (ClientConfig.ALLOW_SCROLLING.get() && !RubidiumToolkitNetwork.getDisableZoomScrolling()) {
-                if (ClientConfig.ZOOM_MODE.get().equals(ConfigEnums.ZoomModes.PERSISTENT)) {
+            if (RubidiumToolkitConfigClient.ALLOW_SCROLLING.get() && !RubidiumToolkitNetwork.getDisableZoomScrolling()) {
+                if (RubidiumToolkitConfigClient.ZOOM_MODE.get().equals(ConfigEnums.ZoomModes.PERSISTENT)) {
                     if (!ZoomKeyBinds.ZOOM_KEY.isDown()) return;
                 }
 

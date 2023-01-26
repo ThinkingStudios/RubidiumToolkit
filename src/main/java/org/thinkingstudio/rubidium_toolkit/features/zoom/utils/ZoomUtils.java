@@ -5,7 +5,7 @@ import org.thinkingstudio.rubidium_toolkit.features.zoom.api.ZoomInstance;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.modifiers.ZoomDivisorMouseModifier;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.api.transitions.SmoothTransitionMode;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.network.RubidiumToolkitNetwork;
-import org.thinkingstudio.rubidium_toolkit.config.ClientConfig;
+import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfigClient;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -38,11 +38,11 @@ public class ZoomUtils {
             return;
         }
 
-        double zoomDivisor = ClientConfig.ZOOM_DIVISOR.get();
-        double minimumZoomDivisor = ClientConfig.MINIMUM_ZOOM_DIVISOR.get();
-        double maximumZoomDivisor = ClientConfig.MAXIMUM_ZOOM_DIVISOR.get();
-        int upperScrollStep = ClientConfig.UPPER_SCROLL_STEPS.get();
-        int lowerScrollStep = ClientConfig.LOWER_SCROLL_STEPS.get();
+        double zoomDivisor = RubidiumToolkitConfigClient.ZOOM_DIVISOR.get();
+        double minimumZoomDivisor = RubidiumToolkitConfigClient.MINIMUM_ZOOM_DIVISOR.get();
+        double maximumZoomDivisor = RubidiumToolkitConfigClient.MAXIMUM_ZOOM_DIVISOR.get();
+        int upperScrollStep = RubidiumToolkitConfigClient.UPPER_SCROLL_STEPS.get();
+        int lowerScrollStep = RubidiumToolkitConfigClient.LOWER_SCROLL_STEPS.get();
 
         if (RubidiumToolkitNetwork.getForceZoomDivisors()) {
             double packetMinimumZoomDivisor = RubidiumToolkitNetwork.getMinimumZoomDivisor();
@@ -83,8 +83,8 @@ public class ZoomUtils {
     }
 
     public static void keepZoomStepsWithinBounds() {
-        int upperScrollStep = ClientConfig.UPPER_SCROLL_STEPS.get();
-        int lowerScrollStep = ClientConfig.LOWER_SCROLL_STEPS.get();
+        int upperScrollStep = RubidiumToolkitConfigClient.UPPER_SCROLL_STEPS.get();
+        int lowerScrollStep = RubidiumToolkitConfigClient.LOWER_SCROLL_STEPS.get();
 
         zoomStep = Mth.clamp(zoomStep, -lowerScrollStep, upperScrollStep);
     }

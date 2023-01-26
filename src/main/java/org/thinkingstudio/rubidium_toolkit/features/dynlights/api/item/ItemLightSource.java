@@ -1,7 +1,7 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.api.item;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item;
 
 import com.google.gson.JsonObject;
-import org.thinkingstudio.rubidium_toolkit.features.dynamic_lights.RubidiumDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynlights.ToolkitDynLights;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -82,7 +82,7 @@ public abstract class ItemLightSource {
 
 	public static @NotNull Optional<ItemLightSource> fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
 		if (!json.has("item") || !json.has("luminance")) {
-			RubidiumDynLights.get().warn("Failed to parse item light source \"" + id + "\", invalid format: missing required fields.");
+			ToolkitDynLights.get().warn("Failed to parse item light source \"" + id + "\", invalid format: missing required fields.");
 			return Optional.empty();
 		}
 
@@ -114,7 +114,7 @@ public abstract class ItemLightSource {
 				}
 			}
 		} else {
-			RubidiumDynLights.get().warn("Failed to parse item light source \"" + id + "\", invalid format: \"luminance\" field value isn't string or integer.");
+			ToolkitDynLights.get().warn("Failed to parse item light source \"" + id + "\", invalid format: \"luminance\" field value isn't string or integer.");
 		}
 
 		return Optional.empty();

@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.features.dynamic_lights;
+package org.thinkingstudio.rubidium_toolkit.features.dynlights;
 
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.world.level.Level;
@@ -47,7 +47,7 @@ public interface DynamicLightSource {
 	 * @return {@code true} if the dynamic light is enabled, else {@code false}
 	 */
 	default boolean isDynamicLightEnabled() {
-		return RubidiumDynLights.isEnabled() && RubidiumDynLights.get().containsLightSource(this);
+		return ToolkitDynLights.isEnabled() && ToolkitDynLights.get().containsLightSource(this);
 	}
 
 	/**
@@ -61,9 +61,9 @@ public interface DynamicLightSource {
 	default void setDynamicLightEnabled(boolean enabled) {
 		this.resetDynamicLight();
 		if (enabled)
-			RubidiumDynLights.get().addLightSource(this);
+			ToolkitDynLights.get().addLightSource(this);
 		else
-			RubidiumDynLights.get().removeLightSource(this);
+			ToolkitDynLights.get().removeLightSource(this);
 	}
 
 	void resetDynamicLight();
