@@ -62,9 +62,9 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.overlay.tooltip")))
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnums.ZoomOverlays.class, new Component[] {
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.off")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.vignette")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.spyglass"))
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.off")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.vignette")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.spyglass"))
                         })
                 )
                 .setBinding(
@@ -79,9 +79,9 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.transition.tooltip")))
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnums.ZoomTransitionOptions.class, new Component[] {
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.off")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.smooth")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.linear"))
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.off")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.smooth")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.linear"))
                         }
                         )
                 )
@@ -96,9 +96,9 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.keybind.tooltip")))
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnums.ZoomModes.class, new Component[] {
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.hold")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.toggle")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.persistent"))
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.hold")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.toggle")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.persistent"))
                         }
                         )
                 )
@@ -113,9 +113,9 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.cinematic_camera.tooltip")))
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnums.CinematicCameraOptions.class, new Component[] {
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.off")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.vanilla")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.multiplied"))
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.off")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.vanilla")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.multiplied"))
                         }
                         )
                 )
@@ -150,9 +150,9 @@ public class ZoomOptionsPage
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.zoom.spyglass_dependency.tooltip")))
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnums.SpyglassDependency.class, new Component[] {
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.require_item")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.replace_zoom")),
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.both"))
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.require_item")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.replace_zoom")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.both"))
                         }
                         )
                 )

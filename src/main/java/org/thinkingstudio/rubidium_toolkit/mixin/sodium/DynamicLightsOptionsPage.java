@@ -47,7 +47,7 @@ public class DynamicLightsOptionsPage {
                 .setTooltip(Component.nullToEmpty(I18n.get("rubidium_toolkit.dynlights.speed.tooltip")))
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnums.QualityMode.class, new Component[] {
-                                Component.nullToEmpty(I18n.get("rubidium_toolkit.option.off")),
+                                Component.nullToEmpty(I18n.get("rubidium_toolkit.options.off")),
                                 Component.nullToEmpty(I18n.get("rubidium_toolkit.options.slow")),
                                 Component.nullToEmpty(I18n.get("rubidium_toolkit.options.fast")),
                                 Component.nullToEmpty(I18n.get("rubidium_toolkit.options.realtime"))
@@ -90,6 +90,6 @@ public class DynamicLightsOptionsPage {
                 .build()
         );
 
-        pages.add(new OptionPage(Component.nullToEmpty(I18n.get("rubidium_toolkit.dynlights.options.name")), ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage(Component.nullToEmpty(I18n.get("rubidium_toolkit.dynlights.option.name")), ImmutableList.copyOf(groups)));
     }
 }
