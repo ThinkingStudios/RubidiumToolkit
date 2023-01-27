@@ -8,7 +8,7 @@ version = "${version}"
 displayName = "Rubidium Toolkit"
 displayURL="https://github.com/TexTrueStudio/RubidiumToolkit" #optional
 logoFile="icon.png" #optional
-credits="EnnuiL, Matyrobbrt, TeamDeusVult" #optional
+credits="TeamDeusVult" #optional
 authors="TexTrue, TexTrueStudio, BocchiKessokuTeam" #optional
 description = '''
 Add some missing features of Rubidium Extra.

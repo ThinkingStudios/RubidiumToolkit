@@ -5,8 +5,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 
 public class ConfigEnum {
-    public static enum Complexity implements TextProvider
-    {
+    public static enum Complexity implements TextProvider {
+
         OFF("Off"),
         SIMPLE("Simple"),
         ADVANCED("Advanced");
@@ -22,8 +22,8 @@ public class ConfigEnum {
         }
     }
 
-    public static enum Quality implements TextProvider
-    {
+    public static enum Quality implements TextProvider {
+
         OFF("Off"),
         FAST("Fast"),
         FANCY("Fancy");
@@ -37,6 +37,23 @@ public class ConfigEnum {
         public Component getLocalizedName() {
 
             return new TextComponent(this.name);
+        }
+    }
+
+    public enum QualityMode implements TextProvider {
+        OFF("Off"),
+        SLOW("Slow"),
+        FAST("Fast"),
+        REALTIME("Realtime");
+
+        private final String name;
+
+        private QualityMode(String name) {
+            this.name = name;
+        }
+
+        public Component getLocalizedName() {
+            return Component.nullToEmpty(this.name);
         }
     }
 

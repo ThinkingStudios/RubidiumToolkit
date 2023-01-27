@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit;
+package org.thinkingstudio.rubidium_toolkit.features.zoom;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;

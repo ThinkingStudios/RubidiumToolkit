@@ -5,7 +5,8 @@
   "package": "org.thinkingstudio.rubidium_toolkit.mixins",
   "refmap": "rubidium-toolkit.mixins.refmap.json",
   "mixins": [
-    "sodium.SodiumGameOptionsMixin",
+    "sodium.ToolkitSodiumOptionsMixin",
+    "sodium.DynLightsSodiumOptionsMixin",
     "zoom.PlayerInventoryMixin"
   ],
   "client": [
@@ -13,6 +14,23 @@
     "entitydistance.MaxDistanceTileEntity",
     "sodium.SodiumGUIMixin",
     "zoom.GameRendererMixin",
-    "zoom.MouseMixin"
+    "zoom.MouseMixin",
+    "dynlights.BlockEntityTypeMixin",
+    "dynlights.ClientWorldMixin",
+    "dynlights.CommonWorldRendererMixin",
+    "dynlights.DebugHudMixin",
+    "dynlights.EntityRendererMixin",
+    "dynlights.EntityTypeMixin",
+    "dynlights.MinecraftClientMixin",
+    "dynlights.WorldMixin",
+    "dynlights.WorldRendererMixin",
+    "dynlights.lightsource.AbstractDecorationEntityMixin",
+    "dynlights.lightsource.AbstractMinecartEntityMixin",
+    "dynlights.lightsource.BlockEntityMixin",
+    "dynlights.lightsource.EntityMixin",
+    "dynlights.lightsource.ExplosiveProjectileEntityMixin",
+    "dynlights.lightsource.LivingEntityMixin",
+    "dynlights.lightsource.PlayerEntityMixin",
+    "dynlights.lightsource.TntEntityMixin"
   ]
 }

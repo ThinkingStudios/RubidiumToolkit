@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.thinkingstudio.rubidium_toolkit.WiZoom;
+import org.thinkingstudio.rubidium_toolkit.features.zoom.WiZoom;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin

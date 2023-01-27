@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.thinkingstudio.rubidium_toolkit.WiZoom;
+import org.thinkingstudio.rubidium_toolkit.features.zoom.WiZoom;
 
 @Mixin(MouseHandler.class)
 public class MouseMixin

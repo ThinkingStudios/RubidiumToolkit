@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(SodiumOptionsGUI.class)
-public class SodiumGameOptionsMixin {
+public class ToolkitSodiumOptionsMixin {
 
     @Shadow
     @Final
