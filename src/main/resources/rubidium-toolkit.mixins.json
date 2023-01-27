@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "refmap": "rubidium-toolkit.refmap.json",
-  "package": "com.texstudio.rubidium_toolkit.mixins",
+  "package": "org.thinkingstudio.rubidium_toolkit.mixins",
   "mixins": [
     "zoom.MouseMixin"
   ],
@@ -27,7 +27,7 @@
     "dynlights.WorldMixin",
     "dynlights.WorldRendererMixin"
   ],
-  "plugin": "com.texstudio.rubidium_toolkit.mixins.dynlights.DynamicLightsMixinPlugin",
+  "plugin": "org.thinkingstudio.rubidium_toolkit.mixins.dynlights.DynamicLightsMixinPlugin",
   "injectors": {
     "defaultRequire": 1
   }

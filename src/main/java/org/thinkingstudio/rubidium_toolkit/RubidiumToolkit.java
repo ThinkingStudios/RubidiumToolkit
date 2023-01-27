@@ -18,8 +18,7 @@ import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsResou
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandlers;
 
 @Mod(RubidiumToolkit.MODID)
-public class RubidiumToolkit
-{
+public class RubidiumToolkit {
     public static final String MODID = "rubidium_toolkit";
     public static final Logger LOGGER = LogManager.getLogger("RubidiumToolkit");
 
