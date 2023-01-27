@@ -5,14 +5,10 @@ import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.control.ControlValueFormatter;
-import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.SliderControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +16,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 
 import java.util.ArrayList;
@@ -74,7 +69,7 @@ public class SodiumGameOptionsMixin {
         OptionImpl<SodiumGameOptions, Integer> maxEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
                 .setName(new TranslatableComponent("rubidium_toolkit.tools.max_entity_distance.name"))
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.max_entity_distance.tooltip"))
-                .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.translateVariable("milk_of_magnesium.options.unit.blocks")))
+                .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.maxEntityRenderDistanceSquare.set(value * value),
                         (options) ->  Math.toIntExact(Math.round(Math.sqrt(RubidiumToolkitConfig.maxEntityRenderDistanceSquare.get()))))
@@ -84,7 +79,7 @@ public class SodiumGameOptionsMixin {
         OptionImpl<SodiumGameOptions, Integer> maxEntityDistanceVertical = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
                 .setName(new TranslatableComponent("rubidium_toolkit.tools.vertical_entity_distance.name"))
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.vertical_entity_distance.tooltip"))
-                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("milk_of_magnesium.options.unit.blocks")))
+                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.maxEntityRenderDistanceY.set(value),
                         (options) -> RubidiumToolkitConfig.maxEntityRenderDistanceY.get())
@@ -102,7 +97,7 @@ public class SodiumGameOptionsMixin {
         OptionImpl<SodiumGameOptions, Integer> maxTileEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
                 .setName(new TranslatableComponent("rubidium_toolkit.tools.max_block_distance.name"))
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.max_block_distance.tooltip"))
-                .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.translateVariable("milk_of_magnesium.options.unit.blocks")))
+                .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.maxBlockEntityRenderDistanceSquare.set(value * value),
                         (options) -> Math.toIntExact(Math.round(Math.sqrt(RubidiumToolkitConfig.maxBlockEntityRenderDistanceSquare.get()))))
@@ -112,7 +107,7 @@ public class SodiumGameOptionsMixin {
         OptionImpl<SodiumGameOptions, Integer> maxTileEntityDistanceVertical = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
                 .setName(new TranslatableComponent("rubidium_toolkit.tools.vertical_block_distance.name"))
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.vertical_block_distance.tooltip"))
-                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("milk_of_magnesium.options.unit.blocks")))
+                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
                         (options, value) -> RubidiumToolkitConfig.maxBlockEntityRenderDistanceY.set(value),
                         (options) -> RubidiumToolkitConfig.maxBlockEntityRenderDistanceY.get())
