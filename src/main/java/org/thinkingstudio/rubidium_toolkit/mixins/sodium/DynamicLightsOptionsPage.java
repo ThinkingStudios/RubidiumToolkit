@@ -25,7 +25,7 @@ import java.util.List;
 
 @Pseudo
 @Mixin(SodiumOptionsGUI.class)
-public class DynamiclightsOptionsPage {
+public class DynamicLightsOptionsPage {
 
     @Shadow
     @Final

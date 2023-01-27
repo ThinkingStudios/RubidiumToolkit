@@ -8,11 +8,26 @@
     "zoom.MouseMixin"
   ],
   "client": [
-    "sodium.DynamiclightsOptionsPage",
+    "sodium.DynamicLightsOptionsPage",
     "sodium.ToolkitOptionsPage",
     "sodium.ZoomOptionsPage",
-    "zoom.GameRendererMixin"
+    "zoom.GameRendererMixin",
+    "dynlights.AbstractDecorationEntityMixin",
+    "dynlights.AbstractMinecartEntityMixin",
+    "dynlights.BlockEntityMixin",
+    "dynlights.ClientWorldMixin",
+    "dynlights.CommonWorldRendererMixin",
+    "dynlights.EntityMixin",
+    "dynlights.EntityRendererMixin",
+    "dynlights.ExplosiveProjectileEntityMixin",
+    "dynlights.LivingEntityMixin",
+    "dynlights.MinecraftClientMixin",
+    "dynlights.PlayerEntityMixin",
+    "dynlights.TntEntityMixin",
+    "dynlights.WorldMixin",
+    "dynlights.WorldRendererMixin"
   ],
+  "plugin": "com.texstudio.rubidium_toolkit.mixins.dynlights.DynamicLightsMixinPlugin",
   "injectors": {
     "defaultRequire": 1
   }

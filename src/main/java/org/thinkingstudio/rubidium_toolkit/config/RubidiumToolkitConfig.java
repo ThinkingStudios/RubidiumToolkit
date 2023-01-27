@@ -10,6 +10,15 @@ import java.nio.file.Path;
 public class RubidiumToolkitConfig {
     public static ForgeConfigSpec ConfigSpec;
 
+    public static ForgeConfigSpec.ConfigValue<Integer> maxBlockEntityRenderDistanceSquare;
+    public static ForgeConfigSpec.ConfigValue<Integer> maxBlockEntityRenderDistanceY;
+
+    public static ForgeConfigSpec.ConfigValue<Integer> maxEntityRenderDistanceSquare;
+    public static ForgeConfigSpec.ConfigValue<Integer> maxEntityRenderDistanceY;
+
+    public static ForgeConfigSpec.ConfigValue<Boolean> enableDistanceChecks;
+
+
     // Ok Zoomer
     public static ConfigEnum.ZoomValues zoomValues = new ConfigEnum.ZoomValues();
     public static ForgeConfigSpec.ConfigValue<Boolean> lowerZoomSensitivity;
@@ -49,6 +58,20 @@ public class RubidiumToolkitConfig {
             entityLighting = bulider.define("Dynamic Entity Lighting", true);
             blockEntityLighting = bulider.define("Dynamic TileEntity Lighting", true);
             onlyUpdateOnPositionChange = bulider.define("Only Update On Position Change", true);
+
+            bulider.pop();
+        }
+
+        {
+            bulider.push("Entity Distance");
+
+            enableDistanceChecks = bulider.define("Enable Max Distance Checks", true);
+
+            maxBlockEntityRenderDistanceSquare = bulider.define("(TileEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
+            maxBlockEntityRenderDistanceY = bulider.define("(TileEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
+
+            maxEntityRenderDistanceSquare = bulider.define("(Entity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
+            maxEntityRenderDistanceY = bulider.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
 
             bulider.pop();
         }
