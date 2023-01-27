@@ -12,22 +12,19 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity implements DynamicLightSource
-{
+public abstract class PlayerEntityMixin extends LivingEntity implements DynamicLightSource {
     @Shadow
     public abstract boolean isSpectator();
 
     private int   lambdynlights_luminance;
     private World lambdynlights_lastWorld;
 
-    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world)
-    {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Override
-    public void dynamicLightTick()
-    {
+    public void dynamicLightTick() {
         if (this.isOnFire() || this.isGlowing())
         {
             this.lambdynlights_luminance = 15;
@@ -55,8 +52,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements DynamicL
     }
 
     @Override
-    public int getLuminance()
-    {
+    public int getLuminance() {
         return this.lambdynlights_luminance;
     }
 }

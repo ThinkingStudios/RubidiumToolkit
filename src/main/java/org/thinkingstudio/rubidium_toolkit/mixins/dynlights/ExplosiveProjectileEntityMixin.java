@@ -7,19 +7,16 @@ import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ExplosiveProjectileEntity.class)
-public abstract class ExplosiveProjectileEntityMixin implements DynamicLightSource
-{
+public abstract class ExplosiveProjectileEntityMixin implements DynamicLightSource {
     @Override
-    public void dynamicLightTick()
-    {
+    public void dynamicLightTick() {
         if (!this.isDynamicLightEnabled())
             this.setDynamicLightEnabled(true);
     }
 
     @Override
-    public int getLuminance()
-    {
-        if (RubidiumToolkitConfig.EntityLighting.get())
+    public int getLuminance() {
+        if (RubidiumToolkitConfig.entityLighting.get())
             return 14;
         return 0;
     }

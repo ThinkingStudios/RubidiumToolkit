@@ -19,8 +19,7 @@ import java.util.Optional;
 /**
  * Represents an item light sources manager.
  */
-public final class ItemLightSources
-{
+public final class ItemLightSources {
     private static final List<ItemLightSource> ITEM_LIGHT_SOURCES = new ArrayList<>();
     private static final List<ItemLightSource> STATIC_ITEM_LIGHT_SOURCES = new ArrayList<>();
 
@@ -34,8 +33,7 @@ public final class ItemLightSources
      *
      * @param resourceManager The resource manager.
      */
-    public static void load(@NotNull ResourceManager resourceManager)
-    {
+    public static void load(@NotNull ResourceManager resourceManager) {
         ITEM_LIGHT_SOURCES.clear();
 
         resourceManager.findResources("textures/misc/dynamiclights/item", path -> path.endsWith(".json")).forEach(id -> load(resourceManager, id));
@@ -43,8 +41,7 @@ public final class ItemLightSources
         ITEM_LIGHT_SOURCES.addAll(STATIC_ITEM_LIGHT_SOURCES);
     }
 
-    private static void load(@NotNull ResourceManager resourceManager, @NotNull Identifier resourceId)
-    {
+    private static void load(@NotNull ResourceManager resourceManager, @NotNull Identifier resourceId) {
         Identifier id = new Identifier(resourceId.getNamespace(), resourceId.getPath().replace(".json", ""));
         try {
             InputStream stream = resourceManager.getResource(resourceId).getInputStream();
@@ -69,8 +66,7 @@ public final class ItemLightSources
      *
      * @param data The item light source data.
      */
-    private static void register(@NotNull ItemLightSource data)
-    {
+    private static void register(@NotNull ItemLightSource data) {
         for (ItemLightSource other : ITEM_LIGHT_SOURCES) {
             if (other.item == data.item) {
                 RubidiumToolkit.LOGGER.warn("Failed to register item light source \"" + data.id + "\", duplicates item found in \"" + other.id + "\".");
@@ -86,8 +82,7 @@ public final class ItemLightSources
      *
      * @param data The item light source data.
      */
-    public static void registerItemLightSource(@NotNull ItemLightSource data)
-    {
+    public static void registerItemLightSource(@NotNull ItemLightSource data) {
         for (ItemLightSource other : STATIC_ITEM_LIGHT_SOURCES) {
             if (other.item == data.item) {
                 RubidiumToolkit.LOGGER.warn("Failed to register item light source \"" + data.id + "\", duplicates item found in \"" + other.id + "\".");
@@ -105,8 +100,7 @@ public final class ItemLightSources
      * @param submergedInWater True if the stack is submerged in water, else false.
      * @return A luminance value.
      */
-    public static int getLuminance(@NotNull ItemStack stack, boolean submergedInWater)
-    {
+    public static int getLuminance(@NotNull ItemStack stack, boolean submergedInWater) {
         for (ItemLightSource data : ITEM_LIGHT_SOURCES) {
             if (data.item == stack.getItem()) {
                 return data.getLuminance(stack, submergedInWater);

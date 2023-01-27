@@ -11,11 +11,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EntityRenderer.class)
-public class EntityRendererMixin<T extends Entity>
-{
+public class EntityRendererMixin<T extends Entity> {
     @Inject(method = "getBlockLight", at = @At("RETURN"), cancellable = true)
-    private void onGetBlockLight(T entity, BlockPos pos, CallbackInfoReturnable<Integer> cir)
-    {
+    private void onGetBlockLight(T entity, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
         if (!DynamicLightsFeature.isEnabled())
             return; // Do not touch to the value.
 

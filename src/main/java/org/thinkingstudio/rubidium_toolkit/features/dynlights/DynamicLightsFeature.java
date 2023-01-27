@@ -5,7 +5,9 @@ import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.model.animation.TileEntityRendererAnimation;
+import net.minecraftforge.fml.common.Mod;
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor.WorldRendererAccessor;
@@ -16,9 +18,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,31 +29,23 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Predicate;
 
 @Mod.EventBusSubscriber(modid = RubidiumToolkit.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class DynamicLightsFeature
-{
+public class DynamicLightsFeature {
     private static final double MAX_RADIUS = 7.75;
     private static final double MAX_RADIUS_SQUARED = MAX_RADIUS * MAX_RADIUS;
-
-    //private static DynamicLightsFeature INSTANCE;
-    //public static final Logger logger = LogManager.getLogger(RubidiumToolkit.MODID);
     private static final Set<DynamicLightSource> dynamicLightSources = new HashSet<>();
     private static final ReentrantReadWriteLock lightSourcesLock = new ReentrantReadWriteLock();
 
     private static long lastUpdate = System.currentTimeMillis();
     private static int lastUpdateCount = 0;
 
-    public static boolean isEnabled() { return !Objects.equals(RubidiumToolkitConfig.Quality.get(), "OFF"); }
-
-    public DynamicLightsFeature() {
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ExecutorHelper::onInitializeClient);
+    public static boolean isEnabled() {
+        return !Objects.equals(RubidiumToolkitConfig.quality.get(), "OFF");
     }
-
 
     private static long lambdynlights_lastUpdate = 0;
 
-    public static boolean ShouldUpdateDynamicLights()
-    {
-        String mode = RubidiumToolkitConfig.Quality.get();
+    public static boolean ShouldUpdateDynamicLights() {
+        String mode = RubidiumToolkitConfig.quality.get();
         if (Objects.equals(mode, "OFF"))
             return false;
 
@@ -77,8 +68,7 @@ public class DynamicLightsFeature
      *
      * @param renderer the renderer
      */
-    public static void updateAll(@NotNull WorldRenderer renderer)
-    {
+    public static void updateAll(@NotNull WorldRenderer renderer) {
         if (!DynamicLightsFeature.isEnabled())
             return;
 
@@ -112,8 +102,7 @@ public class DynamicLightsFeature
      * @param lightmap the vanilla lightmap coordinates
      * @return the modified lightmap coordinates
      */
-    public static int getLightmapWithDynamicLight(@NotNull BlockPos pos, int lightmap)
-    {
+    public static int getLightmapWithDynamicLight(@NotNull BlockPos pos, int lightmap) {
 
         return getLightmapWithDynamicLight(getDynamicLightLevel(pos), lightmap);
     }
@@ -125,8 +114,7 @@ public class DynamicLightsFeature
      * @param lightmap the vanilla lightmap coordinates
      * @return the modified lightmap coordinates
      */
-    public static int getLightmapWithDynamicLight(@NotNull Entity entity, int lightmap)
-    {
+    public static int getLightmapWithDynamicLight(@NotNull Entity entity, int lightmap) {
 
         int posLightLevel = (int) getDynamicLightLevel(entity.getBlockPos());
         int entityLuminance = ((DynamicLightSource) entity).getLuminance();
@@ -284,8 +272,7 @@ public class DynamicLightsFeature
     /**
      * Clears light sources.
      */
-    public static void clearLightSources()
-    {
+    public static void clearLightSources() {
         lightSourcesLock.readLock().lock();
 
         Iterator<DynamicLightSource> LightSources = dynamicLightSources.iterator();
@@ -308,8 +295,7 @@ public class DynamicLightsFeature
      *
      * @param filter the removal filter
      */
-    public static void removeLightSources(@NotNull Predicate<DynamicLightSource> filter)
-    {
+    public static void removeLightSources(@NotNull Predicate<DynamicLightSource> filter) {
         lightSourcesLock.readLock().lock();
 
         Iterator<DynamicLightSource> LightSources = dynamicLightSources.iterator();

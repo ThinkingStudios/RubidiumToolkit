@@ -3,8 +3,7 @@ package org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor;
 /**
  * Represents an accessor for WorldRenderer.
  */
-public interface WorldRendererAccessor
-{
+public interface WorldRendererAccessor {
     /**
      * Schedules a chunk rebuild.
      *

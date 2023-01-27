@@ -14,8 +14,7 @@ import java.util.function.Function;
  *
  * @param <T> The type of the light source.
  */
-public interface DynamicLightHandler<T>
-{
+public interface DynamicLightHandler<T> {
     /**
      * Returns the luminance of the light source.
      *
@@ -43,10 +42,8 @@ public interface DynamicLightHandler<T>
      * @param <T>            The type of the entity.
      * @return The completed handler.
      */
-    static <T extends LivingEntity> @NotNull DynamicLightHandler<T> makeHandler(Function<T, Integer> luminance, Function<T, Boolean> waterSensitive)
-    {
-        return new DynamicLightHandler<T>()
-        {
+    static <T extends LivingEntity> @NotNull DynamicLightHandler<T> makeHandler(Function<T, Integer> luminance, Function<T, Boolean> waterSensitive) {
+        return new DynamicLightHandler<T>() {
             @Override
             public int getLuminance(T lightSource)
             {
@@ -68,8 +65,7 @@ public interface DynamicLightHandler<T>
      * @param <T>     The type of the entity.
      * @return The completed handler.
      */
-    static <T extends LivingEntity> @NotNull DynamicLightHandler<T> makeLivingEntityHandler(@NotNull DynamicLightHandler<T> handler)
-    {
+    static <T extends LivingEntity> @NotNull DynamicLightHandler<T> makeLivingEntityHandler(@NotNull DynamicLightHandler<T> handler) {
         return entity -> {
             int luminance = 0;
             for (ItemStack equipped : entity.getItemsEquipped()) {
@@ -86,13 +82,10 @@ public interface DynamicLightHandler<T>
      * @param <T>     The type of Creeper entity.
      * @return The completed handler.
      */
-    static <T extends CreeperEntity> @NotNull DynamicLightHandler<T> makeCreeperEntityHandler(@Nullable DynamicLightHandler<T> handler)
-    {
-        return new DynamicLightHandler<T>()
-        {
+    static <T extends CreeperEntity> @NotNull DynamicLightHandler<T> makeCreeperEntityHandler(@Nullable DynamicLightHandler<T> handler) {
+        return new DynamicLightHandler<T>() {
             @Override
-            public int getLuminance(T entity)
-            {
+            public int getLuminance(T entity) {
                 int luminance = (int) (entity.getClientFuseTime(0.0F) * 10.0);
 
                 if (handler != null)

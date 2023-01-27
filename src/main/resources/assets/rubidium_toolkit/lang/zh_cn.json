@@ -15,14 +15,9 @@
     "rubidium_toolkit.option.persistent": "保持",
     "rubidium_toolkit.option.vanilla": "原版",
     "rubidium_toolkit.option.multiplied": "乘法",
-    "rubidium_toolkit.option.unit.pixels": "像素",
     "rubidium_toolkit.option.slow": "慢",
     "rubidium_toolkit.option.fast": "快",
     "rubidium_toolkit.option.realtime": "实时",
-    "rubidium_toolkit.option.pitch_black": "漆黑一片",
-    "rubidium_toolkit.option.really_dark": "真正的黑",
-    "rubidium_toolkit.option.dark": "黑暗",
-    "rubidium_toolkit.option.dim": "维度",
 
     "rubidium_toolkit.zoom.lower_sensitivity.name": "降低缩放灵敏度",
     "rubidium_toolkit.zoom.lower_sensitivity.tooltip": "缩放时降低灵敏度以使其感觉更加一致。",
@@ -42,17 +37,5 @@
     "rubidium_toolkit.dynlights.entity_lights.name": "动态实体光照",
     "rubidium_toolkit.dynlights.entity_lights.tooltip": "开启此功能将在实体（掉落的物品、生物等）上显示动态光照。\n这可以大大增加照明更新的数量，即使您没有拿着火把。",
     "rubidium_toolkit.dynlights.block_lights.name": "动态方块光照",
-    "rubidium_toolkit.dynlights.block_lights.tooltip": "启用此功能将在方块实体（熔炉、模组机器等）上显示动态照明。\n这可以大大增加照明更新的数量，即使您没有拿着火把。",
-
-    "rubidium_toolkit.darkness.ture.name": "真实黑暗",
-    "rubidium_toolkit.darkness.ture.tooltip": "使世界的其他部分更加真实地黑暗。不影响白天或火把的光。",
-    "rubidium_toolkit.darkness.ture.mode.name": "真实黑暗模式",
-    "rubidium_toolkit.darkness.ture.mode.tooltip": "控制多暗才算真正的黑暗。",
-    "rubidium_toolkit.darkness.only_block_light.name": "Only Effect Block Lighting",
-    "rubidium_toolkit.darkness.ignore_moon_light.name": "Ignore Moon Light",
-    "rubidium_toolkit.darkness.overworld.name": "Dark Overworld",
-    "rubidium_toolkit.darkness.default.name": "Dark Default",
-    "rubidium_toolkit.darkness.nether.name": "Dark Nether",
-    "rubidium_toolkit.darkness.end.name": "Dark End",
-    "rubidium_toolkit.darkness.skyless.name": "Dark If No Skylight"
-  }
+    "rubidium_toolkit.dynlights.block_lights.tooltip": "启用此功能将在方块实体（熔炉、模组机器等）上显示动态照明。\n这可以大大增加照明更新的数量，即使您没有拿着火把。"
+}

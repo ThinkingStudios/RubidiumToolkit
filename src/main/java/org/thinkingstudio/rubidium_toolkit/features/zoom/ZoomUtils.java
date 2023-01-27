@@ -1,5 +1,6 @@
 package org.thinkingstudio.rubidium_toolkit.features.zoom;
 
+import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 
 //The class that contains most of the logic behind the zoom itself.
@@ -81,7 +82,7 @@ public class ZoomUtils {
 
 		lastZoomFovMultiplier = zoomFovMultiplier;
 		
-		if (RubidiumToolkitConfig.zoomTransition.get().equals(RubidiumToolkitConfig.ZoomTransitionOptions.SMOOTH.toString())) {
+		if (RubidiumToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.SMOOTH.toString())) {
 			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * RubidiumToolkitConfig.zoomValues.smoothMultiplier;
 		}
 	}
@@ -96,7 +97,7 @@ public class ZoomUtils {
 
 		lastZoomOverlayAlpha = zoomOverlayAlpha;
 
-		if (RubidiumToolkitConfig.zoomTransition.get().equals(RubidiumToolkitConfig.ZoomTransitionOptions.SMOOTH.toString())) {
+		if (RubidiumToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.SMOOTH.toString())) {
 			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * RubidiumToolkitConfig.zoomValues.smoothMultiplier;
 		}
 	}

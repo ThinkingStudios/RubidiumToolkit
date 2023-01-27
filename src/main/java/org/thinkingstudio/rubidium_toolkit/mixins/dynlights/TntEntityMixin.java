@@ -16,16 +16,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TntEntity.class)
-public abstract class TntEntityMixin extends Entity implements DynamicLightSource
-{
+public abstract class TntEntityMixin extends Entity implements DynamicLightSource {
     @Shadow
     private int fuseTimer;
 
     //private double lambdynlights_startFuseTimer = 80.0;
     private int lambdynlights_luminance;
 
-    public TntEntityMixin(EntityType<?> type, World world)
-    {
+    public TntEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
@@ -36,11 +34,10 @@ public abstract class TntEntityMixin extends Entity implements DynamicLightSourc
     //}
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private void onTick(CallbackInfo ci)
-    {
+    private void onTick(CallbackInfo ci) {
         // We do not want to update the entity on the server.
         if (this.getEntityWorld().isClient()) {
-            if (!RubidiumToolkitConfig.EntityLighting.get())
+            if (!RubidiumToolkitConfig.entityLighting.get())
                 return;
 
             if (this.removed) {
@@ -53,8 +50,7 @@ public abstract class TntEntityMixin extends Entity implements DynamicLightSourc
     }
 
     @Override
-    public void dynamicLightTick()
-    {
+    public void dynamicLightTick() {
         if (this.isOnFire()) {
             this.lambdynlights_luminance = 15;
         } else {
@@ -63,8 +59,7 @@ public abstract class TntEntityMixin extends Entity implements DynamicLightSourc
     }
 
     @Override
-    public int getLuminance()
-    {
+    public int getLuminance() {
         return this.lambdynlights_luminance;
     }
 }

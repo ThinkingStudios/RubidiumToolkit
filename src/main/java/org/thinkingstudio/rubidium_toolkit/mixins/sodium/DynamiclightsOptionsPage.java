@@ -8,6 +8,7 @@ import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
 import net.minecraft.client.resource.language.I18n;
+import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import net.minecraft.client.gui.screen.Screen;
@@ -38,11 +39,11 @@ public class DynamiclightsOptionsPage {
     {
         List<OptionGroup> groups = new ArrayList<>();
 
-        OptionImpl<SodiumGameOptions, RubidiumToolkitConfig.QualityMode> qualityMode = OptionImpl.createBuilder(RubidiumToolkitConfig.QualityMode.class, dynamicLightsOpts)
+        OptionImpl<SodiumGameOptions, ConfigEnum.QualityMode> qualityMode = OptionImpl.createBuilder(ConfigEnum.QualityMode.class, dynamicLightsOpts)
                 .setName(I18n.translate("rubidium_toolkit.dynlights.speed.name"))
                 .setTooltip(I18n.translate("rubidium_toolkit.dynlights.speed.tooltip"))
                 .setControl(
-                        (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.QualityMode.class, new String[] {
+                        (option) -> new CyclingControl<>(option, ConfigEnum.QualityMode.class, new String[] {
                                 I18n.translate("rubidium_toolkit.option.off"),
                                 I18n.translate("rubidium_toolkit.option.slow"),
                                 I18n.translate("rubidium_toolkit.option.fast"),
@@ -52,10 +53,10 @@ public class DynamiclightsOptionsPage {
                 )
                 .setBinding(
                         (options, value) -> {
-                            RubidiumToolkitConfig.Quality.set(value.toString());
+                            RubidiumToolkitConfig.quality.set(value.toString());
                             DynamicLightsFeature.clearLightSources();
                         },
-                        (options) -> RubidiumToolkitConfig.QualityMode.valueOf(RubidiumToolkitConfig.Quality.get()))
+                        (options) -> ConfigEnum.QualityMode.valueOf(RubidiumToolkitConfig.quality.get()))
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 
@@ -65,8 +66,8 @@ public class DynamiclightsOptionsPage {
                 .setTooltip(I18n.translate("rubidium_toolkit.dynlights.entity_lights.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.EntityLighting.set(value),
-                        (options) -> RubidiumToolkitConfig.EntityLighting.get())
+                        (options, value) -> RubidiumToolkitConfig.entityLighting.set(value),
+                        (options) -> RubidiumToolkitConfig.entityLighting.get())
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 
@@ -75,8 +76,8 @@ public class DynamiclightsOptionsPage {
                 .setTooltip(I18n.translate("rubidium_toolkit.dynlights.block_lights.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.TileEntityLighting.set(value),
-                        (options) -> RubidiumToolkitConfig.TileEntityLighting.get())
+                        (options, value) -> RubidiumToolkitConfig.blockEntityLighting.set(value),
+                        (options) -> RubidiumToolkitConfig.blockEntityLighting.get())
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 

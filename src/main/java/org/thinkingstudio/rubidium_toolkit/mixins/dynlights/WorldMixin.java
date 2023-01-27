@@ -21,8 +21,7 @@ public abstract class WorldMixin {
     public abstract boolean isClient();
 
     @Inject(method = "tickBlockEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Tickable;tick()V", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILEXCEPTION)
-    private void onBlockEntityTick(CallbackInfo ci, Profiler iprofiler, Iterator iterator, BlockEntity tileentity, BlockPos blockpos)
-    {
+    private void onBlockEntityTick(CallbackInfo ci, Profiler iprofiler, Iterator iterator, BlockEntity tileentity, BlockPos blockpos) {
         if (this.isClient() && DynamicLightsFeature.isEnabled()) {
             ((DynamicLightSource) tileentity).dynamicLightTick();
         }

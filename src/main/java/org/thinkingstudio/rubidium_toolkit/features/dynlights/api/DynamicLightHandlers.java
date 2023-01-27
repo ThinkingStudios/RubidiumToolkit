@@ -14,21 +14,18 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class DynamicLightHandlers
-{
-    private static Map<EntityType<? extends Entity>, DynamicLightHandler<? extends Entity>> ENTITES_HANDLER = new HashMap<>();
-    private static Map<BlockEntityType<? extends BlockEntity>, DynamicLightHandler<? extends BlockEntity>> BLOCK_ENTITIES_HANDLER = new HashMap<>();
+public final class DynamicLightHandlers {
+    private static final Map<EntityType<? extends Entity>, DynamicLightHandler<? extends Entity>> ENTITES_HANDLER = new HashMap<>();
+    private static final Map<BlockEntityType<? extends BlockEntity>, DynamicLightHandler<? extends BlockEntity>> BLOCK_ENTITIES_HANDLER = new HashMap<>();
 
-    private DynamicLightHandlers()
-    {
+    private DynamicLightHandlers() {
         throw new UnsupportedOperationException("DynamicLightHandlers only contains static definitions.");
     }
 
     /**
      * Registers the default handlers.
      */
-    public static void registerDefaultHandlers()
-    {
+    public static void registerDefaultHandlers() {
         registerDynamicLightHandler(EntityType.BLAZE, DynamicLightHandler.makeHandler(blaze -> 10, blaze -> true));
         registerDynamicLightHandler(EntityType.CREEPER, DynamicLightHandler.makeCreeperEntityHandler(null));
         registerDynamicLightHandler(EntityType.ENDERMAN, entity -> {
@@ -53,8 +50,7 @@ public final class DynamicLightHandlers
      * @param handler The dynamic light handler.
      * @param <T> The type of the entity.
      */
-    public static <T extends Entity> void registerDynamicLightHandler(@NotNull EntityType<T> type, @NotNull DynamicLightHandler<T> handler)
-    {
+    public static <T extends Entity> void registerDynamicLightHandler(@NotNull EntityType<T> type, @NotNull DynamicLightHandler<T> handler) {
         DynamicLightHandler<T> registeredHandler = getDynamicLightHandler(type);
         if (registeredHandler != null) {
             DynamicLightHandler<T> newHandler = entity -> Math.max(registeredHandler.getLuminance(entity), handler.getLuminance(entity));
@@ -70,8 +66,7 @@ public final class DynamicLightHandlers
      * @param handler The dynamic light handler.
      * @param <T> The type of the block entity.
      */
-    public static <T extends BlockEntity> void registerDynamicLightHandler(@NotNull BlockEntityType<T> type, @NotNull DynamicLightHandler<T> handler)
-    {
+    public static <T extends BlockEntity> void registerDynamicLightHandler(@NotNull BlockEntityType<T> type, @NotNull DynamicLightHandler<T> handler) {
         DynamicLightHandler<T> registeredHandler = getDynamicLightHandler(type);
         if (registeredHandler != null) {
             DynamicLightHandler<T> newHandler = entity -> Math.max(registeredHandler.getLuminance(entity), handler.getLuminance(entity));
@@ -88,8 +83,7 @@ public final class DynamicLightHandlers
      * @return The registered dynamic light handler.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends Entity> @Nullable DynamicLightHandler<T> getDynamicLightHandler(@NotNull EntityType<T> type)
-    {
+    public static <T extends Entity> @Nullable DynamicLightHandler<T> getDynamicLightHandler(@NotNull EntityType<T> type) {
         return (DynamicLightHandler<T>) ENTITES_HANDLER.get(type);
     }
 
@@ -101,8 +95,7 @@ public final class DynamicLightHandlers
      * @return The registered dynamic light handler.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends BlockEntity> @Nullable DynamicLightHandler<T> getDynamicLightHandler(@NotNull BlockEntityType<T> type)
-    {
+    public static <T extends BlockEntity> @Nullable DynamicLightHandler<T> getDynamicLightHandler(@NotNull BlockEntityType<T> type) {
         return (DynamicLightHandler<T>) BLOCK_ENTITIES_HANDLER.get(type);
     }
 
@@ -114,9 +107,8 @@ public final class DynamicLightHandlers
      * @return The luminance.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends Entity> int getLuminanceFrom(@NotNull T entity)
-    {
-        if (!RubidiumToolkitConfig.EntityLighting.get())
+    public static <T extends Entity> int getLuminanceFrom(@NotNull T entity) {
+        if (!RubidiumToolkitConfig.entityLighting.get())
             return 0;
 
         DynamicLightHandler<T> handler = (DynamicLightHandler<T>) getDynamicLightHandler(entity.getType());
@@ -135,9 +127,8 @@ public final class DynamicLightHandlers
      * @return The luminance.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends BlockEntity> int getLuminanceFrom(@NotNull T entity)
-    {
-        if (!RubidiumToolkitConfig.TileEntityLighting.get())
+    public static <T extends BlockEntity> int getLuminanceFrom(@NotNull T entity) {
+        if (!RubidiumToolkitConfig.blockEntityLighting.get())
             return 0;
         DynamicLightHandler<T> handler = (DynamicLightHandler<T>) getDynamicLightHandler(entity.getType());
         if (handler == null)

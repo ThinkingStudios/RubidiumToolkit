@@ -2,6 +2,7 @@ package org.thinkingstudio.rubidium_toolkit.mixins.sodium;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.resource.language.I18n;
+import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
@@ -23,8 +24,7 @@ import java.util.List;
 
 @Pseudo
 @Mixin(SodiumOptionsGUI.class)
-public abstract class ZoomOptionsPage
-{
+public abstract class ZoomOptionsPage {
 
     @Shadow
     @Final
@@ -33,8 +33,7 @@ public abstract class ZoomOptionsPage
 
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void DynamicLights(Screen prevScreen, CallbackInfo ci)
-    {
+    private void DynamicLights(Screen prevScreen, CallbackInfo ci) {
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, Boolean> lowerSensitivity = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
@@ -77,11 +76,11 @@ public abstract class ZoomOptionsPage
 
 
 
-        Option<RubidiumToolkitConfig.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(RubidiumToolkitConfig.ZoomTransitionOptions.class, sodiumOpts)
+        Option<ConfigEnum.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(ConfigEnum.ZoomTransitionOptions.class, sodiumOpts)
                 .setName(I18n.translate("rubidium_toolkit.zoom.transition.name"))
                 .setTooltip(I18n.translate("rubidium_toolkit.zoom.transition.tooltip"))
                 .setControl(
-                        (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.ZoomTransitionOptions.class, new String[] {
+                        (option) -> new CyclingControl<>(option, ConfigEnum.ZoomTransitionOptions.class, new String[] {
                         I18n.translate("rubidium_toolkit.option.off"),
                         I18n.translate("rubidium_toolkit.option.smooth")
                         }
@@ -89,15 +88,15 @@ public abstract class ZoomOptionsPage
                 )
                 .setBinding(
                         (opts, value) -> RubidiumToolkitConfig.zoomTransition.set(value.toString()),
-                        (opts) -> RubidiumToolkitConfig.ZoomTransitionOptions.valueOf(RubidiumToolkitConfig.zoomTransition.get()))
+                        (opts) -> ConfigEnum.ZoomTransitionOptions.valueOf(RubidiumToolkitConfig.zoomTransition.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        Option<RubidiumToolkitConfig.ZoomModes> zoomMode =  OptionImpl.createBuilder(RubidiumToolkitConfig.ZoomModes.class, sodiumOpts)
+        Option<ConfigEnum.ZoomModes> zoomMode =  OptionImpl.createBuilder(ConfigEnum.ZoomModes.class, sodiumOpts)
                 .setName(I18n.translate("rubidium_toolkit.zoom.keybind.name"))
                 .setTooltip(I18n.translate("rubidium_toolkit.zoom.keybind.tooltip"))
                 .setControl(
-                        (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.ZoomModes.class, new String[] {
+                        (option) -> new CyclingControl<>(option, ConfigEnum.ZoomModes.class, new String[] {
                         I18n.translate("rubidium_toolkit.option.hold"),
                         I18n.translate("rubidium_toolkit.option.toggle"),
                         I18n.translate("rubidium_toolkit.option.persistent")
@@ -106,14 +105,14 @@ public abstract class ZoomOptionsPage
                 )
                 .setBinding(
                         (opts, value) -> RubidiumToolkitConfig.zoomMode.set(value.toString()),
-                        (opts) -> RubidiumToolkitConfig.ZoomModes.valueOf(RubidiumToolkitConfig.zoomMode.get()))
+                        (opts) -> ConfigEnum.ZoomModes.valueOf(RubidiumToolkitConfig.zoomMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        Option<RubidiumToolkitConfig.CinematicCameraOptions> cinematicCameraMode =  OptionImpl.createBuilder(RubidiumToolkitConfig.CinematicCameraOptions.class, sodiumOpts)
+        Option<ConfigEnum.CinematicCameraOptions> cinematicCameraMode =  OptionImpl.createBuilder(ConfigEnum.CinematicCameraOptions.class, sodiumOpts)
                 .setName(I18n.translate("rubidium_toolkit.zoom.cinematic_camera.name"))
                 .setTooltip(I18n.translate("rubidium_toolkit.zoom.cinematic_camera.tooltip"))
-                .setControl((option) -> new CyclingControl<>(option, RubidiumToolkitConfig.CinematicCameraOptions.class, new String[] {
+                .setControl((option) -> new CyclingControl<>(option, ConfigEnum.CinematicCameraOptions.class, new String[] {
                         I18n.translate("rubidium_toolkit.option.off"),
                         I18n.translate("rubidium_toolkit.option.vanilla"),
                         I18n.translate("rubidium_toolkit.option.multiplied")
@@ -122,7 +121,7 @@ public abstract class ZoomOptionsPage
                 )
                 .setBinding(
                         (opts, value) -> RubidiumToolkitConfig.cinematicCameraMode.set(value.toString()),
-                        (opts) -> RubidiumToolkitConfig.CinematicCameraOptions.valueOf(RubidiumToolkitConfig.cinematicCameraMode.get()))
+                        (opts) -> ConfigEnum.CinematicCameraOptions.valueOf(RubidiumToolkitConfig.cinematicCameraMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 

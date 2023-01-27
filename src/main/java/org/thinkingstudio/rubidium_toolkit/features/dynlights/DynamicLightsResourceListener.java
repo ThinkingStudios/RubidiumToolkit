@@ -9,8 +9,7 @@ import net.minecraftforge.resource.ISelectiveResourceReloadListener;
 
 import java.util.function.Predicate;
 
-public class DynamicLightsResourceListener implements ISelectiveResourceReloadListener
-{
+public class DynamicLightsResourceListener implements ISelectiveResourceReloadListener {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().serializeNulls().setLenient().create();
 
     @Override

@@ -9,11 +9,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientWorld.class)
-public class ClientWorldMixin
-{
+public class ClientWorldMixin {
     @Inject(method = "finishRemovingEntity", at = @At("RETURN"))
-    private void onFinishRemovingEntity(Entity entity, CallbackInfo ci)
-    {
+    private void onFinishRemovingEntity(Entity entity, CallbackInfo ci) {
         DynamicLightSource dls = (DynamicLightSource) entity;
         dls.setDynamicLightEnabled(false);
     }

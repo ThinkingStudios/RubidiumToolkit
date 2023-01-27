@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.ZoomUtils;
 import org.thinkingstudio.rubidium_toolkit.keybinds.KeyboardInput;
@@ -63,7 +64,7 @@ public class MouseMixin {
 
 		if (RubidiumToolkitConfig.lowerZoomSensitivity.get())
 		{
-			if (!RubidiumToolkitConfig.zoomTransition.get().equals(RubidiumToolkitConfig.ZoomTransitionOptions.OFF.toString())) {
+			if (!RubidiumToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.OFF.toString())) {
 				modifiedMouseSensitivity *= ZoomUtils.zoomFovMultiplier;
 			} else if (ZoomUtils.zoomState) {
 				modifiedMouseSensitivity /= ZoomUtils.zoomDivisor;
@@ -93,7 +94,7 @@ public class MouseMixin {
 		ordinal = 2
 	)
 	private double applyCinematicModeX(double l) {
-		if (!RubidiumToolkitConfig.cinematicCameraMode.get().equals(RubidiumToolkitConfig.CinematicCameraOptions.OFF.toString())) {
+		if (!RubidiumToolkitConfig.cinematicCameraMode.get().equals(ConfigEnum.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
 				if (this.client.options.smoothCameraEnabled) {
 					l = this.cursorXSmoother.smooth(this.cursorDeltaX * this.adjustedG, (this.extractedE * this.adjustedG));
@@ -101,7 +102,7 @@ public class MouseMixin {
 				} else {
 					l = this.cursorXZoomSmoother.smooth(this.cursorDeltaX * this.adjustedG, (this.extractedE * this.adjustedG));
 				}
-				if (RubidiumToolkitConfig.cinematicCameraMode.get().equals(RubidiumToolkitConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
+				if (RubidiumToolkitConfig.cinematicCameraMode.get().equals(ConfigEnum.CinematicCameraOptions.MULTIPLIED.toString())) {
 					l *= RubidiumToolkitConfig.zoomValues.cinematicMultiplier;
 				}
 			} else {
@@ -119,7 +120,7 @@ public class MouseMixin {
 		ordinal = 2
 	)
 	private double applyCinematicModeY(double m) {
-		if (!RubidiumToolkitConfig.cinematicCameraMode.get().equals(RubidiumToolkitConfig.CinematicCameraOptions.OFF.toString())) {
+		if (!RubidiumToolkitConfig.cinematicCameraMode.get().equals(ConfigEnum.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
 				if (this.client.options.smoothCameraEnabled) {
 					m = this.cursorYSmoother.smooth(this.cursorDeltaY * this.adjustedG, (this.extractedE * this.adjustedG));
@@ -127,7 +128,7 @@ public class MouseMixin {
 				} else {
 					m = this.cursorYZoomSmoother.smooth(this.cursorDeltaY * this.adjustedG, (this.extractedE * this.adjustedG));
 				}
-				if (RubidiumToolkitConfig.cinematicCameraMode.get().equals(RubidiumToolkitConfig.CinematicCameraOptions.MULTIPLIED.toString())) {
+				if (RubidiumToolkitConfig.cinematicCameraMode.get().equals(ConfigEnum.CinematicCameraOptions.MULTIPLIED.toString())) {
 					m *= RubidiumToolkitConfig.zoomValues.cinematicMultiplier;
 				}
 			} else {
@@ -147,7 +148,7 @@ public class MouseMixin {
 	private void zoomerOnMouseScroll(CallbackInfo info) {
 		if (this.eventDeltaWheel != 0.0) {
 			if (RubidiumToolkitConfig.zoomScrolling.get()) {
-				if (RubidiumToolkitConfig.zoomMode.get().equals(RubidiumToolkitConfig.ZoomModes.PERSISTENT.toString())) {
+				if (RubidiumToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.PERSISTENT.toString())) {
 					if (!KeyboardInput.zoomKey.isPressed())
 					{
 						return;
@@ -176,7 +177,7 @@ public class MouseMixin {
 	)
 	private void zoomerOnMouseButton(long window, int button, int action, int mods, CallbackInfo info, boolean bl, int i) {
 		if (RubidiumToolkitConfig.zoomScrolling.get()) {
-			if (RubidiumToolkitConfig.zoomMode.get().equals(RubidiumToolkitConfig.ZoomModes.PERSISTENT.toString())) {
+			if (RubidiumToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.PERSISTENT.toString())) {
 				if (!KeyboardInput.zoomKey.isPressed()) {
 					return;
 				}

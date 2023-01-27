@@ -73,7 +73,7 @@ public abstract class EntityMixin implements DynamicLightSource {
                 this.setDynamicLightEnabled(false);
             } else {
                 this.dynamicLightTick();
-                if (!RubidiumToolkitConfig.EntityLighting.get() && this.getType() != EntityType.PLAYER)
+                if (!RubidiumToolkitConfig.entityLighting.get() && this.getType() != EntityType.PLAYER)
                     this.lambdynlights_luminance = 0;
                 DynamicLightsFeature.updateTracking(this);
             }
@@ -142,7 +142,7 @@ public abstract class EntityMixin implements DynamicLightSource {
 
 
         double minDelta = 0D;
-        String mode = RubidiumToolkitConfig.Quality.get();
+        String mode = RubidiumToolkitConfig.quality.get();
         if (Objects.equals(mode, "SLOW"))
             minDelta = 0.5D;
 

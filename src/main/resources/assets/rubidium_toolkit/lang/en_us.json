@@ -15,14 +15,9 @@
   "rubidium_toolkit.option.persistent": "Persistent",
   "rubidium_toolkit.option.vanilla": "Vanilla",
   "rubidium_toolkit.option.multiplied": "Multiplied",
-  "rubidium_toolkit.option.unit.pixels": "Pixels",
   "rubidium_toolkit.option.slow": "Slow",
   "rubidium_toolkit.option.fast": "Fast",
   "rubidium_toolkit.option.realtime": "Realtime",
-  "rubidium_toolkit.option.pitch_black": "Pitch Black",
-  "rubidium_toolkit.option.really_dark": "Really Dark",
-  "rubidium_toolkit.option.dark": "Dark",
-  "rubidium_toolkit.option.dim": "Dim",
 
   "rubidium_toolkit.zoom.lower_sensitivity.name": "Lower Zoom Sensitivity",
   "rubidium_toolkit.zoom.lower_sensitivity.tooltip": "Lowers your sensitivity when zooming to make it feel more consistent.",
@@ -42,17 +37,5 @@
   "rubidium_toolkit.dynlights.entity_lights.name": "Dynamic Entity Lights",
   "rubidium_toolkit.dynlights.entity_lights.tooltip": "Turning this on will show dynamic lighting on entities (dropped items, mobs, etc). \n\nThis can drastically increase the amount of lighting updates, even when you're not holding a torch.",
   "rubidium_toolkit.dynlights.block_lights.name": "Dynamic Block Lights",
-  "rubidium_toolkit.dynlights.block_lights.tooltip": "Turning this on will show dynamic lighting on tile entities (furnaces, modded machines, etc). \n\nThis can drastically increase the amount of lighting updates, even when you're not holding a torch.",
-
-  "rubidium_toolkit.darkness.ture.name": "Ture Darkness",
-  "rubidium_toolkit.darkness.ture.tooltip": "Makes the rest of the world more realistically dark. Does not effect daytime or torch light.",
-  "rubidium_toolkit.darkness.ture.mode.name": "True Darkness Mode",
-  "rubidium_toolkit.darkness.ture.mode.tooltip": "Controls how dark is considered true darkness.",
-  "rubidium_toolkit.darkness.only_block_light.name": "Only Effect Block Lighting",
-  "rubidium_toolkit.darkness.ignore_moon_light.name": "Ignore Moon Light",
-  "rubidium_toolkit.darkness.overworld.name": "Dark Overworld",
-  "rubidium_toolkit.darkness.default.name": "Dark Default",
-  "rubidium_toolkit.darkness.nether.name": "Dark Nether",
-  "rubidium_toolkit.darkness.end.name": "Dark End",
-  "rubidium_toolkit.darkness.skyless.name": "Dark If No Skylight"
+  "rubidium_toolkit.dynlights.block_lights.tooltip": "Turning this on will show dynamic lighting on tile entities (furnaces, modded machines, etc). \n\nThis can drastically increase the amount of lighting updates, even when you're not holding a torch."
 }

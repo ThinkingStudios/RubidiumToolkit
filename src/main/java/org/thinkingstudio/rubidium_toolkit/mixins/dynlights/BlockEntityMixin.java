@@ -21,8 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import javax.annotation.Nullable;
 
 @Mixin(BlockEntity.class)
-public abstract class BlockEntityMixin implements DynamicLightSource
-{
+public abstract class BlockEntityMixin implements DynamicLightSource {
     @Shadow
     protected BlockPos pos;
 
@@ -38,44 +37,37 @@ public abstract class BlockEntityMixin implements DynamicLightSource
     private LongOpenHashSet trackedLitChunkPos = new LongOpenHashSet();
 
     @Override
-    public double getDynamicLightX()
-    {
+    public double getDynamicLightX() {
         return this.pos.getX() + 0.5;
     }
 
     @Override
-    public double getDynamicLightY()
-    {
+    public double getDynamicLightY() {
         return this.pos.getY() + 0.5;
     }
 
     @Override
-    public double getDynamicLightZ()
-    {
+    public double getDynamicLightZ() {
         return this.pos.getZ() + 0.5;
     }
 
     @Override
-    public World getDynamicLightWorld()
-    {
+    public World getDynamicLightWorld() {
         return this.world;
     }
 
     @Inject(method = "markRemoved", at = @At("TAIL"))
-    private void onRemoved(CallbackInfo ci)
-    {
+    private void onRemoved(CallbackInfo ci) {
         this.setDynamicLightEnabled(false);
     }
 
     @Override
-    public void resetDynamicLight()
-    {
+    public void resetDynamicLight() {
         this.lambdynlights_lastLuminance = 0;
     }
 
     @Override
-    public void dynamicLightTick()
-    {
+    public void dynamicLightTick() {
         // We do not want to update the entity on the server.
         if (this.world == null || !this.world.isClient)
             return;
@@ -90,20 +82,17 @@ public abstract class BlockEntityMixin implements DynamicLightSource
     }
 
     @Override
-    public int getLuminance()
-    {
+    public int getLuminance() {
         return this.lambdynlights_luminance;
     }
 
     @Override
-    public boolean shouldUpdateDynamicLight()
-    {
+    public boolean shouldUpdateDynamicLight() {
         return DynamicLightsFeature.ShouldUpdateDynamicLights();
     }
 
     @Override
-    public boolean lambdynlights_updateDynamicLight(@NotNull WorldRenderer renderer)
-    {
+    public boolean lambdynlights_updateDynamicLight(@NotNull WorldRenderer renderer) {
         if (!this.shouldUpdateDynamicLight())
             return false;
 
@@ -146,8 +135,7 @@ public abstract class BlockEntityMixin implements DynamicLightSource
     }
 
     @Override
-    public void lambdynlights_scheduleTrackedChunksRebuild(@NotNull WorldRenderer renderer)
-    {
+    public void lambdynlights_scheduleTrackedChunksRebuild(@NotNull WorldRenderer renderer) {
         if (this.world == MinecraftClient.getInstance().world)
             for (long pos : this.trackedLitChunkPos) {
             DynamicLightsFeature.scheduleChunkRebuild(renderer, pos);

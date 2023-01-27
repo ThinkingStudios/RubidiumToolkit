@@ -19,20 +19,17 @@ import java.util.Optional;
 /**
  * Represents an item light source.
  */
-public class ItemLightSource
-{
+public class ItemLightSource {
     public final Identifier id;
     public final Item item;
     public final int        luminance;
     public final boolean    waterSensitive;
 
-    public ItemLightSource(@NotNull Identifier id, @NotNull Item item, int luminance)
-    {
+    public ItemLightSource(@NotNull Identifier id, @NotNull Item item, int luminance) {
         this(id, item, luminance, false);
     }
 
-    public ItemLightSource(@NotNull Identifier id, @NotNull Item item, int luminance, boolean waterSensitive)
-    {
+    public ItemLightSource(@NotNull Identifier id, @NotNull Item item, int luminance, boolean waterSensitive) {
         this.id = id;
         this.item = item;
         this.luminance = luminance;
@@ -46,8 +43,7 @@ public class ItemLightSource
      * @param submergedInWater True if submerged in water, else false.
      * @return The luminance value between 0 and 15.
      */
-    public int getLuminance(@NotNull ItemStack stack, boolean submergedInWater)
-    {
+    public int getLuminance(@NotNull ItemStack stack, boolean submergedInWater) {
         if (this.waterSensitive && submergedInWater)
             return 0; // Don't emit light with water sensitive items while submerged in water.
 
@@ -55,8 +51,7 @@ public class ItemLightSource
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ItemLightSource that = (ItemLightSource) o;
@@ -73,8 +68,7 @@ public class ItemLightSource
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "ItemLightSource{" +
                 "item=" + item +
                 ", luminance=" + luminance +
@@ -82,8 +76,7 @@ public class ItemLightSource
                 '}';
     }
 
-    public static @NotNull Optional<ItemLightSource> fromJson(@NotNull Identifier id, @NotNull JsonObject json)
-    {
+    public static @NotNull Optional<ItemLightSource> fromJson(@NotNull Identifier id, @NotNull JsonObject json) {
         if (!json.has("item") || !json.has("luminance")) {
             RubidiumToolkit.LOGGER.warn("Failed to parse item light source \"" + id + "\", invalid format: missing required fields.");
             return Optional.empty();
