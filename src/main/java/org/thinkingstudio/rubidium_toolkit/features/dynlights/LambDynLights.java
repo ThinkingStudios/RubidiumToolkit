@@ -14,10 +14,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.resources.ReloadableResourceManager;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.PrimedTnt;
@@ -25,20 +21,11 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.IExtensionPoint;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.loading.FMLPaths;
-import net.minecraftforge.network.NetworkConstants;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor.WorldRendererAccessor;
-import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandlers;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item.ItemLightSources;
 
 import java.util.HashSet;
@@ -47,34 +34,23 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Predicate;
 
-@Mod("dynamiclightsreforged")
 public class LambDynLights {
 
-	public static final String MODID = "dynamiclightsreforged";
 	private static final double MAX_RADIUS = 7.75;
 	private static final double MAX_RADIUS_SQUARED = MAX_RADIUS * MAX_RADIUS;
 	private static LambDynLights INSTANCE;
-	public final Logger logger = LogManager.getLogger(MODID);
-
 	private final Set<DynamicLightSource> dynamicLightSources = new HashSet<>();
 	private final ReentrantReadWriteLock lightSourcesLock = new ReentrantReadWriteLock();
 	private long lastUpdate = System.currentTimeMillis();
 	private int lastUpdateCount = 0;
 
-	public static boolean isEnabled() { return !Objects.equals(RubidiumToolkitConfig.quality.get(), "OFF"); }
+	public static boolean isEnabled() {
+		return !Objects.equals(RubidiumToolkitConfig.quality.get(), "OFF");
+	}
 
 	public LambDynLights() {
 		INSTANCE = this;
-		log("Initializing Dynamic Lights Reforged...");
-		RubidiumToolkitConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve("dynamic_lights_reforged.toml"));
-
-		ModLoadingContext.get()
-				.registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
-
-
-		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> DynLightsExecutorHelper::onInitializeClient);
 	}
-
 
 
 	/**
@@ -357,7 +333,7 @@ public class LambDynLights {
 	 * @param info the message to print
 	 */
 	public void log(String info) {
-		this.logger.info("[LambDynLights] " + info);
+		RubidiumToolkit.LOGGER.info("[DynLights] " + info);
 	}
 
 	/**
@@ -366,7 +342,7 @@ public class LambDynLights {
 	 * @param info the message to print
 	 */
 	public void warn(String info) {
-		this.logger.warn("[LambDynLights] " + info);
+		RubidiumToolkit.LOGGER.warn("[DynLights] " + info);
 	}
 
 	/**

@@ -9,7 +9,6 @@
 
 package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
 
-import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
@@ -44,7 +43,7 @@ public abstract class EntityTypeMixin<T extends Entity> implements DynamicLightH
 		var name = description;
 
 		if (name == null) {
-			return new TranslatableComponent("lambdynlights.dummy");
+			return new TranslatableComponent("rubidium_toolkit.dynlights.placeholder.dummy.name");
 		}
 		return name;
 	}
