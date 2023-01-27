@@ -1,17 +1,18 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.thinkingstudio.rubidium_toolkit.mixin.features",
-  "refmap": "rubidium_toolkit.mixins.refmap.json",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_8",
+  "package": "org.thinkingstudio.rubidium_toolkit.mixins",
+  "refmap": "rubidium-toolkit.mixins.refmap.json",
+  "mixins": [
+    "sodium.SodiumGameOptionsMixin",
+    "zoom.PlayerInventoryMixin"
+  ],
   "client": [
     "entitydistance.MaxDistanceEntity",
-    "entitydistance.MaxDistanceBlockEntity",
-    "sodium.DynamicLightsOptionsPage",
-    "sodium.ToolkitOptionsPage",
-    "sodium.ZoomOptionsPage"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "entitydistance.MaxDistanceTileEntity",
+    "sodium.SodiumGUIMixin",
+    "zoom.GameRendererMixin",
+    "zoom.MouseMixin"
+  ]
 }
