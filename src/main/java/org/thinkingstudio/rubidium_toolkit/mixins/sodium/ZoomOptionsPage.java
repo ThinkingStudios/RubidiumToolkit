@@ -3,7 +3,7 @@ package org.thinkingstudio.rubidium_toolkit.mixins.sodium;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.resource.language.I18n;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import me.jellysquid.mods.sodium.client.gui.options.*;
@@ -41,8 +41,8 @@ public abstract class ZoomOptionsPage {
                 .setTooltip(I18n.translate("rubidium_toolkit.zoom.lower_sensitivity.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.lowerZoomSensitivity.set(value),
-                        (options) -> RubidiumToolkitConfig.lowerZoomSensitivity.get())
+                        (options, value) -> ToolkitConfig.lowerZoomSensitivity.set(value),
+                        (options) -> ToolkitConfig.lowerZoomSensitivity.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -51,8 +51,8 @@ public abstract class ZoomOptionsPage {
                 .setTooltip(I18n.translate("rubidium_toolkit.zoom.scrolling.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.zoomScrolling.set(value),
-                        (options) -> RubidiumToolkitConfig.zoomScrolling.get())
+                        (options, value) -> ToolkitConfig.zoomScrolling.set(value),
+                        (options) -> ToolkitConfig.zoomScrolling.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -61,8 +61,8 @@ public abstract class ZoomOptionsPage {
                 .setTooltip(I18n.translate("rubidium_toolkit.zoom.overlay.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.zoomOverlay.set(value),
-                        (options) -> RubidiumToolkitConfig.zoomOverlay.get())
+                        (options, value) -> ToolkitConfig.zoomOverlay.set(value),
+                        (options) -> ToolkitConfig.zoomOverlay.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -87,8 +87,8 @@ public abstract class ZoomOptionsPage {
                     )
                 )
                 .setBinding(
-                        (opts, value) -> RubidiumToolkitConfig.zoomTransition.set(value.toString()),
-                        (opts) -> ConfigEnum.ZoomTransitionOptions.valueOf(RubidiumToolkitConfig.zoomTransition.get()))
+                        (opts, value) -> ToolkitConfig.zoomTransition.set(value.toString()),
+                        (opts) -> ConfigEnum.ZoomTransitionOptions.valueOf(ToolkitConfig.zoomTransition.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -104,8 +104,8 @@ public abstract class ZoomOptionsPage {
                     )
                 )
                 .setBinding(
-                        (opts, value) -> RubidiumToolkitConfig.zoomMode.set(value.toString()),
-                        (opts) -> ConfigEnum.ZoomModes.valueOf(RubidiumToolkitConfig.zoomMode.get()))
+                        (opts, value) -> ToolkitConfig.zoomMode.set(value.toString()),
+                        (opts) -> ConfigEnum.ZoomModes.valueOf(ToolkitConfig.zoomMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -120,8 +120,8 @@ public abstract class ZoomOptionsPage {
                     )
                 )
                 .setBinding(
-                        (opts, value) -> RubidiumToolkitConfig.cinematicCameraMode.set(value.toString()),
-                        (opts) -> ConfigEnum.CinematicCameraOptions.valueOf(RubidiumToolkitConfig.cinematicCameraMode.get()))
+                        (opts, value) -> ToolkitConfig.cinematicCameraMode.set(value.toString()),
+                        (opts) -> ConfigEnum.CinematicCameraOptions.valueOf(ToolkitConfig.cinematicCameraMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 

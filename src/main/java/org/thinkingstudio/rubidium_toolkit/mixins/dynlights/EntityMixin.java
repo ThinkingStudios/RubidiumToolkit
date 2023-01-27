@@ -4,7 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.math.Direction;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandlers;
 //import com.texstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
@@ -73,7 +73,7 @@ public abstract class EntityMixin implements DynamicLightSource {
                 this.setDynamicLightEnabled(false);
             } else {
                 this.dynamicLightTick();
-                if (!RubidiumToolkitConfig.entityLighting.get() && this.getType() != EntityType.PLAYER)
+                if (!ToolkitConfig.entityLighting.get() && this.getType() != EntityType.PLAYER)
                     this.lambdynlights_luminance = 0;
                 DynamicLightsFeature.updateTracking(this);
             }
@@ -142,7 +142,7 @@ public abstract class EntityMixin implements DynamicLightSource {
 
 
         double minDelta = 0D;
-        String mode = RubidiumToolkitConfig.quality.get();
+        String mode = ToolkitConfig.quality.get();
         if (Objects.equals(mode, "SLOW"))
             minDelta = 0.5D;
 

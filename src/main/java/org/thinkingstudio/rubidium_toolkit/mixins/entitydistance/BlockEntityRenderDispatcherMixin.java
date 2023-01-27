@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.entitydistance.DistanceUtility;
 
 @Mixin(BlockEntityRenderDispatcher.class)
@@ -16,7 +16,7 @@ public class BlockEntityRenderDispatcherMixin {
 
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     public <E extends BlockEntity> void render(E entity, float val, MatrixStack matrix, VertexConsumerProvider arg3, CallbackInfo ci) {
-        if (!RubidiumToolkitConfig.enableDistanceChecks.get())
+        if (!ToolkitConfig.enableDistanceChecks.get())
             return;
 
         BlockEntityRenderDispatcher thisObj = (BlockEntityRenderDispatcher) (Object) this;
@@ -24,8 +24,8 @@ public class BlockEntityRenderDispatcherMixin {
         if (!DistanceUtility.isEntityWithinDistance(
                 entity.getPos(),
                 thisObj.camera.getPos(),
-                RubidiumToolkitConfig.maxBlockEntityRenderDistanceY.get(),
-                RubidiumToolkitConfig.maxBlockEntityRenderDistanceSquare.get()
+                ToolkitConfig.maxBlockEntityRenderDistanceY.get(),
+                ToolkitConfig.maxBlockEntityRenderDistanceSquare.get()
         ))
         {
             ci.cancel();

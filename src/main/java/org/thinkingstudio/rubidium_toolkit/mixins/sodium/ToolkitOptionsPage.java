@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +38,8 @@ public class ToolkitOptionsPage {
                 .setTooltip("Toggles off entity culling.")
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.enableDistanceChecks.set(value),
-                        (options) -> RubidiumToolkitConfig.enableDistanceChecks.get())
+                        (options, value) -> ToolkitConfig.enableDistanceChecks.set(value),
+                        (options) -> ToolkitConfig.enableDistanceChecks.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -55,8 +55,8 @@ public class ToolkitOptionsPage {
                 .setTooltip("Hides and does not tick entities beyond this many blocks. Huge performance increase, especially around modded farms.")
                 .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.quantity("Blocks")))
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.maxEntityRenderDistanceSquare.set(value * value),
-                        (options) ->  Math.toIntExact(Math.round(Math.sqrt(RubidiumToolkitConfig.maxEntityRenderDistanceSquare.get()))))
+                        (options, value) -> ToolkitConfig.maxEntityRenderDistanceSquare.set(value * value),
+                        (options) ->  Math.toIntExact(Math.round(Math.sqrt(ToolkitConfig.maxEntityRenderDistanceSquare.get()))))
                 .setImpact(OptionImpact.EXTREME)
                 .build();
 
@@ -65,8 +65,8 @@ public class ToolkitOptionsPage {
                 .setTooltip("Hides and does not tick entities underneath this many blocks, improving performance above caves. This should ideally be set lower than the horizontal distance.")
                 .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.quantity("Blocks")))
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.maxEntityRenderDistanceY.set(value ),
-                        (options) -> RubidiumToolkitConfig.maxEntityRenderDistanceY.get())
+                        (options, value) -> ToolkitConfig.maxEntityRenderDistanceY.set(value ),
+                        (options) -> ToolkitConfig.maxEntityRenderDistanceY.get())
                 .setImpact(OptionImpact.EXTREME)
                 .build();
 
@@ -87,8 +87,8 @@ public class ToolkitOptionsPage {
                 .setTooltip("Hides block entities beyond this many blocks. Huge performance increase, especially around lots of modded machines.")
                 .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.quantity("Blocks")))
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.maxBlockEntityRenderDistanceSquare.set(value * value),
-                        (options) -> Math.toIntExact(Math.round(Math.sqrt(RubidiumToolkitConfig.maxBlockEntityRenderDistanceSquare.get()))))
+                        (options, value) -> ToolkitConfig.maxBlockEntityRenderDistanceSquare.set(value * value),
+                        (options) -> Math.toIntExact(Math.round(Math.sqrt(ToolkitConfig.maxBlockEntityRenderDistanceSquare.get()))))
                 .setImpact(OptionImpact.HIGH)
                 .build();
 
@@ -97,8 +97,8 @@ public class ToolkitOptionsPage {
                 .setTooltip("Hides block entities underneath this many blocks, improving performance above caves (if you have your machines in caves, for some reason). This should ideally be set lower than the horizontal distance.")
                 .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.quantity("Blocks")))
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.maxBlockEntityRenderDistanceY.set(value ),
-                        (options) -> RubidiumToolkitConfig.maxBlockEntityRenderDistanceY.get())
+                        (options, value) -> ToolkitConfig.maxBlockEntityRenderDistanceY.set(value ),
+                        (options) -> ToolkitConfig.maxBlockEntityRenderDistanceY.get())
                 .setImpact(OptionImpact.HIGH)
                 .build();
 

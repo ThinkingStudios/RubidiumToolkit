@@ -3,7 +3,7 @@ package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
 import net.minecraft.entity.TntEntity;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
 
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 //import com.texstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import net.minecraft.entity.Entity;
@@ -37,7 +37,7 @@ public abstract class TntEntityMixin extends Entity implements DynamicLightSourc
     private void onTick(CallbackInfo ci) {
         // We do not want to update the entity on the server.
         if (this.getEntityWorld().isClient()) {
-            if (!RubidiumToolkitConfig.entityLighting.get())
+            if (!ToolkitConfig.entityLighting.get())
                 return;
 
             if (this.removed) {

@@ -2,7 +2,7 @@ package org.thinkingstudio.rubidium_toolkit.features.dynlights.api;
 
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -108,7 +108,7 @@ public final class DynamicLightHandlers {
      */
     @SuppressWarnings("unchecked")
     public static <T extends Entity> int getLuminanceFrom(@NotNull T entity) {
-        if (!RubidiumToolkitConfig.entityLighting.get())
+        if (!ToolkitConfig.entityLighting.get())
             return 0;
 
         DynamicLightHandler<T> handler = (DynamicLightHandler<T>) getDynamicLightHandler(entity.getType());
@@ -128,7 +128,7 @@ public final class DynamicLightHandlers {
      */
     @SuppressWarnings("unchecked")
     public static <T extends BlockEntity> int getLuminanceFrom(@NotNull T entity) {
-        if (!RubidiumToolkitConfig.blockEntityLighting.get())
+        if (!ToolkitConfig.blockEntityLighting.get())
             return 0;
         DynamicLightHandler<T> handler = (DynamicLightHandler<T>) getDynamicLightHandler(entity.getType());
         if (handler == null)

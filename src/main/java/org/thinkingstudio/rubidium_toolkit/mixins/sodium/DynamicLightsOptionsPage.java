@@ -10,7 +10,7 @@ import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage
 import net.minecraft.client.resource.language.I18n;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -53,10 +53,10 @@ public class DynamicLightsOptionsPage {
                 )
                 .setBinding(
                         (options, value) -> {
-                            RubidiumToolkitConfig.quality.set(value.toString());
+                            ToolkitConfig.quality.set(value.toString());
                             DynamicLightsFeature.clearLightSources();
                         },
-                        (options) -> ConfigEnum.QualityMode.valueOf(RubidiumToolkitConfig.quality.get()))
+                        (options) -> ConfigEnum.QualityMode.valueOf(ToolkitConfig.quality.get()))
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 
@@ -66,8 +66,8 @@ public class DynamicLightsOptionsPage {
                 .setTooltip(I18n.translate("rubidium_toolkit.dynlights.entity_lights.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.entityLighting.set(value),
-                        (options) -> RubidiumToolkitConfig.entityLighting.get())
+                        (options, value) -> ToolkitConfig.entityLighting.set(value),
+                        (options) -> ToolkitConfig.entityLighting.get())
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 
@@ -76,8 +76,8 @@ public class DynamicLightsOptionsPage {
                 .setTooltip(I18n.translate("rubidium_toolkit.dynlights.block_lights.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.blockEntityLighting.set(value),
-                        (options) -> RubidiumToolkitConfig.blockEntityLighting.get())
+                        (options, value) -> ToolkitConfig.blockEntityLighting.set(value),
+                        (options) -> ToolkitConfig.blockEntityLighting.get())
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 

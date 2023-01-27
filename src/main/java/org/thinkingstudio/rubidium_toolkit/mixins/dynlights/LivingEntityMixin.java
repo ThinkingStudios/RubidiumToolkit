@@ -1,7 +1,7 @@
 package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
 
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandlers;
 //import com.texstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
@@ -41,7 +41,7 @@ public abstract class LivingEntityMixin extends Entity implements DynamicLightSo
         if (luminance > this.lambdynlights_luminance)
             this.lambdynlights_luminance = luminance;
 
-        if (!RubidiumToolkitConfig.entityLighting.get() && this.getType() != EntityType.PLAYER)
+        if (!ToolkitConfig.entityLighting.get() && this.getType() != EntityType.PLAYER)
             this.lambdynlights_luminance = 0;
     }
 

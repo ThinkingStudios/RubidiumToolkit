@@ -2,7 +2,7 @@ package org.thinkingstudio.rubidium_toolkit.features.zoom;
 
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.keybinds.KeyboardInput;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
@@ -20,11 +20,11 @@ public class ZoomHandler {
     @SubscribeEvent
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         //Handle zoom mode changes.
-        if (!RubidiumToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.HOLD.toString())) {
+        if (!ToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.HOLD.toString())) {
             if (!persistentZoom) {
                 persistentZoom = true;
                 lastZoomPress = true;
-                ZoomUtils.zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
+                ZoomUtils.zoomDivisor = ToolkitConfig.zoomValues.zoomDivisor;
             }
         } else {
             if (persistentZoom) {
@@ -38,19 +38,19 @@ public class ZoomHandler {
             return;
         }
 
-        if (RubidiumToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.HOLD.toString())) {
+        if (ToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.HOLD.toString())) {
             //If the zoom needs to be held, then the zoom signal is determined by if the key is pressed or not.
             ZoomUtils.zoomState = KeyboardInput.zoomKey.isPressed();
-            ZoomUtils.zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
+            ZoomUtils.zoomDivisor = ToolkitConfig.zoomValues.zoomDivisor;
         }
-        else if (RubidiumToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.TOGGLE.toString())) {
+        else if (ToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.TOGGLE.toString())) {
             //If the zoom needs to be toggled, toggle the zoom signal instead.
             if (KeyboardInput.zoomKey.isPressed()) {
                 ZoomUtils.zoomState = !ZoomUtils.zoomState;
-                ZoomUtils.zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
+                ZoomUtils.zoomDivisor = ToolkitConfig.zoomValues.zoomDivisor;
             }
         }
-        else if (RubidiumToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.PERSISTENT.toString()))
+        else if (ToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.PERSISTENT.toString()))
         {
             //If persistent zoom is enabled, just keep the zoom on.
             ZoomUtils.zoomState = true;

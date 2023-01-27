@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.model.animation.TileEntityRendererAnimation;
 import net.minecraftforge.fml.common.Mod;
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.accessor.WorldRendererAccessor;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item.ItemLightSources;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
@@ -39,13 +39,13 @@ public class DynamicLightsFeature {
     private static int lastUpdateCount = 0;
 
     public static boolean isEnabled() {
-        return !Objects.equals(RubidiumToolkitConfig.quality.get(), "OFF");
+        return !Objects.equals(ToolkitConfig.quality.get(), "OFF");
     }
 
     private static long lambdynlights_lastUpdate = 0;
 
     public static boolean ShouldUpdateDynamicLights() {
-        String mode = RubidiumToolkitConfig.quality.get();
+        String mode = ToolkitConfig.quality.get();
         if (Objects.equals(mode, "OFF"))
             return false;
 

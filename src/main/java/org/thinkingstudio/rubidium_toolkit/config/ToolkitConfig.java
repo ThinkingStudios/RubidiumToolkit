@@ -7,7 +7,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.nio.file.Path;
 
-public class RubidiumToolkitConfig {
+public class ToolkitConfig {
     public static ForgeConfigSpec ConfigSpec;
 
     public static ForgeConfigSpec.ConfigValue<Integer> maxBlockEntityRenderDistanceSquare;

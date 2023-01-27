@@ -3,7 +3,7 @@ package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
 //import com.texstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ExplosiveProjectileEntity.class)
@@ -16,7 +16,7 @@ public abstract class ExplosiveProjectileEntityMixin implements DynamicLightSour
 
     @Override
     public int getLuminance() {
-        if (RubidiumToolkitConfig.entityLighting.get())
+        if (ToolkitConfig.entityLighting.get())
             return 14;
         return 0;
     }
