@@ -7,7 +7,7 @@ import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
-import net.minecraft.client.resource.language.I18n;
+import net.minecraft.text.TranslatableText;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
@@ -40,16 +40,15 @@ public class DynamicLightsOptionsPage {
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, ConfigEnum.QualityMode> qualityMode = OptionImpl.createBuilder(ConfigEnum.QualityMode.class, dynamicLightsOpts)
-                .setName(I18n.translate("rubidium_toolkit.dynlights.speed.name"))
-                .setTooltip(I18n.translate("rubidium_toolkit.dynlights.speed.tooltip"))
+                .setName((new TranslatableText("rubidium_toolkit.dynlights.speed.name")).getString())
+                .setTooltip((new TranslatableText("rubidium_toolkit.dynlights.speed.tooltip")).getString())
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnum.QualityMode.class, new String[] {
-                                I18n.translate("rubidium_toolkit.option.off"),
-                                I18n.translate("rubidium_toolkit.option.slow"),
-                                I18n.translate("rubidium_toolkit.option.fast"),
-                                I18n.translate("rubidium_toolkit.option.realtime")
-                        }
-                        )
+                                (new TranslatableText("rubidium_toolkit.option.off")).getString(),
+                                (new TranslatableText("rubidium_toolkit.option.slow")).getString(),
+                                (new TranslatableText("rubidium_toolkit.option.fast")).getString(),
+                                (new TranslatableText("rubidium_toolkit.option.realtime")).getString()
+                        })
                 )
                 .setBinding(
                         (options, value) -> {
@@ -62,8 +61,8 @@ public class DynamicLightsOptionsPage {
 
 
         OptionImpl<SodiumGameOptions, Boolean> entityLighting = OptionImpl.createBuilder(Boolean.class, dynamicLightsOpts)
-                .setName(I18n.translate("rubidium_toolkit.dynlights.entity_lights.name"))
-                .setTooltip(I18n.translate("rubidium_toolkit.dynlights.entity_lights.tooltip"))
+                .setName((new TranslatableText("rubidium_toolkit.dynlights.entity_lights.name")).getString())
+                .setTooltip((new TranslatableText("rubidium_toolkit.dynlights.entity_lights.tooltip")).getString())
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> ToolkitConfig.entityLighting.set(value),
@@ -72,8 +71,8 @@ public class DynamicLightsOptionsPage {
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> tileEntityLighting = OptionImpl.createBuilder(Boolean.class, dynamicLightsOpts)
-                .setName(I18n.translate("rubidium_toolkit.dynlights.block_lights.name"))
-                .setTooltip(I18n.translate("rubidium_toolkit.dynlights.block_lights.tooltip"))
+                .setName((new TranslatableText("rubidium_toolkit.dynlights.block_lights.name")).getString())
+                .setTooltip((new TranslatableText("rubidium_toolkit.dynlights.block_lights.tooltip")).getString())
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> ToolkitConfig.blockEntityLighting.set(value),
@@ -89,6 +88,6 @@ public class DynamicLightsOptionsPage {
                 .build()
         );
 
-        pages.add(new OptionPage(I18n.translate("rubidium_toolkit.dynlights.options.name"), ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage((new TranslatableText("rubidium_toolkit.dynlights.options.name")).getString(), ImmutableList.copyOf(groups)));
     }
 }

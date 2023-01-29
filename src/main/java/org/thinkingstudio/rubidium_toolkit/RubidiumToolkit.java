@@ -34,7 +34,7 @@ public class RubidiumToolkit {
         DynamicLightsResourceListener reloadListener = new DynamicLightsResourceListener();
 
         ResourceManager resourceManager = MinecraftClient.getInstance().getResourceManager();
-        if (resourceManager instanceof ReloadableResourceManager) {
+        if (resourceManager instanceof ReloadableResourceManager ) {
             ReloadableResourceManager reloadableResourceManager = (ReloadableResourceManager) resourceManager;
             reloadableResourceManager.registerReloader(reloadListener);
         }
