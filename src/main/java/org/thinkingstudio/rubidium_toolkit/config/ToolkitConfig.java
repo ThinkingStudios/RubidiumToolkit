@@ -67,8 +67,8 @@ public class ToolkitConfig {
 
             enableDistanceChecks = bulider.define("Enable Max Distance Checks", true);
 
-            maxBlockEntityRenderDistanceSquare = bulider.define("(TileEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
-            maxBlockEntityRenderDistanceY = bulider.define("(TileEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
+            maxBlockEntityRenderDistanceSquare = bulider.define("(BlockEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
+            maxBlockEntityRenderDistanceY = bulider.define("(BlockEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
 
             maxEntityRenderDistanceSquare = bulider.define("(Entity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
             maxEntityRenderDistanceY = bulider.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
