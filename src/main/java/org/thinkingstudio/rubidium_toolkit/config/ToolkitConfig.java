@@ -78,8 +78,7 @@ public class ToolkitConfig {
     }
 
     public static void loadConfig(Path path) {
-        final CommentedFileConfig configData = CommentedFileConfig.builder(path)
-                .sync().autosave().writingMode(WritingMode.REPLACE).build();
+        final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
 
         configData.load();
         ConfigSpec.setConfig(configData);
