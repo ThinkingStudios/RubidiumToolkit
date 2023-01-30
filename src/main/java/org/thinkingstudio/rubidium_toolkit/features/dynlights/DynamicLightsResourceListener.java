@@ -2,7 +2,7 @@ package org.thinkingstudio.rubidium_toolkit.features.dynlights;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.resource.ResourceManager;
+import net.minecraft.server.packs.resources.ResourceManager;
 import org.jetbrains.annotations.NotNull;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item.ItemLightSources;
 import net.minecraftforge.resource.IResourceType;

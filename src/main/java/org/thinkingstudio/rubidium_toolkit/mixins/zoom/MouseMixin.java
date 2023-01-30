@@ -1,8 +1,8 @@
 package org.thinkingstudio.rubidium_toolkit.mixins.zoom;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.Mouse;
-import net.minecraft.client.util.SmoothUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.MouseHandler;
+import net.minecraft.util.SmoothDouble;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,34 +19,34 @@ import org.thinkingstudio.rubidium_toolkit.keybinds.KeyboardInput;
 
 
 //This mixin is responsible for the mouse-behavior-changing part of the zoom.
-@Mixin(Mouse.class)
+@Mixin(MouseHandler.class)
 public class MouseMixin {
 	@Final
 	@Shadow
-	private MinecraftClient client;
+	private Minecraft minecraft;
 	
 	@Final
 	@Shadow
-	private final SmoothUtil cursorXSmoother = new SmoothUtil();
+	private final SmoothDouble smoothTurnX = new SmoothDouble();
 	
 	@Final
 	@Shadow
-	private final SmoothUtil cursorYSmoother = new SmoothUtil();
+	private final SmoothDouble smoothTurnY = new SmoothDouble();
 
 	@Shadow
-	private double cursorDeltaX;
+	private double accumulatedDX;
 
 	@Shadow
-	private double cursorDeltaY;
+	private double accumulatedDY;
 	
 	@Shadow
-	private double eventDeltaWheel;
+	private double accumulatedScroll;
 	
 	@Unique
-	private final SmoothUtil cursorXZoomSmoother = new SmoothUtil();
+	private final SmoothDouble cursorXZoomSmoother = new SmoothDouble();
 
 	@Unique
-	private final SmoothUtil cursorYZoomSmoother = new SmoothUtil();
+	private final SmoothDouble cursorYZoomSmoother = new SmoothDouble();
 
 	@Unique
 	private double extractedE;
@@ -55,12 +55,12 @@ public class MouseMixin {
 	
 	//This mixin handles the "Reduce Sensitivity" option and extracts the g variable for the cinematic cameras.
 	@ModifyVariable(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;minecraft:Lnet/minecraft/client/MinecraftClient;", ordinal = 2),
-		method = "updateMouse",
+		at = @At(value = "FIELD", target = "Lnet/minecraft/client/MouseHandler;minecraft:Lnet/minecraft/client/Minecraft;", ordinal = 2),
+		method = "turnPlayer",
 		ordinal = 2
 	)
 	private double applyReduceSensitivity(double g) {
-		double modifiedMouseSensitivity = this.client.options.mouseSensitivity;
+		double modifiedMouseSensitivity = this.minecraft.options.sensitivity;
 
 		if (ToolkitConfig.lowerZoomSensitivity.get())
 		{
@@ -79,8 +79,8 @@ public class MouseMixin {
 	
 	//Extracts the e variable for the cinematic cameras.
 	@Inject(
-		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Mouse;isCursorLocked()Z"),
-		method = "updateMouse",
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MouseHandler;isMouseGrabbed()Z"),
+		method = "turnPlayer",
 		locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	private void obtainCinematicCameraValues(CallbackInfo info, double d, double e) {
@@ -89,24 +89,24 @@ public class MouseMixin {
 
 	//Applies the cinematic camera on the mouse's X.
 	@ModifyVariable(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;cursorDeltaX:D", ordinal = 2, shift = At.Shift.BEFORE),
-		method = "updateMouse",
+		at = @At(value = "FIELD", target = "Lnet/minecraft/client/MouseHandler;accumulatedDX:D", ordinal = 2, shift = At.Shift.BEFORE),
+		method = "turnPlayer",
 		ordinal = 2
 	)
 	private double applyCinematicModeX(double l) {
 		if (!ToolkitConfig.cinematicCameraMode.get().equals(ConfigEnum.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
-				if (this.client.options.smoothCameraEnabled) {
-					l = this.cursorXSmoother.smooth(this.cursorDeltaX * this.adjustedG, (this.extractedE * this.adjustedG));
-					this.cursorXZoomSmoother.clear();
+				if (this.minecraft.options.smoothCamera) {
+					l = this.smoothTurnX.getNewDeltaValue(this.accumulatedDX * this.adjustedG, (this.extractedE * this.adjustedG));
+					this.cursorXZoomSmoother.reset();
 				} else {
-					l = this.cursorXZoomSmoother.smooth(this.cursorDeltaX * this.adjustedG, (this.extractedE * this.adjustedG));
+					l = this.cursorXZoomSmoother.getNewDeltaValue(this.accumulatedDX * this.adjustedG, (this.extractedE * this.adjustedG));
 				}
 				if (ToolkitConfig.cinematicCameraMode.get().equals(ConfigEnum.CinematicCameraOptions.MULTIPLIED.toString())) {
 					l *= ToolkitConfig.zoomValues.cinematicMultiplier;
 				}
 			} else {
-				this.cursorXZoomSmoother.clear();
+				this.cursorXZoomSmoother.reset();
 			}
 		}
 		
@@ -115,24 +115,24 @@ public class MouseMixin {
 	
 	//Applies the cinematic camera on the mouse's Y.
 	@ModifyVariable(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;cursorDeltaY:D", ordinal = 2, shift = At.Shift.BEFORE),
-		method = "updateMouse",
+		at = @At(value = "FIELD", target = "Lnet/minecraft/client/MouseHandler;accumulatedDY:D", ordinal = 2, shift = At.Shift.BEFORE),
+		method = "turnPlayer",
 		ordinal = 2
 	)
 	private double applyCinematicModeY(double m) {
 		if (!ToolkitConfig.cinematicCameraMode.get().equals(ConfigEnum.CinematicCameraOptions.OFF.toString())) {
 			if (ZoomUtils.zoomState) {
-				if (this.client.options.smoothCameraEnabled) {
-					m = this.cursorYSmoother.smooth(this.cursorDeltaY * this.adjustedG, (this.extractedE * this.adjustedG));
-					this.cursorYZoomSmoother.clear();
+				if (this.minecraft.options.smoothCamera) {
+					m = this.smoothTurnY.getNewDeltaValue(this.accumulatedDY * this.adjustedG, (this.extractedE * this.adjustedG));
+					this.cursorYZoomSmoother.reset();
 				} else {
-					m = this.cursorYZoomSmoother.smooth(this.cursorDeltaY * this.adjustedG, (this.extractedE * this.adjustedG));
+					m = this.cursorYZoomSmoother.getNewDeltaValue(this.accumulatedDY * this.adjustedG, (this.extractedE * this.adjustedG));
 				}
 				if (ToolkitConfig.cinematicCameraMode.get().equals(ConfigEnum.CinematicCameraOptions.MULTIPLIED.toString())) {
 					m *= ToolkitConfig.zoomValues.cinematicMultiplier;
 				}
 			} else {
-				this.cursorYZoomSmoother.clear();
+				this.cursorYZoomSmoother.reset();
 			}
 		}
 		
@@ -141,24 +141,24 @@ public class MouseMixin {
 	
 	//Handles zoom scrolling.
 	@Inject(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;eventDeltaWheel:D", ordinal = 7),
-		method = "onMouseScroll",
+		at = @At(value = "FIELD", target = "Lnet/minecraft/client/MouseHandler;accumulatedScroll:D", ordinal = 7),
+		method = "onScroll",
 		cancellable = true
 	)
 	private void zoomerOnMouseScroll(CallbackInfo info) {
-		if (this.eventDeltaWheel != 0.0) {
+		if (this.accumulatedScroll != 0.0) {
 			if (ToolkitConfig.zoomScrolling.get()) {
 				if (ToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.PERSISTENT.toString())) {
-					if (!KeyboardInput.zoomKey.isPressed())
+					if (!KeyboardInput.zoomKey.isDown())
 					{
 						return;
 					}
 				}
 				
 				if (ZoomUtils.zoomState) {
-					if (this.eventDeltaWheel > 0.0) {
+					if (this.accumulatedScroll > 0.0) {
 						ZoomUtils.changeZoomDivisor(true);
-					} else if (this.eventDeltaWheel < 0.0) {
+					} else if (this.accumulatedScroll < 0.0) {
 						ZoomUtils.changeZoomDivisor(false);
 					}
 					
@@ -170,21 +170,21 @@ public class MouseMixin {
 
 	//Handles the zoom scrolling reset through the middle button.
 	@Inject(
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;setKeyPressed(Lnet/minecraft/client/util/InputUtil$Key;Z)V"),
-			method = "onMouseButton(JIII)V",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyMapping;set(Lcom/mojang/blaze3d/platform/InputConstants$Key;Z)V"),
+			method = "onPress(JIII)V",
 			cancellable = true,
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
 	private void zoomerOnMouseButton(long window, int button, int action, int mods, CallbackInfo info, boolean bl, int i) {
 		if (ToolkitConfig.zoomScrolling.get()) {
 			if (ToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.PERSISTENT.toString())) {
-				if (!KeyboardInput.zoomKey.isPressed()) {
+				if (!KeyboardInput.zoomKey.isDown()) {
 					return;
 				}
 			}
 
 			if (button == 2 && bl) {
-				if (KeyboardInput.zoomKey.isPressed()) {
+				if (KeyboardInput.zoomKey.isDown()) {
 					ZoomUtils.resetZoomDivisor();
 					info.cancel();
 				}

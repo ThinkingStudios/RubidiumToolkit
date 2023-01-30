@@ -1,13 +1,13 @@
 package org.thinkingstudio.rubidium_toolkit.features.dynlights.api;
 
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,15 +31,15 @@ public final class DynamicLightHandlers {
         registerDynamicLightHandler(EntityType.ENDERMAN, entity -> {
             int luminance = 0;
             if (entity.getCarriedBlock() != null)
-                luminance = entity.getCarriedBlock().getLuminance();
+                luminance = entity.getCarriedBlock().getLightEmission();
             return luminance;
         });
-        registerDynamicLightHandler(EntityType.ITEM, entity -> DynamicLightsFeature.getLuminanceFromItemStack(entity.getStack(), entity.isSubmergedInWater()));
+        registerDynamicLightHandler(EntityType.ITEM, entity -> DynamicLightsFeature.getLuminanceFromItemStack(entity.getItem(), entity.isUnderWater()));
         registerDynamicLightHandler(EntityType.ITEM_FRAME, entity -> {
-            World world = entity.getEntityWorld();
-            return DynamicLightsFeature.getLuminanceFromItemStack(entity.getHeldItemStack(), !world.getFluidState(entity.getBlockPos()).isEmpty());
+            Level world = entity.getCommandSenderWorld();
+            return DynamicLightsFeature.getLuminanceFromItemStack(entity.getItem(), !world.getFluidState(entity.getPos()).isEmpty());
         });
-        registerDynamicLightHandler(EntityType.MAGMA_CUBE, entity -> (entity.stretch > 0.6) ? 11 : 8);
+        registerDynamicLightHandler(EntityType.MAGMA_CUBE, entity -> (entity.squish > 0.6) ? 11 : 8);
         registerDynamicLightHandler(EntityType.SPECTRAL_ARROW, entity -> 8);
     }
 
@@ -114,7 +114,7 @@ public final class DynamicLightHandlers {
         DynamicLightHandler<T> handler = (DynamicLightHandler<T>) getDynamicLightHandler(entity.getType());
         if (handler == null)
             return 0;
-        if (handler.isWaterSensitive(entity) && !entity.getEntityWorld().getFluidState(new BlockPos(entity.getX(), entity.getEyeY(), entity.getZ())).isEmpty())
+        if (handler.isWaterSensitive(entity) && !entity.getCommandSenderWorld().getFluidState(new BlockPos(entity.getX(), entity.getEyeY(), entity.getZ())).isEmpty())
             return 0;
         return handler.getLuminance(entity);
     }
@@ -133,7 +133,7 @@ public final class DynamicLightHandlers {
         DynamicLightHandler<T> handler = (DynamicLightHandler<T>) getDynamicLightHandler(entity.getType());
         if (handler == null)
             return 0;
-        if (handler.isWaterSensitive(entity) && entity.getWorld() != null && !entity.getWorld().getFluidState(entity.getPos()).isEmpty())
+        if (handler.isWaterSensitive(entity) && entity.getLevel() != null && !entity.getLevel().getFluidState(entity.getBlockPos()).isEmpty())
             return 0;
         return handler.getLuminance(entity);
     }

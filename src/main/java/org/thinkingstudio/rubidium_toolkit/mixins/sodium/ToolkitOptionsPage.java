@@ -8,8 +8,8 @@ import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.TranslatableComponent;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,8 +34,8 @@ public class ToolkitOptionsPage {
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, Boolean> enableDistanceChecks = OptionImpl.createBuilder(Boolean.class, sodiumOpts)
-                .setName((new TranslatableText("rubidium_toolkit.tools.enable_max_entity_distance.name")).getString())
-                .setTooltip((new TranslatableText("rubidium_toolkit.tools.enable_max_entity_distance.tooltip")).getString())
+                .setName((new TranslatableComponent("rubidium_toolkit.tools.enable_max_entity_distance.name")).getString())
+                .setTooltip((new TranslatableComponent("rubidium_toolkit.tools.enable_max_entity_distance.tooltip")).getString())
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> ToolkitConfig.enableDistanceChecks.set(value),
@@ -51,9 +51,9 @@ public class ToolkitOptionsPage {
         );
 
         OptionImpl<SodiumGameOptions, Integer> maxEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName((new TranslatableText("rubidium_toolkit.tools.max_entity_distance.name")).getString())
-                .setTooltip((new TranslatableText("rubidium_toolkit.tools.max_entity_distance.tooltip")).getString())
-                .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.quantity((new TranslatableText("rubidium_toolkit.options.unit.blocks")).getString())))
+                .setName((new TranslatableComponent("rubidium_toolkit.tools.max_entity_distance.name")).getString())
+                .setTooltip((new TranslatableComponent("rubidium_toolkit.tools.max_entity_distance.tooltip")).getString())
+                .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.quantity((new TranslatableComponent("rubidium_toolkit.options.unit.blocks")).getString())))
                 .setBinding(
                         (options, value) -> ToolkitConfig.maxEntityRenderDistanceSquare.set(value * value),
                         (options) ->  Math.toIntExact(Math.round(Math.sqrt(ToolkitConfig.maxEntityRenderDistanceSquare.get()))))
@@ -61,9 +61,9 @@ public class ToolkitOptionsPage {
                 .build();
 
         OptionImpl<SodiumGameOptions, Integer> maxEntityDistanceVertical = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName((new TranslatableText("rubidium_toolkit.tools.vertical_entity_distance.name")).getString())
-                .setTooltip((new TranslatableText("rubidium_toolkit.tools.vertical_entity_distance.tooltip")).getString())
-                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.quantity((new TranslatableText("rubidium_toolkit.options.unit.blocks")).getString())))
+                .setName((new TranslatableComponent("rubidium_toolkit.tools.vertical_entity_distance.name")).getString())
+                .setTooltip((new TranslatableComponent("rubidium_toolkit.tools.vertical_entity_distance.tooltip")).getString())
+                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.quantity((new TranslatableComponent("rubidium_toolkit.options.unit.blocks")).getString())))
                 .setBinding(
                         (options, value) -> ToolkitConfig.maxEntityRenderDistanceY.set(value ),
                         (options) -> ToolkitConfig.maxEntityRenderDistanceY.get())
@@ -79,9 +79,9 @@ public class ToolkitOptionsPage {
         );
 
         OptionImpl<SodiumGameOptions, Integer> maxTileEntityDistance = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName((new TranslatableText("rubidium_toolkit.tools.max_block_distance.name")).getString())
-                .setTooltip((new TranslatableText("rubidium_toolkit.tools.max_block_distance.tooltip")).getString())
-                .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.quantity((new TranslatableText("rubidium_toolkit.options.unit.blocks")).getString())))
+                .setName((new TranslatableComponent("rubidium_toolkit.tools.max_block_distance.name")).getString())
+                .setTooltip((new TranslatableComponent("rubidium_toolkit.tools.max_block_distance.tooltip")).getString())
+                .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.quantity((new TranslatableComponent("rubidium_toolkit.options.unit.blocks")).getString())))
                 .setBinding(
                         (options, value) -> ToolkitConfig.maxBlockEntityRenderDistanceSquare.set(value * value),
                         (options) -> Math.toIntExact(Math.round(Math.sqrt(ToolkitConfig.maxBlockEntityRenderDistanceSquare.get()))))
@@ -89,9 +89,9 @@ public class ToolkitOptionsPage {
                 .build();
 
         OptionImpl<SodiumGameOptions, Integer> maxTileEntityDistanceVertical = OptionImpl.createBuilder(Integer.TYPE, sodiumOpts)
-                .setName((new TranslatableText("rubidium_toolkit.tools.vertical_entity_distance.name")).getString())
-                .setTooltip((new TranslatableText("rubidium_toolkit.tools.vertical_block_distance.tooltip")).getString())
-                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.quantity((new TranslatableText("rubidium_toolkit.options.unit.blocks")).getString())))
+                .setName((new TranslatableComponent("rubidium_toolkit.tools.vertical_entity_distance.name")).getString())
+                .setTooltip((new TranslatableComponent("rubidium_toolkit.tools.vertical_block_distance.tooltip")).getString())
+                .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.quantity((new TranslatableComponent("rubidium_toolkit.options.unit.blocks")).getString())))
                 .setBinding(
                         (options, value) -> ToolkitConfig.maxBlockEntityRenderDistanceY.set(value ),
                         (options) -> ToolkitConfig.maxBlockEntityRenderDistanceY.get())
@@ -105,6 +105,6 @@ public class ToolkitOptionsPage {
                 .build()
         );
 
-        pages.add(new OptionPage((new TranslatableText("rubidium_toolkit.tools.options.name")).getString(),ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage((new TranslatableComponent("rubidium_toolkit.tools.options.name")).getString(),ImmutableList.copyOf(groups)));
     }
 }

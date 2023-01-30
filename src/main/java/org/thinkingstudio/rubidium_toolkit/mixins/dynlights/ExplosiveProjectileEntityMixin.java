@@ -1,12 +1,11 @@
 package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
 
-import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
+import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
-//import com.texstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(ExplosiveProjectileEntity.class)
+@Mixin(AbstractHurtingProjectile.class)
 public abstract class ExplosiveProjectileEntityMixin implements DynamicLightSource {
     @Override
     public void dynamicLightTick() {

@@ -1,23 +1,22 @@
 package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandlers;
-//import com.texstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity implements DynamicLightSource {
     private int lambdynlights_luminance;
 
-    public LivingEntityMixin(EntityType<?> type, World world) {
+    public LivingEntityMixin(EntityType<?> type, Level world) {
         super(type, world);
     }
 
@@ -28,8 +27,8 @@ public abstract class LivingEntityMixin extends Entity implements DynamicLightSo
         } else {
             int luminance = 0;
             BlockPos eyePos = new BlockPos(this.getX(), this.getEyeY(), this.getZ());
-            boolean submergedInFluid = !this.world.getFluidState(eyePos).isEmpty();
-            for (ItemStack equipped : this.getItemsEquipped()) {
+            boolean submergedInFluid = !this.level.getFluidState(eyePos).isEmpty();
+            for (ItemStack equipped : this.getAllSlots()) {
                 if (!equipped.isEmpty())
                     luminance = Math.max(luminance, DynamicLightsFeature.getLuminanceFromItemStack(equipped, submergedInFluid));
             }

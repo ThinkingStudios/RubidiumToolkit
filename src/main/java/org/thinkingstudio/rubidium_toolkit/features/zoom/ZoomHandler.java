@@ -34,18 +34,18 @@ public class ZoomHandler {
         }
 
         //If the press state is the same as the previous tick's, cancel the rest. Makes toggling usable and the zoom divisor adjustable.
-        if (KeyboardInput.zoomKey.isPressed() == lastZoomPress) {
+        if (KeyboardInput.zoomKey.isDown() == lastZoomPress) {
             return;
         }
 
         if (ToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.HOLD.toString())) {
             //If the zoom needs to be held, then the zoom signal is determined by if the key is pressed or not.
-            ZoomUtils.zoomState = KeyboardInput.zoomKey.isPressed();
+            ZoomUtils.zoomState = KeyboardInput.zoomKey.isDown();
             ZoomUtils.zoomDivisor = ToolkitConfig.zoomValues.zoomDivisor;
         }
         else if (ToolkitConfig.zoomMode.get().equals(ConfigEnum.ZoomModes.TOGGLE.toString())) {
             //If the zoom needs to be toggled, toggle the zoom signal instead.
-            if (KeyboardInput.zoomKey.isPressed()) {
+            if (KeyboardInput.zoomKey.isDown()) {
                 ZoomUtils.zoomState = !ZoomUtils.zoomState;
                 ZoomUtils.zoomDivisor = ToolkitConfig.zoomValues.zoomDivisor;
             }
@@ -60,6 +60,6 @@ public class ZoomHandler {
         ZoomUtils.lastZoomState = !ZoomUtils.zoomState && lastZoomPress;
 
         //Set the previous zoom signal for the next tick.
-        lastZoomPress = KeyboardInput.zoomKey.isPressed();
+        lastZoomPress = KeyboardInput.zoomKey.isDown();
     }
 }

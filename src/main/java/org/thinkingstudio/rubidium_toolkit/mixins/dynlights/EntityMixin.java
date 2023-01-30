@@ -1,19 +1,18 @@
 package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.util.math.Direction;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.api.DynamicLightHandlers;
-//import com.texstudio.rubidium_toolkit.features.dynlights.config.DynamicLightsConfig;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,7 +25,7 @@ import java.util.Objects;
 @Mixin(Entity.class)
 public abstract class EntityMixin implements DynamicLightSource {
     @Shadow
-    public World world;
+    public Level level;
 
     @Shadow
     public boolean removed;
@@ -68,7 +67,7 @@ public abstract class EntityMixin implements DynamicLightSource {
     @Inject(method = "tick", at = @At("TAIL"))
     public void onTick(CallbackInfo ci) {
         // We do not want to update the entity on the server.
-        if (this.world.isClient()) {
+        if (this.level.isClientSide()) {
             if (this.removed) {
                 this.setDynamicLightEnabled(false);
             } else {
@@ -82,7 +81,7 @@ public abstract class EntityMixin implements DynamicLightSource {
 
     @Inject(method = "remove", at = @At("TAIL"))
     public void onRemove(CallbackInfo ci) {
-        if (this.world.isClient())
+        if (this.level.isClientSide())
             this.setDynamicLightEnabled(false);
     }
 
@@ -102,8 +101,8 @@ public abstract class EntityMixin implements DynamicLightSource {
     }
 
     @Override
-    public World getDynamicLightWorld() {
-        return this.world;
+    public Level getDynamicLightWorld() {
+        return this.level;
     }
 
     @Override
@@ -131,7 +130,7 @@ public abstract class EntityMixin implements DynamicLightSource {
     }
 
     @Override
-    public boolean lambdynlights_updateDynamicLight(@NotNull WorldRenderer renderer) {
+    public boolean lambdynlights_updateDynamicLight(@NotNull LevelRenderer renderer) {
         if (!this.shouldUpdateDynamicLight())
             return false;
         double deltaX = this.getX() - this.lambdynlights_prevX;
@@ -159,13 +158,13 @@ public abstract class EntityMixin implements DynamicLightSource {
             LongOpenHashSet newPos = new LongOpenHashSet();
 
             if (luminance > 0) {
-                BlockPos.Mutable chunkPos = new BlockPos.Mutable(this.chunkX, MathHelper.parseInt(String.valueOf((int) this.getEyeY()), 16), this.chunkZ);
+                BlockPos.MutableBlockPos chunkPos = new BlockPos.MutableBlockPos(this.chunkX, Mth.getInt(String.valueOf((int) this.getEyeY()), 16), this.chunkZ);
 
                 DynamicLightsFeature.scheduleChunkRebuild(renderer, chunkPos);
                 DynamicLightsFeature.updateTrackedChunks(chunkPos, this.trackedLitChunkPos, newPos);
 
                 Direction directionX = (this.getBlockPos().getX() & 15) >= 8 ? Direction.EAST : Direction.WEST;
-                Direction directionY = (MathHelper.fastFloor(this.getEyeY()) & 15) >= 8 ? Direction.UP : Direction.DOWN;
+                Direction directionY = (Mth.fastFloor(this.getEyeY()) & 15) >= 8 ? Direction.UP : Direction.DOWN;
                 Direction directionZ = (this.getBlockPos().getZ() & 15) >= 8 ? Direction.SOUTH : Direction.NORTH;
 
                 for (int i = 0; i < 7; i++) {
@@ -194,8 +193,8 @@ public abstract class EntityMixin implements DynamicLightSource {
     }
 
     @Override
-    public void lambdynlights_scheduleTrackedChunksRebuild(@NotNull WorldRenderer renderer) {
-        if (MinecraftClient.getInstance().world == this.world)
+    public void lambdynlights_scheduleTrackedChunksRebuild(@NotNull LevelRenderer renderer) {
+        if (Minecraft.getInstance().level == this.level)
             for (long pos : this.trackedLitChunkPos) {
                 DynamicLightsFeature.scheduleChunkRebuild(renderer, pos);
             }

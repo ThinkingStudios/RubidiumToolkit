@@ -1,7 +1,7 @@
 package org.thinkingstudio.rubidium_toolkit.features.dynlights;
 
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.world.World;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +32,7 @@ public interface DynamicLightSource {
      *
      * @return the world instance
      */
-    World getDynamicLightWorld();
+    Level getDynamicLightWorld();
 
     /**
      * Returns whether the dynamic light is enabled or not.
@@ -82,7 +82,7 @@ public interface DynamicLightSource {
      */
     boolean shouldUpdateDynamicLight();
 
-    boolean lambdynlights_updateDynamicLight(@NotNull WorldRenderer renderer);
+    boolean lambdynlights_updateDynamicLight(@NotNull LevelRenderer renderer);
 
-    void lambdynlights_scheduleTrackedChunksRebuild(@NotNull WorldRenderer renderer);
+    void lambdynlights_scheduleTrackedChunksRebuild(@NotNull LevelRenderer renderer);
 }

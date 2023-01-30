@@ -1,8 +1,8 @@
 package org.thinkingstudio.rubidium_toolkit;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.resource.ReloadableResourceManager;
-import net.minecraft.resource.ResourceManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.server.packs.resources.ReloadableResourceManager;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ExtensionPoint;
@@ -33,10 +33,10 @@ public class RubidiumToolkit {
     public void onInitializeClient() {
         DynamicLightsResourceListener reloadListener = new DynamicLightsResourceListener();
 
-        ResourceManager resourceManager = MinecraftClient.getInstance().getResourceManager();
-        if (resourceManager instanceof ReloadableResourceManager ) {
+        ResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
+        if (resourceManager instanceof ReloadableResourceManager) {
             ReloadableResourceManager reloadableResourceManager = (ReloadableResourceManager) resourceManager;
-            reloadableResourceManager.registerReloader(reloadListener);
+            reloadableResourceManager.registerReloadListener(reloadListener);
         }
 
         DynamicLightHandlers.registerDefaultHandlers();

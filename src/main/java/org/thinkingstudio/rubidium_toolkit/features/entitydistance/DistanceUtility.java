@@ -1,22 +1,22 @@
 package org.thinkingstudio.rubidium_toolkit.features.entitydistance;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public abstract class DistanceUtility {
-    public static boolean isNearPlayer(World world, BlockPos pos, int maxHeight, int maxDistanceSquare) {
+    public static boolean isNearPlayer(Level world, BlockPos pos, int maxHeight, int maxDistanceSquare) {
         return isNearPlayerInternal(world, pos.getX(), pos.getY(), pos.getZ(), maxHeight, maxDistanceSquare, false);
     }
 
-    private static boolean isNearPlayerInternal(World world, double posx, double posy, double posz, int maxHeight, int maxDistanceSquare, boolean allowNullPlayers) {
-        List<? extends PlayerEntity> closest = world.getPlayers();
+    private static boolean isNearPlayerInternal(Level world, double posx, double posy, double posz, int maxHeight, int maxDistanceSquare, boolean allowNullPlayers) {
+        List<? extends Player> closest = world.players();
 
-        for (PlayerEntity player : closest)
+        for (Player player : closest)
         {
             if (player == null)
                 return allowNullPlayers;
@@ -50,7 +50,7 @@ public abstract class DistanceUtility {
         return false;
     }
 
-    public static boolean isEntityWithinDistance(BlockPos player, Vec3d entity, int maxHeight, int maxDistanceSquare) {
+    public static boolean isEntityWithinDistance(BlockPos player, Vec3 entity, int maxHeight, int maxDistanceSquare) {
         if (Math.abs(player.getY() - entity.y - 4) < maxHeight)
         {
             double x = player.getX() - entity.x;

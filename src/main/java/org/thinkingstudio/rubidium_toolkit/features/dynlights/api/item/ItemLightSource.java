@@ -2,15 +2,15 @@ package org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -20,16 +20,16 @@ import java.util.Optional;
  * Represents an item light source.
  */
 public class ItemLightSource {
-    public final Identifier id;
+    public final ResourceLocation id;
     public final Item item;
     public final int        luminance;
     public final boolean    waterSensitive;
 
-    public ItemLightSource(@NotNull Identifier id, @NotNull Item item, int luminance) {
+    public ItemLightSource(@NotNull ResourceLocation id, @NotNull Item item, int luminance) {
         this(id, item, luminance, false);
     }
 
-    public ItemLightSource(@NotNull Identifier id, @NotNull Item item, int luminance, boolean waterSensitive) {
+    public ItemLightSource(@NotNull ResourceLocation id, @NotNull Item item, int luminance, boolean waterSensitive) {
         this.id = id;
         this.item = item;
         this.luminance = luminance;
@@ -76,13 +76,13 @@ public class ItemLightSource {
                 '}';
     }
 
-    public static @NotNull Optional<ItemLightSource> fromJson(@NotNull Identifier id, @NotNull JsonObject json) {
+    public static @NotNull Optional<ItemLightSource> fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
         if (!json.has("item") || !json.has("luminance")) {
             RubidiumToolkit.LOGGER.warn("Failed to parse item light source \"" + id + "\", invalid format: missing required fields.");
             return Optional.empty();
         }
 
-        Identifier affectId = new Identifier(json.get("item").getAsString());
+        ResourceLocation affectId = new ResourceLocation(json.get("item").getAsString());
         Item item = Registry.ITEM.get(affectId);
 
         if (item == Items.AIR)
@@ -96,16 +96,16 @@ public class ItemLightSource {
             String luminanceStr = luminanceElement.getAsString();
             if (luminanceStr.equals("block")) {
                 if (item instanceof BlockItem) {
-                    luminance = ((BlockItem) item).getBlock().getDefaultState().getLuminance();
+                    luminance = ((BlockItem) item).getBlock().defaultBlockState().getLightEmission();
                 } else {
                     return Optional.empty();
                 }
             } else {
-                Block block = Registry.BLOCK.get(new Identifier(luminanceStr));
+                Block block = Registry.BLOCK.get(new ResourceLocation(luminanceStr));
                 if (block == Blocks.AIR)
                     return Optional.empty();
 
-                luminance = block.getDefaultState().getLuminance();
+                luminance = block.defaultBlockState().getLightEmission();
             }
         } else {
             RubidiumToolkit.LOGGER.warn("Failed to parse item light source \"" + id + "\", invalid format: \"luminance\" field value isn't string or integer.");

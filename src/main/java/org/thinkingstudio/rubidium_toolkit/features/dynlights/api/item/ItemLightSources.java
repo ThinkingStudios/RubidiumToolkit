@@ -1,11 +1,11 @@
 package org.thinkingstudio.rubidium_toolkit.features.dynlights.api.item;
 
 import com.google.gson.JsonObject;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
 import org.aperlambda.lambdacommon.LambdaConstants;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,13 +36,13 @@ public final class ItemLightSources {
     public static void load(@NotNull ResourceManager resourceManager) {
         ITEM_LIGHT_SOURCES.clear();
 
-        resourceManager.findResources("textures/misc/dynamiclights/item", path -> path.endsWith(".json")).forEach(id -> load(resourceManager, id));
+        resourceManager.listResources("textures/misc/dynamiclights/item", path -> path.endsWith(".json")).forEach(id -> load(resourceManager, id));
 
         ITEM_LIGHT_SOURCES.addAll(STATIC_ITEM_LIGHT_SOURCES);
     }
 
-    private static void load(@NotNull ResourceManager resourceManager, @NotNull Identifier resourceId) {
-        Identifier id = new Identifier(resourceId.getNamespace(), resourceId.getPath().replace(".json", ""));
+    private static void load(@NotNull ResourceManager resourceManager, @NotNull ResourceLocation resourceId) {
+        ResourceLocation id = new ResourceLocation(resourceId.getNamespace(), resourceId.getPath().replace(".json", ""));
         try {
             InputStream stream = resourceManager.getResource(resourceId).getInputStream();
             JsonObject json = LambdaConstants.JSON_PARSER.parse(new InputStreamReader(stream)).getAsJsonObject();
@@ -107,7 +107,7 @@ public final class ItemLightSources {
             }
         }
         if (stack.getItem() instanceof BlockItem)
-            return ((BlockItem) stack.getItem()).getBlock().getDefaultState().getLuminance();
+            return ((BlockItem) stack.getItem()).getBlock().defaultBlockState().getLightEmission();
         return 0;
     }
 }

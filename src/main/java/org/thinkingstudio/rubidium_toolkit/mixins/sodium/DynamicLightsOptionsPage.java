@@ -7,11 +7,11 @@ import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.control.CyclingControl;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.TranslatableComponent;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
-import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -40,14 +40,14 @@ public class DynamicLightsOptionsPage {
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, ConfigEnum.QualityMode> qualityMode = OptionImpl.createBuilder(ConfigEnum.QualityMode.class, dynamicLightsOpts)
-                .setName((new TranslatableText("rubidium_toolkit.dynlights.speed.name")).getString())
-                .setTooltip((new TranslatableText("rubidium_toolkit.dynlights.speed.tooltip")).getString())
+                .setName((new TranslatableComponent("rubidium_toolkit.dynlights.speed.name")).getString())
+                .setTooltip((new TranslatableComponent("rubidium_toolkit.dynlights.speed.tooltip")).getString())
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnum.QualityMode.class, new String[] {
-                                (new TranslatableText("rubidium_toolkit.option.off")).getString(),
-                                (new TranslatableText("rubidium_toolkit.option.slow")).getString(),
-                                (new TranslatableText("rubidium_toolkit.option.fast")).getString(),
-                                (new TranslatableText("rubidium_toolkit.option.realtime")).getString()
+                                (new TranslatableComponent("rubidium_toolkit.option.off")).getString(),
+                                (new TranslatableComponent("rubidium_toolkit.option.slow")).getString(),
+                                (new TranslatableComponent("rubidium_toolkit.option.fast")).getString(),
+                                (new TranslatableComponent("rubidium_toolkit.option.realtime")).getString()
                         })
                 )
                 .setBinding(
@@ -61,8 +61,8 @@ public class DynamicLightsOptionsPage {
 
 
         OptionImpl<SodiumGameOptions, Boolean> entityLighting = OptionImpl.createBuilder(Boolean.class, dynamicLightsOpts)
-                .setName((new TranslatableText("rubidium_toolkit.dynlights.entity_lights.name")).getString())
-                .setTooltip((new TranslatableText("rubidium_toolkit.dynlights.entity_lights.tooltip")).getString())
+                .setName((new TranslatableComponent("rubidium_toolkit.dynlights.entity_lights.name")).getString())
+                .setTooltip((new TranslatableComponent("rubidium_toolkit.dynlights.entity_lights.tooltip")).getString())
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> ToolkitConfig.entityLighting.set(value),
@@ -71,8 +71,8 @@ public class DynamicLightsOptionsPage {
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> tileEntityLighting = OptionImpl.createBuilder(Boolean.class, dynamicLightsOpts)
-                .setName((new TranslatableText("rubidium_toolkit.dynlights.block_lights.name")).getString())
-                .setTooltip((new TranslatableText("rubidium_toolkit.dynlights.block_lights.tooltip")).getString())
+                .setName((new TranslatableComponent("rubidium_toolkit.dynlights.block_lights.name")).getString())
+                .setTooltip((new TranslatableComponent("rubidium_toolkit.dynlights.block_lights.tooltip")).getString())
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> ToolkitConfig.blockEntityLighting.set(value),
@@ -88,6 +88,6 @@ public class DynamicLightsOptionsPage {
                 .build()
         );
 
-        pages.add(new OptionPage((new TranslatableText("rubidium_toolkit.dynlights.options.name")).getString(), ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage((new TranslatableComponent("rubidium_toolkit.dynlights.options.name")).getString(), ImmutableList.copyOf(groups)));
     }
 }

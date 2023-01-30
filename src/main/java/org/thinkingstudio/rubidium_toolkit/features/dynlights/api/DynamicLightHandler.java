@@ -1,9 +1,9 @@
 package org.thinkingstudio.rubidium_toolkit.features.dynlights.api;
 
-import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.item.ItemStack;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -68,8 +68,8 @@ public interface DynamicLightHandler<T> {
     static <T extends LivingEntity> @NotNull DynamicLightHandler<T> makeLivingEntityHandler(@NotNull DynamicLightHandler<T> handler) {
         return entity -> {
             int luminance = 0;
-            for (ItemStack equipped : entity.getItemsEquipped()) {
-                luminance = Math.max(luminance, DynamicLightsFeature.getLuminanceFromItemStack(equipped, entity.isSubmergedInWater()));
+            for (ItemStack equipped : entity.getAllSlots()) {
+                luminance = Math.max(luminance, DynamicLightsFeature.getLuminanceFromItemStack(equipped, entity.isUnderWater()));
             }
             return Math.max(luminance, handler.getLuminance(entity));
         };
@@ -82,11 +82,11 @@ public interface DynamicLightHandler<T> {
      * @param <T>     The type of Creeper entity.
      * @return The completed handler.
      */
-    static <T extends CreeperEntity> @NotNull DynamicLightHandler<T> makeCreeperEntityHandler(@Nullable DynamicLightHandler<T> handler) {
+    static <T extends Creeper> @NotNull DynamicLightHandler<T> makeCreeperEntityHandler(@Nullable DynamicLightHandler<T> handler) {
         return new DynamicLightHandler<T>() {
             @Override
             public int getLuminance(T entity) {
-                int luminance = (int) (entity.getClientFuseTime(0.0F) * 10.0);
+                int luminance = (int) (entity.getSwelling(0.0F) * 10.0);
 
                 if (handler != null)
                     luminance = Math.max(luminance, handler.getLuminance(entity));
