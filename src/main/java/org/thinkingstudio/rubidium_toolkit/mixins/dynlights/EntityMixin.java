@@ -43,9 +43,9 @@ public abstract class EntityMixin implements DynamicLightSource {
     public abstract double getY();
 
     @Shadow
-    public int chunkX;
+    public int xChunk;
     @Shadow
-    public int chunkZ;
+    public int zChunk;
 
     @Shadow
     public abstract boolean isOnFire();
@@ -54,7 +54,7 @@ public abstract class EntityMixin implements DynamicLightSource {
     public abstract EntityType<?> getType();
 
     @Shadow
-    public abstract BlockPos getBlockPos();
+    public abstract BlockPos blockPosition();
 
     private int lambdynlights_luminance = 0;
     private int lambdynlights_lastLuminance = 0;
@@ -158,14 +158,14 @@ public abstract class EntityMixin implements DynamicLightSource {
             LongOpenHashSet newPos = new LongOpenHashSet();
 
             if (luminance > 0) {
-                BlockPos.MutableBlockPos chunkPos = new BlockPos.MutableBlockPos(this.chunkX, Mth.getInt(String.valueOf((int) this.getEyeY()), 16), this.chunkZ);
+                BlockPos.MutableBlockPos chunkPos = new BlockPos.MutableBlockPos(this.xChunk, Mth.getInt(String.valueOf((int) this.getEyeY()), 16), this.zChunk);
 
                 DynamicLightsFeature.scheduleChunkRebuild(renderer, chunkPos);
                 DynamicLightsFeature.updateTrackedChunks(chunkPos, this.trackedLitChunkPos, newPos);
 
-                Direction directionX = (this.getBlockPos().getX() & 15) >= 8 ? Direction.EAST : Direction.WEST;
+                Direction directionX = (this.blockPosition().getX() & 15) >= 8 ? Direction.EAST : Direction.WEST;
                 Direction directionY = (Mth.fastFloor(this.getEyeY()) & 15) >= 8 ? Direction.UP : Direction.DOWN;
-                Direction directionZ = (this.getBlockPos().getZ() & 15) >= 8 ? Direction.SOUTH : Direction.NORTH;
+                Direction directionZ = (this.blockPosition().getZ() & 15) >= 8 ? Direction.SOUTH : Direction.NORTH;
 
                 for (int i = 0; i < 7; i++) {
                     if (i % 4 == 0) {

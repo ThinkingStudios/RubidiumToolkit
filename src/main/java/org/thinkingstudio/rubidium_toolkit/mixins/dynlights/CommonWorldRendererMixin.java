@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = LevelRenderer.class, priority = 900)
 public abstract class CommonWorldRendererMixin implements WorldRendererAccessor {
-    @Invoker("scheduleChunkRender")
+    @Invoker("setSectionDirty")
     @Override
     public abstract void dynlights_setSectionDirty(int x, int y, int z, boolean important);
 
