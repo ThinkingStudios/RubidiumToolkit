@@ -4,11 +4,14 @@ import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import lombok.val;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.config.ModConfig;
+import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
 
 import java.nio.file.Path;
 
 public class ToolkitConfig {
-    public static ForgeConfigSpec ConfigSpec;
+    public static ForgeConfigSpec SPEC;
 
     public static ForgeConfigSpec.ConfigValue<Integer> maxBlockEntityRenderDistanceSquare;
     public static ForgeConfigSpec.ConfigValue<Integer> maxBlockEntityRenderDistanceY;
@@ -75,12 +78,15 @@ public class ToolkitConfig {
 
             bulider.pop();
         }
+
+        SPEC = bulider.build();
     }
 
     public static void loadConfig(Path path) {
         final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
 
         configData.load();
-        ConfigSpec.setConfig(configData);
+        SPEC.setConfig(configData);
     }
+
 }
