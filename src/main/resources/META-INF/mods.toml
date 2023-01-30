@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[36,)"
-license = "LGPLv2.1"
+license = "LGPLv2"
 
 [[mods]]
 modId = "rubidium_toolkit"

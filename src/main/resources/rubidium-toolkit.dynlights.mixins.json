@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "package": "org.thinkingstudio.rubidium_toolkit.mixins.dynlights",
+  "mixins": [
+  ],
+  "client": [
+    "AbstractDecorationEntityMixin",
+    "AbstractMinecartEntityMixin",
+    "BlockEntityMixin",
+    "ClientWorldMixin",
+    "CommonWorldRendererMixin",
+    "EntityMixin",
+    "EntityRendererMixin",
+    "ExplosiveProjectileEntityMixin",
+    "LivingEntityMixin",
+    "MinecraftClientMixin",
+    "PlayerEntityMixin",
+    "TntEntityMixin",
+    "WorldMixin",
+    "WorldRendererMixin"
+  ],
+  "plugin": "org.thinkingstudio.rubidium_toolkit.mixins.dynlights.DynamicLightsMixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
