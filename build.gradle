@@ -43,6 +43,7 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     compileOnly 'org.aperlambda:lambdajcommon:1.8.1'
+    include 'org.aperlambda:lambdajcommon:1.8.1'
 }
 
 processResources {
