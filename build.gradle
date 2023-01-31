@@ -42,7 +42,10 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 
-    compileOnly 'org.aperlambda:lambdajcommon:1.8.1'
+    modApi("org.aperlambda:lambdajcommon:1.8.1") {
+        exclude group: 'com.google.code.gson'
+        exclude group: 'com.google.guava'
+    }
     include 'org.aperlambda:lambdajcommon:1.8.1'
 }
 
