@@ -4,7 +4,6 @@
   "compatibilityLevel": "JAVA_8",
   "package": "org.thinkingstudio.rubidium_toolkit.mixins",
   "plugin": "org.thinkingstudio.rubidium_toolkit.mixins.DynamicLightsMixinPlugin",
-  "refmap": "rubidium_toolkit.refmap.json",
   "mixins": [
     "Zoom.MouseMixin"
   ],

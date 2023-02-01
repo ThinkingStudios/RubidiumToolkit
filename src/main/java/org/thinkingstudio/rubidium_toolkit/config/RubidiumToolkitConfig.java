@@ -2,7 +2,7 @@ package org.thinkingstudio.rubidium_toolkit.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import lombok.val;
+import lombok.var;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.nio.file.Path;
@@ -35,7 +35,7 @@ public class RubidiumToolkitConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean> OnlyUpdateOnPositionChange;
 
     static {
-        val builder = new ConfigBuilder("Rubidium Toolkit");
+        var builder = new ConfigBuilder("Rubidium Toolkit");
 
         builder.Block("Zoom", b -> {
             lowerZoomSensitivity = b.define("Lower Zoom Sensitivity", true);
