@@ -31,8 +31,7 @@ public class ToolkitOptionsPage
     private static final SodiumOptionsStorage sodiumOpts = new SodiumOptionsStorage();
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void RubidiumToolkit(Screen prevScreen, CallbackInfo ci)
-    {
+    private void Toolkit(Screen prevScreen, CallbackInfo ci) {
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, Boolean> fog = OptionImpl.createBuilder(Boolean.class, sodiumOpts)

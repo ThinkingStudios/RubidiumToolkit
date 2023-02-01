@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.DynamicLights.DynamicLightsFeature;
 
@@ -37,15 +38,14 @@ public class DynamiclightsOptionsPage {
 
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void DynamicLights(Screen prevScreen, CallbackInfo ci)
-    {
+    private void DynamicLights(Screen prevScreen, CallbackInfo ci) {
         List<OptionGroup> groups = new ArrayList<>();
 
-        OptionImpl<SodiumGameOptions, RubidiumToolkitConfig.QualityMode> qualityMode = OptionImpl.createBuilder(RubidiumToolkitConfig.QualityMode.class, dynamicLightsOpts)
+        OptionImpl<SodiumGameOptions, ConfigEnum.QualityMode> qualityMode = OptionImpl.createBuilder(ConfigEnum.QualityMode.class, dynamicLightsOpts)
                 .setName(I18n.get("rubidium_toolkit.dynlights.speed.name"))
                 .setTooltip(I18n.get("rubidium_toolkit.dynlights.speed.tooltip"))
                 .setControl(
-                        (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.QualityMode.class, new String[] {
+                        (option) -> new CyclingControl<>(option, ConfigEnum.QualityMode.class, new String[] {
                                 I18n.get("rubidium_toolkit.options.off"),
                                 I18n.get("rubidium_toolkit.options.slow"),
                                 I18n.get("rubidium_toolkit.options.fast"),
@@ -57,7 +57,7 @@ public class DynamiclightsOptionsPage {
                             RubidiumToolkitConfig.Quality.set(value.toString());
                             DynamicLightsFeature.clearLightSources();
                         },
-                        (options) -> RubidiumToolkitConfig.QualityMode.valueOf(RubidiumToolkitConfig.Quality.get()))
+                        (options) -> ConfigEnum.QualityMode.valueOf(RubidiumToolkitConfig.Quality.get()))
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 
