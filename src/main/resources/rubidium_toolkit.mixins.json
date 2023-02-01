@@ -1,8 +1,8 @@
 {
   "required": true,
-  "package": "com.texstudio.rubidium_toolkit.mixins",
+  "package": "org.thinkingstudio.rubidium_toolkit.mixins",
   "compatibilityLevel": "JAVA_8",
-  "plugin": "com.texstudio.rubidium_toolkit.mixins.DynamicLightsMixinPlugin",
+  "plugin": "org.thinkingstudio.rubidium_toolkit.mixins.DynamicLightsMixinPlugin",
   "refmap": "rubidium_toolkit.refmap.json",
   "mixins": [
     "Zoom.MouseMixin"
@@ -23,16 +23,9 @@
     "DynamicLights.TntEntityMixin",
     "DynamicLights.WorldMixin",
     "DynamicLights.WorldRendererMixin",
-    "FrameCounter.FpsAccessorMixin",
-    "FrameCounter.FrameCounterMixin",
     "Sodium.DynamiclightsOptionsPage",
     "Sodium.ToolkitOptionsPage",
     "Sodium.ZoomOptionsPage",
-    "TotalDarkness.MixinGameRenderer",
-    "TotalDarkness.MixinLightmapTextureManager",
-    "TotalDarkness.MixinNativeImageBackedTexture",
-    "TotalDarkness.MixinTheEndDimension",
-    "TotalDarkness.MixinTheNetherDimension",
     "Zoom.GameRendererMixin"
   ],
   "injectors": {

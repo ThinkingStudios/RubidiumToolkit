@@ -1,6 +1,6 @@
 modLoader="javafml" #mandatory
 loaderVersion="[36,)" #mandatory
-license="LGPL+MIT"
+license="LGPLv2"
 
 [[mods]] #mandatory
 modId="rubidium_toolkit" #mandatory
@@ -10,7 +10,7 @@ logoFile="icon.png" #optional
 credits="TexTrue" #optional
 authors="TexTrueStudio" #optional
 description='''
-Adds some tools to Rubidium.
+
 '''
 
 [[dependencies.rubidium_toolkit]] #optional
@@ -24,5 +24,12 @@ Adds some tools to Rubidium.
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.rubidium_toolkit]]
+    modId="rubidium"
+    mandatory=true
+    versionRange="[0.2,)"
     ordering="NONE"
     side="BOTH"

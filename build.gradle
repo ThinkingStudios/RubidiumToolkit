@@ -36,7 +36,6 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
 minecraft {
     mappings channel: "${mappings_channel}", version: "${mappings_version}"
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
@@ -128,8 +127,6 @@ dependencies {
     runtimeOnly fg.deobf("maven.modrinth:rubidium:${rubidium_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
-
-    compileOnly 'org.aperlambda:lambdajcommon:1.8.1'
 }
 
 jar {

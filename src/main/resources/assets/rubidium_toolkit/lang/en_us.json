@@ -15,22 +15,22 @@
   "rubidium_toolkit.option.persistent": "Persistent",
   "rubidium_toolkit.option.vanilla": "Vanilla",
   "rubidium_toolkit.option.multiplied": "Multiplied",
-  "rubidium_toolkit.option.unit.pixels": "Pixels",
   "rubidium_toolkit.option.slow": "Slow",
   "rubidium_toolkit.option.fast": "Fast",
-  "rubidium_toolkit.option.realtime": "Realtime",
-  "rubidium_toolkit.option.pitch_black": "Pitch Black",
-  "rubidium_toolkit.option.really_dark": "Really Dark",
-  "rubidium_toolkit.option.dark": "Dark",
-  "rubidium_toolkit.option.dim": "Dim",
+  "rubidium_toolkit.options.unit.blocks": "Blocks",
 
-
-  "rubidium_toolkit.fps.display.name": "Display FPS",
-  "rubidium_toolkit.fps.display.tooltip": "Displays the current FPS. Advanced mode also displays minimum FPS, as well as 15 second average FPS, which are more useful for judging performance.",
-  "rubidium_toolkit.fps.position.name": "FPS Display Position",
-  "rubidium_toolkit.fps.position.tooltip": "Offsets the FPS display from the top-left or top-right corner of the screen.",
-  "rubidium_toolkit.fps.right_align.name": "Right-align FPS Display",
-  "rubidium_toolkit.fps.right_align.tooltip": "Aligns the FPS display to the right side of the screen. Useful if you have other overlays that show on the left side of the screen. Does nothing if the Display FPS option is set to Off.",
+  "rubidium_toolkit.tools.fog.name": "Fog",
+  "rubidium_toolkit.tools.fog.tooltip": "Toggles off all fog in the overworld.",
+  "rubidium_toolkit.tools.enable_max_entity_distance.name": "Enable Max Entity Distance",
+  "rubidium_toolkit.tools.enable_max_entity_distance.tooltip": "Toggles off entity culling.",
+  "rubidium_toolkit.tools.max_entity_distance.name": "Max Entity Distance",
+  "rubidium_toolkit.tools.max_entity_distance.tooltip": "Hides and does not tick entities beyond this many blocks. Huge performance increase, especially around modded farms.",
+  "rubidium_toolkit.tools.vertical_entity_distance.name": "Vertical Entity Distance",
+  "rubidium_toolkit.tools.vertical_entity_distance.tooltip": "Hides and does not tick entities underneath this many blocks, improving performance above caves. This should ideally be set lower than the horizontal distance.",
+  "rubidium_toolkit.tools.max_block_distance.name": "Max Block Distance",
+  "rubidium_toolkit.tools.max_block_distance.tooltip": "Hides block entities beyond this many blocks. Huge performance increase, especially around lots of modded machines.",
+  "rubidium_toolkit.tools.vertical_block_distance.name": "Vertical Block Distance",
+  "rubidium_toolkit.tools.vertical_block_distance.tooltip": "Hides block entities underneath this many blocks, improving performance above caves (if you have your machines in caves, for some reason). This should ideally be set lower than the horizontal distance.",
 
   "rubidium_toolkit.zoom.lower_sensitivity.name": "Lower Zoom Sensitivity",
   "rubidium_toolkit.zoom.lower_sensitivity.tooltip": "Lowers your sensitivity when zooming to make it feel more consistent.",
@@ -50,11 +50,5 @@
   "rubidium_toolkit.dynlights.entity_lights.name": "Dynamic Entity Lights",
   "rubidium_toolkit.dynlights.entity_lights.tooltip": "Turning this on will show dynamic lighting on entities (dropped items, mobs, etc). \n\nThis can drastically increase the amount of lighting updates, even when you're not holding a torch.",
   "rubidium_toolkit.dynlights.block_lights.name": "Dynamic Block Lights",
-  "rubidium_toolkit.dynlights.block_lights.tooltip": "Turning this on will show dynamic lighting on tile entities (furnaces, modded machines, etc). \n\nThis can drastically increase the amount of lighting updates, even when you're not holding a torch.",
-
-  "rubidium_toolkit.darkness.ture.name": "Ture Darkness",
-  "rubidium_toolkit.darkness.ture.tooltip": "Makes the rest of the world more realistically dark. Does not effect daytime or torch light.",
-  "rubidium_toolkit.darkness.ture.mode.name": "True Darkness Mode",
-  "rubidium_toolkit.darkness.ture.mode.tooltip": "Controls how dark is considered true darkness.",
-  "rubidium_toolkit.darkness.only_block_light.name": "Only Effect Block Lighting"
+  "rubidium_toolkit.dynlights.block_lights.tooltip": "Turning this on will show dynamic lighting on tile entities (furnaces, modded machines, etc). \n\nThis can drastically increase the amount of lighting updates, even when you're not holding a torch."
 }
