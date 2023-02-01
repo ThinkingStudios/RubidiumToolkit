@@ -12,7 +12,6 @@ package org.thinkingstudio.rubidium_toolkit.mixins.dynamiclights;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightsFeatures;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.DynamicLightHandlers;
-import me.lambdaurora.lambdynlights.config.DynamicLightsConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

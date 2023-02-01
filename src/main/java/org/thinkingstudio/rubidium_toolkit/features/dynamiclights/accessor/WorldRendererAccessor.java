@@ -16,8 +16,7 @@ package org.thinkingstudio.rubidium_toolkit.features.dynamiclights.accessor;
  * @version 1.0.0
  * @since 1.0.0
  */
-public interface WorldRendererAccessor
-{
+public interface WorldRendererAccessor {
     /**
      * Schedules a chunk rebuild.
      *

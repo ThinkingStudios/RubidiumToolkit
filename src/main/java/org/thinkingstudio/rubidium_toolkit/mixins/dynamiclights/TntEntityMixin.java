@@ -11,7 +11,6 @@ package org.thinkingstudio.rubidium_toolkit.mixins.dynamiclights;
 
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightsFeatures;
-import me.lambdaurora.lambdynlights.config.DynamicLightsConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.TNTEntity;
@@ -24,8 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 
 @Mixin(TNTEntity.class)
-public abstract class TntEntityMixin extends Entity implements DynamicLightSource
-{
+public abstract class TntEntityMixin extends Entity implements DynamicLightSource {
     @Shadow
     private int life;
 
@@ -44,8 +42,7 @@ public abstract class TntEntityMixin extends Entity implements DynamicLightSourc
     //}
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private void onTick(CallbackInfo ci)
-    {
+    private void onTick(CallbackInfo ci) {
         // We do not want to update the entity on the server.
         if (this.getCommandSenderWorld().isClientSide()) {
             if (!ToolkitConfig.EntityLighting.get())
@@ -61,8 +58,7 @@ public abstract class TntEntityMixin extends Entity implements DynamicLightSourc
     }
 
     @Override
-    public void dynamicLightTick()
-    {
+    public void dynamicLightTick() {
         if (this.isOnFire()) {
             this.lambdynlights_luminance = 15;
         } else {

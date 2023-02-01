@@ -13,7 +13,6 @@ import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightsFeatures;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.DynamicLightHandlers;
-import me.lambdaurora.lambdynlights.config.DynamicLightsConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -31,8 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import javax.annotation.Nullable;
 
 @Mixin(TileEntity.class)
-public abstract class BlockEntityMixin implements DynamicLightSource
-{
+public abstract class BlockEntityMixin implements DynamicLightSource {
     @Shadow
     protected BlockPos worldPosition;
 
@@ -48,44 +46,37 @@ public abstract class BlockEntityMixin implements DynamicLightSource
     private LongOpenHashSet trackedLitChunkPos = new LongOpenHashSet();
 
     @Override
-    public double getDynamicLightX()
-    {
+    public double getDynamicLightX() {
         return this.worldPosition.getX() + 0.5;
     }
 
     @Override
-    public double getDynamicLightY()
-    {
+    public double getDynamicLightY() {
         return this.worldPosition.getY() + 0.5;
     }
 
     @Override
-    public double getDynamicLightZ()
-    {
+    public double getDynamicLightZ() {
         return this.worldPosition.getZ() + 0.5;
     }
 
     @Override
-    public World getDynamicLightWorld()
-    {
+    public World getDynamicLightWorld() {
         return this.level;
     }
 
     @Inject(method = "setRemoved", at = @At("TAIL"))
-    private void onRemoved(CallbackInfo ci)
-    {
+    private void onRemoved(CallbackInfo ci) {
         this.setDynamicLightEnabled(false);
     }
 
     @Override
-    public void resetDynamicLight()
-    {
+    public void resetDynamicLight() {
         this.lambdynlights_lastLuminance = 0;
     }
 
     @Override
-    public void dynamicLightTick()
-    {
+    public void dynamicLightTick() {
         // We do not want to update the entity on the server.
         if (this.level == null || !this.level.isClientSide())
             return;
@@ -100,20 +91,17 @@ public abstract class BlockEntityMixin implements DynamicLightSource
     }
 
     @Override
-    public int getLuminance()
-    {
+    public int getLuminance() {
         return this.lambdynlights_luminance;
     }
 
     @Override
-    public boolean shouldUpdateDynamicLight()
-    {
+    public boolean shouldUpdateDynamicLight() {
         return DynamicLightsFeatures.ShouldUpdateDynamicLights();
     }
 
     @Override
-    public boolean lambdynlights_updateDynamicLight(@NotNull WorldRenderer renderer)
-    {
+    public boolean lambdynlights_updateDynamicLight(@NotNull WorldRenderer renderer) {
         if (!this.shouldUpdateDynamicLight())
             return false;
 
@@ -156,11 +144,10 @@ public abstract class BlockEntityMixin implements DynamicLightSource
     }
 
     @Override
-    public void lambdynlights_scheduleTrackedChunksRebuild(@NotNull WorldRenderer renderer)
-    {
+    public void lambdynlights_scheduleTrackedChunksRebuild(@NotNull WorldRenderer renderer) {
         if (this.level == Minecraft.getInstance().level)
-        for (long pos : this.trackedLitChunkPos) {
+            for (long pos : this.trackedLitChunkPos) {
             DynamicLightsFeatures.scheduleChunkRebuild(renderer, pos);
-        }
+            }
     }
 }

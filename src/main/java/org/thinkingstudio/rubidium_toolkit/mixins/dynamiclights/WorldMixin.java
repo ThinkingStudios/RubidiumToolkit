@@ -11,7 +11,6 @@ package org.thinkingstudio.rubidium_toolkit.mixins.dynamiclights;
 
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightsFeatures;
-import me.lambdaurora.lambdynlights.config.DynamicLightsConfig;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -26,8 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.Iterator;
 
 @Mixin(World.class)
-public abstract class WorldMixin
-{
+public abstract class WorldMixin {
     @Shadow
     public abstract boolean isClientSide();
 
@@ -36,8 +34,7 @@ public abstract class WorldMixin
             at = @At(value = "INVOKE", target = "Lnet/minecraft/tileentity/ITickableTileEntity;tick()V", shift = At.Shift.BEFORE),
             locals = LocalCapture.CAPTURE_FAILEXCEPTION
     )
-    private void onBlockEntityTick(CallbackInfo ci, IProfiler iprofiler, Iterator iterator, TileEntity tileentity, BlockPos blockpos)
-    {
+    private void onBlockEntityTick(CallbackInfo ci, IProfiler iprofiler, Iterator iterator, TileEntity tileentity, BlockPos blockpos) {
         if (this.isClientSide() && DynamicLightsFeatures.isEnabled()) {
             ((DynamicLightSource) tileentity).dynamicLightTick();
         }

@@ -17,7 +17,6 @@ import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.ZoomUtils;
 import org.thinkingstudio.rubidium_toolkit.keybinds.KeyboardInput;
 
-
 //This mixin is responsible for the mouse-behavior-changing part of the zoom.
 @Mixin(MouseHelper.class)
 public class MouseMixin {

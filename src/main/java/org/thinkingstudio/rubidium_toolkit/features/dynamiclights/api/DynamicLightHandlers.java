@@ -28,13 +28,11 @@ import java.util.Map;
  * @version 1.3.2
  * @since 1.1.0
  */
-public final class DynamicLightHandlers
-{
+public final class DynamicLightHandlers {
     private static Map<EntityType<? extends Entity>, DynamicLightHandler<? extends Entity>> ENTITES_HANDLER = new HashMap<>();
     private static Map<TileEntityType<? extends TileEntity>, DynamicLightHandler<? extends TileEntity>> BLOCK_ENTITIES_HANDLER = new HashMap<>();
 
-    private DynamicLightHandlers()
-    {
+    private DynamicLightHandlers() {
         throw new UnsupportedOperationException("DynamicLightHandlers only contains static definitions.");
     }
 

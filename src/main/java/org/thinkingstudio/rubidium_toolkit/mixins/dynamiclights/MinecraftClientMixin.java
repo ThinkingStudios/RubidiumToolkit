@@ -27,8 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 1.3.2
  */
 @Mixin(Minecraft.class)
-public class MinecraftClientMixin
-{
+public class MinecraftClientMixin {
     @Inject(method = "updateLevelInEngines", at = @At("HEAD"))
     private void onSetWorld(ClientWorld world, CallbackInfo ci) {
         DynamicLightsFeatures.clearLightSources();

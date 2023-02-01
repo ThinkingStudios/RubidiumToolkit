@@ -21,16 +21,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(HangingEntity.class)
-public abstract class AbstractDecorationEntityMixin extends Entity implements DynamicLightSource
-{
-    public AbstractDecorationEntityMixin(EntityType<?> type, World world)
-    {
+public abstract class AbstractDecorationEntityMixin extends Entity implements DynamicLightSource {
+    public AbstractDecorationEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private void onTick(CallbackInfo ci)
-    {
+    private void onTick(CallbackInfo ci) {
         // We do not want to update the entity on the server.
         if (this.getCommandSenderWorld().isClientSide()) {
             if (this.removed) {

@@ -91,8 +91,7 @@ public class ItemLightSource {
                 '}';
     }
 
-    public static @NotNull Optional<ItemLightSource> fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json)
-    {
+    public static @NotNull Optional<ItemLightSource> fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
         if (!json.has("item") || !json.has("luminance")) {
             DynamicLightsFeatures.warn("Failed to parse item light source \"" + id + "\", invalid format: missing required fields.");
             return Optional.empty();

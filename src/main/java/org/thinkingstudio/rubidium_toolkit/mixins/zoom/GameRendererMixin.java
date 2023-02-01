@@ -35,10 +35,7 @@ public class GameRendererMixin {
 	private Minecraft minecraft;
 
 	//Handle transitioned zoom FOV multiplier and zoom overlay alphas each tick.
-	@Inject(
-		at = @At("HEAD"),
-		method = "tick()V"
-	)
+	@Inject(at = @At("HEAD"), method = "tick()V")
 	private void zoomTick(CallbackInfo info) {
 		//If zoom transitions are enabled, update the zoom FOV multiplier.
 		if (!ToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.OFF.toString())) {
@@ -52,11 +49,7 @@ public class GameRendererMixin {
 	}
 	
 	//Handles zooming of both modes (Transitionless and with Smooth Transitions).
-	@Inject(
-		at = @At("RETURN"),
-		method = "getFov",
-		cancellable = true
-	)
+	@Inject(at = @At("RETURN"), method = "getFov", cancellable = true)
 	private void getZoomedFov(ActiveRenderInfo camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
 		double fov = info.getReturnValue();
 
@@ -83,10 +76,7 @@ public class GameRendererMixin {
 	}
 
 	//This applies the zoom overlay itself.
-	@Inject(
-		at = @At(value = "FIELD", target = "Lnet/minecraft/client/GameSettings;hideGui:Z"),
-		method = "render(FJZ)V"
-	)
+	@Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/client/GameSettings;hideGui:Z"), method = "render(FJZ)V")
 	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
 		if (ToolkitConfig.zoomOverlay.get()) {
 			if (this.minecraft.options.hideGui) {
