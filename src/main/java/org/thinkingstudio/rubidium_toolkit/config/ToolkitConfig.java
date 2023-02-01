@@ -2,12 +2,8 @@ package org.thinkingstudio.rubidium_toolkit.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import lombok.val;
 import lombok.var;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.config.ModConfig;
-import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
 
 import java.nio.file.Path;
 
