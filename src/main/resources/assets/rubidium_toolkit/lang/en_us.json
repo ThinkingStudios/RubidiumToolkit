@@ -1,14 +1,8 @@
 {
   "toast.rubidium_toolkit.title": "Rubidium Toolkit",
-  "toast.rubidium_toolkit.acknowledge_mod": "The mod is allowed by this server",
-  "toast.rubidium_toolkit.acknowledge_mod_restrictions": "This server restricts the mod",
-  "command.rubidium_toolkit.client.config_present": "Config has been reset to preset %s!",
 
   "key.rubidium_toolkit.category": "Rubidium Toolkit",
   "key.rubidium_toolkit.zoom": "Zoom",
-  "key.rubidium_toolkit.decrease_zoom": "Decrease Zoom",
-  "key.rubidium_toolkit.increase_zoom": "Increase Zoom",
-  "key.rubidium_toolkit.reset_zoom": "Reset Zoom",
 
   "rubidium_toolkit.tools.option.name": "Tools",
   "rubidium_toolkit.zoom.option.name": "Zoom",

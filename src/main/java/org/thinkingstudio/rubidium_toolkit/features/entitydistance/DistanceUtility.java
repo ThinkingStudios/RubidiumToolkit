@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.util;
+package org.thinkingstudio.rubidium_toolkit.features.entitydistance;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;

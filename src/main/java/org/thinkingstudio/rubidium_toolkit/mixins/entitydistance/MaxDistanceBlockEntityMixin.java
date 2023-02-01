@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
-import org.thinkingstudio.rubidium_toolkit.util.DistanceUtility;
+import org.thinkingstudio.rubidium_toolkit.features.entitydistance.DistanceUtility;
 
 @Mixin(BlockEntityRenderDispatcher.class)
 public class MaxDistanceBlockEntityMixin

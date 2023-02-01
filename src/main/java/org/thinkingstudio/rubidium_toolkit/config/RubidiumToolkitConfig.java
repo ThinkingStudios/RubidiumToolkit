@@ -40,10 +40,8 @@ public class RubidiumToolkitConfig
             builder.push("Entity Distance");
 
             enableDistanceChecks = builder.define("Enable Max Distance Checks", true);
-
             maxBlockEntityRenderDistanceSquare = builder.define("(BlockEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
             maxBlockEntityRenderDistanceY = builder.define("(BlockEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
-
             maxEntityRenderDistanceSquare = builder.define("(Entity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
             maxEntityRenderDistanceY = builder.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
 
