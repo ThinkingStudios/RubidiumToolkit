@@ -1,20 +1,19 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
+package org.thinkingstudio.rubidium_toolkit.dynamiclights.mixin;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.entity.decoration.HangingEntity;
 import net.minecraft.world.level.Level;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightsFeature;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(AbstractMinecart.class)
-public abstract class AbstractMinecartEntityMixin extends Entity implements DynamicLightSource {
-    public AbstractMinecartEntityMixin(EntityType<?> type, Level world) {
+@Mixin(HangingEntity.class)
+public abstract class AbstractDecorationEntityMixin extends Entity implements DynamicLightSource {
+    public AbstractDecorationEntityMixin(EntityType<?> type, Level world) {
         super(type, world);
     }
 

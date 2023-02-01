@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
+package org.thinkingstudio.rubidium_toolkit.dynamiclights.mixin;
 
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import org.thinkingstudio.rubidium_toolkit.features.dynlights.DynamicLightSource;

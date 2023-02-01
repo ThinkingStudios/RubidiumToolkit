@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
+package org.thinkingstudio.rubidium_toolkit.dynamiclights.mixin;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

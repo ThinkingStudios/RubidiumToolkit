@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.dynlights;
+package org.thinkingstudio.rubidium_toolkit.dynamiclights.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;

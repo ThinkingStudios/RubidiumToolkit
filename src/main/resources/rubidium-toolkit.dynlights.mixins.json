@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
-  "package": "org.thinkingstudio.rubidium_toolkit.mixins.dynlights",
+  "package": "org.thinkingstudio.rubidium_toolkit.dynamiclights.mixin",
   "mixins": [
   ],
   "client": [
@@ -21,7 +21,7 @@
     "WorldMixin",
     "WorldRendererMixin"
   ],
-  "plugin": "org.thinkingstudio.rubidium_toolkit.mixins.dynlights.DynamicLightsMixinPlugin",
+  "plugin": "org.thinkingstudio.rubidium_toolkit.dynamiclights.mixin.DynamicLightsMixinPlugin",
   "injectors": {
     "defaultRequire": 1
   }

@@ -2,7 +2,7 @@ package org.thinkingstudio.rubidium_toolkit.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import lombok.var;
+import lombok.val;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.nio.file.Path;
@@ -35,7 +35,7 @@ public class ToolkitConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean> onlyUpdateOnPositionChange;
 
     static {
-        var builder = new ConfigBuilder("Rubidium Toolkit Settings");
+        val builder = new ConfigBuilder("Rubidium Toolkit Settings");
 
 
         builder.Block("Entity Distance", b -> {
