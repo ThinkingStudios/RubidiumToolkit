@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
-import org.thinkingstudio.rubidium_toolkit.features.dynlights.LambDynLights;
+import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public abstract class DynLightsSodiumOptionsMixin {
                 .setBinding(
                         (options, value) -> {
                             RubidiumToolkitConfig.quality.set(ConfigEnum.QualityMode.valueOf(value.toString()));
-                            LambDynLights.get().clearLightSources();
+                            DynLightsFeatures.get().clearLightSources();
                         },
                         (options) -> ConfigEnum.QualityMode.valueOf(String.valueOf(RubidiumToolkitConfig.quality.get())))
                 .setImpact(OptionImpact.MEDIUM)
