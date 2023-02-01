@@ -13,5 +13,3 @@ Rubidium Toolkit 是从 Magnesium/Rubidium Extras 的分支，用于弥补 Rubid
 
 来自 [Magnesium/Rubidium Dynamic Lights](https://github.com/TeamDeusVult/DynamicLightsReforged) 的代码 -> MIT
 
-语言文件由MIT许可证许可
-

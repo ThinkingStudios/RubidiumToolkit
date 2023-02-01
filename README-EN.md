@@ -12,5 +12,3 @@ Rubidium Toolkit is an Magnesium/Rubidium Extras fork, this mod is used to make 
 Code from [Magnesium/Rubidium Extras](https://github.com/TeamDeusVult/MagnesiumExtras) -> LGPL
 
 Code from [Magnesium/Rubidium Dynamic Lights](https://github.com/TeamDeusVult/DynamicLightsReforged) -> MIT
-
-Language files are licensed under the MIT license
