@@ -14,7 +14,7 @@ loom {
 
     forge {
         mixinConfigs = [
-                "rubidium-toolkit.mixins.json", "rubidium-toolkit.mixin.mixins.json"
+                "rubidium-toolkit.mixins.json", "rubidium-toolkit.dynlights.mixins.json"
         ]
         dataGen {
             mod project.mod_id
