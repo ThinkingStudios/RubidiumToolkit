@@ -36,7 +36,7 @@ public final class ItemLightSources {
     public static void load(@NotNull ResourceManager resourceManager) {
         ITEM_LIGHT_SOURCES.clear();
 
-        resourceManager.listResources("textures/misc/dynamiclights/item", path -> path.endsWith(".json")).forEach(id -> load(resourceManager, id));
+        resourceManager.listResources("dynamiclights/item", path -> path.endsWith(".json")).forEach(id -> load(resourceManager, id));
 
         ITEM_LIGHT_SOURCES.addAll(STATIC_ITEM_LIGHT_SOURCES);
     }
