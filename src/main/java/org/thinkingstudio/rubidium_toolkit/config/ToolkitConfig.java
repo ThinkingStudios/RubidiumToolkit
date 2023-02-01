@@ -3,6 +3,7 @@ package org.thinkingstudio.rubidium_toolkit.config;
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import lombok.val;
+import lombok.var;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.config.ModConfig;
@@ -38,48 +39,37 @@ public class ToolkitConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean> onlyUpdateOnPositionChange;
 
     static {
-        val bulider = new ForgeConfigSpec.Builder();
+        var builder = new ConfigBuilder("Rubidium Toolkit Settings");
 
-        {
-            bulider.push("Zoom");
 
-            lowerZoomSensitivity = bulider.define("Lower zoom Sensitivity", true);
-            zoomScrolling = bulider.define("Zoom Scrolling Enabled", true);
-            zoomTransition = bulider.define("Zoom Transition Mode (OFF, LINEAR, SMOOTH)", ConfigEnum.ZoomTransitionOptions.SMOOTH.toString());
-            zoomMode = bulider.define("Zoom Transition Mode (TOGGLE, HOLD, PERSISTENT)", ConfigEnum.ZoomModes.HOLD.toString());
-            cinematicCameraMode = bulider.define("Cinematic Camera Mode (OFF, VANILLA, MULTIPLIED)", ConfigEnum.CinematicCameraOptions.OFF.toString());
-            zoomOverlay = bulider.define("Zoom Overlay", true);
-            //zoomValues = bulider.define("Zoom Advanced Values", new ZoomValues());
+        builder.Block("Entity Distance", b -> {
+            enableDistanceChecks = b.define("Enable Max Distance Checks", true);
 
-            bulider.pop();
-        }
+            maxBlockEntityRenderDistanceSquare = b.define("(BlockEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
+            maxBlockEntityRenderDistanceY = b.define("(BlockEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
 
-        {
-            bulider.push("Dynamic Lights");
+            maxEntityRenderDistanceSquare = b.define("(Entity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
+            maxEntityRenderDistanceY = b.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
+        });
 
-            quality = bulider.define("Quality Mode (OFF, SLOW, FAST, REALTIME)", "REALTIME");
-            entityLighting = bulider.define("Dynamic Entity Lighting", true);
-            blockEntityLighting = bulider.define("Dynamic TileEntity Lighting", true);
-            onlyUpdateOnPositionChange = bulider.define("Only Update On Position Change", true);
+        builder.Block("Zoom", b -> {
+            lowerZoomSensitivity = b.define("Lower Zoom Sensitivity", true);
+            zoomScrolling = b.define("Zoom Scrolling Enabled", true);
+            zoomTransition = b.define("Zoom Transition Mode (OFF, LINEAR, SMOOTH)", ConfigEnum.ZoomTransitionOptions.SMOOTH.toString());
+            zoomMode = b.define("Zoom Transition Mode (TOGGLE, HOLD, PERSISTENT)", ConfigEnum.ZoomModes.HOLD.toString());
+            cinematicCameraMode = b.define("Cinematic Camera Mode (OFF, VANILLA, MULTIPLIED)", ConfigEnum.CinematicCameraOptions.OFF.toString());
+            zoomOverlay = b.define("Zoom Overlay?", true);
+            //zoomValues = b.define("Zoom Advanced Values", new ZoomValues());
+        });
 
-            bulider.pop();
-        }
+        builder.Block("Dynamic Lights", b -> {
+            quality = b.define("Quality Mode (OFF, SLOW, FAST, REALTIME)", "REALTIME");
+            entityLighting = b.define("Dynamic Entity Lighting", true);
+            blockEntityLighting = b.define("Dynamic TileEntity Lighting", true);
+            onlyUpdateOnPositionChange = b.define("Only Update On Position Change", true);
+        });
 
-        {
-            bulider.push("Entity Distance");
-
-            enableDistanceChecks = bulider.define("Enable Max Distance Checks", true);
-
-            maxBlockEntityRenderDistanceSquare = bulider.define("(BlockEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
-            maxBlockEntityRenderDistanceY = bulider.define("(BlockEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
-
-            maxEntityRenderDistanceSquare = bulider.define("(Entity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
-            maxEntityRenderDistanceY = bulider.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
-
-            bulider.pop();
-        }
-
-        SPEC = bulider.build();
+        SPEC = builder.Save();
     }
 
     public static void loadConfig(Path path) {
