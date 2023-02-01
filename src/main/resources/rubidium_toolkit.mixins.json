@@ -1,13 +1,14 @@
 {
   "required": true,
-  "package": "org.thinkingstudio.rubidium_toolkit.mixins",
+  "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
+  "package": "org.thinkingstudio.rubidium_toolkit.mixins",
   "plugin": "org.thinkingstudio.rubidium_toolkit.mixins.DynamicLightsMixinPlugin",
   "refmap": "rubidium_toolkit.refmap.json",
   "mixins": [
     "Zoom.MouseMixin"
   ],
-  "minVersion": "0.8",
+
   "client": [
     "DynamicLights.AbstractDecorationEntityMixin",
     "DynamicLights.AbstractMinecartEntityMixin",
