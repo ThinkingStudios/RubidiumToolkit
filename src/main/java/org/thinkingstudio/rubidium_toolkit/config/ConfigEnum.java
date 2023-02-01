@@ -35,23 +35,21 @@ public class ConfigEnum {
         }
     }
 
-    public enum DarknessOption {
-        PITCH_BLACK(0f),
-        REALLY_DARK (0.04f),
-        DARK(0.08f),
-        DIM(0.12f);
+    public enum QualityMode implements TextProvider {
+        OFF("Off"),
+        SLOW("Slow"),
+        FAST("Fast"),
+        REALTIME("Realtime");
 
-        public final float value;
+        private final String name;
 
-        private DarknessOption(float value) {
-            this.value = value;
+        private QualityMode(String name) {
+            this.name = name;
         }
-    }
 
-    public enum FullscreenMode {
-        WINDOWED,
-        BORDERLESS,
-        FULLSCREEN
+        public String getLocalizedName() {
+            return this.name;
+        }
     }
 
     public enum ZoomTransitionOptions {

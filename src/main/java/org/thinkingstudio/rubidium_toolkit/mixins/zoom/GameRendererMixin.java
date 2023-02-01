@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.util.math.MathHelper;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
-import org.thinkingstudio.rubidium_toolkit.features.Zoom.ZoomUtils;
+import org.thinkingstudio.rubidium_toolkit.features.zoom.ZoomUtils;
 
 //This mixin is responsible for managing the fov-changing part of the zoom.
 @Mixin(GameRenderer.class)

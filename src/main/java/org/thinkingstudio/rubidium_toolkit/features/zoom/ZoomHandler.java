@@ -1,4 +1,4 @@
-package org.thinkingstudio.rubidium_toolkit.features.Zoom;
+package org.thinkingstudio.rubidium_toolkit.features.zoom;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;

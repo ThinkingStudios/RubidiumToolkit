@@ -5,13 +5,32 @@
   "package": "org.thinkingstudio.rubidium_toolkit.mixins",
   "mixins": [
     "fog.MixinSodiumWorldRenderer",
-    "sodium.SodiumSettingsMixin",
+    "sodium.ToolkitSettingsPage",
     "zoom.MouseMixin"
   ],
   "client": [
     "entitydistance.MaxDistanceEntity",
     "entitydistance.MaxDistanceTileEntity",
+    "sodium.DynLightsSettingsPage",
     "sodium.ZoomSettingsPage",
-    "zoom.GameRendererMixin"
-  ]
+    "zoom.GameRendererMixin",
+    "dynamiclights.AbstractDecorationEntityMixin",
+    "dynamiclights.AbstractMinecartEntityMixin",
+    "dynamiclights.BlockEntityMixin",
+    "dynamiclights.ClientWorldMixin",
+    "dynamiclights.CommonWorldRendererMixin",
+    "dynamiclights.EntityMixin",
+    "dynamiclights.EntityRendererMixin",
+    "dynamiclights.ExplosiveProjectileEntityMixin",
+    "dynamiclights.LivingEntityMixin",
+    "dynamiclights.MinecraftClientMixin",
+    "dynamiclights.PlayerEntityMixin",
+    "dynamiclights.TntEntityMixin",
+    "dynamiclights.WorldMixin",
+    "dynamiclights.WorldRendererMixin"
+  ],
+  "plugin": "org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsMixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
 }

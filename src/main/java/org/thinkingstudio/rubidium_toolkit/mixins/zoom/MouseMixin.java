@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
-import org.thinkingstudio.rubidium_toolkit.features.Zoom.ZoomUtils;
+import org.thinkingstudio.rubidium_toolkit.features.zoom.ZoomUtils;
 import org.thinkingstudio.rubidium_toolkit.keybinds.KeyboardInput;
 
 

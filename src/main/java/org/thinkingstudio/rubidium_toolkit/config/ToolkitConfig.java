@@ -28,6 +28,13 @@ public class ToolkitConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean> zoomScrolling;
     public static ForgeConfigSpec.ConfigValue<Boolean> zoomOverlay;
 
+    // Dynamic Lights
+    public static ForgeConfigSpec.ConfigValue<String> Quality;
+    public static ForgeConfigSpec.ConfigValue<Boolean> EntityLighting;
+    public static ForgeConfigSpec.ConfigValue<Boolean> TileEntityLighting;
+
+    public static ForgeConfigSpec.ConfigValue<Boolean> OnlyUpdateOnPositionChange;
+
     static {
         val builder = new ConfigBuilder("RubidiumToolkit");
 
@@ -45,7 +52,7 @@ public class ToolkitConfig {
             maxEntityRenderDistanceY = b.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
         });
 
-        builder.Block("Zoom", b -> {
+        builder.Block("zoom", b -> {
             lowerZoomSensitivity = b.define("Lower zoom Sensitivity", true);
             zoomScrolling = b.define("zoom Scrolling Enabled", true);
             zoomTransition = b.define("zoom Transition Mode (OFF, LINEAR, SMOOTH)", ConfigEnum.ZoomTransitionOptions.SMOOTH.toString());
@@ -53,6 +60,13 @@ public class ToolkitConfig {
             cinematicCameraMode = b.define("Cinematic Camera Mode (OFF, VANILLA, MULTIPLIED)", ConfigEnum.CinematicCameraOptions.OFF.toString());
             zoomOverlay = b.define("zoom Overlay?", true);
             //zoomValues = b.define("zoom Advanced Values", new ZoomValues());
+        });
+
+        builder.Block("Dynamic Lights", b -> {
+            Quality = b.define("Quality Mode (OFF, SLOW, FAST, REALTIME)", "REALTIME");
+            EntityLighting = b.define("Dynamic Entity Lighting", true);
+            TileEntityLighting = b.define("Dynamic TileEntity Lighting", true);
+            OnlyUpdateOnPositionChange = b.define("Only Update On Position Change", true);
         });
 
         ConfigSpec = builder.Save();

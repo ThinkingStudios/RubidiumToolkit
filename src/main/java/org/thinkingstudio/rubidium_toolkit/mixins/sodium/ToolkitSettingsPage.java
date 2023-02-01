@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(SodiumOptionsGUI.class)
-public class SodiumSettingsMixin {
+public class ToolkitSettingsPage {
     @Shadow
     @Final
     private List<OptionPage> pages;
