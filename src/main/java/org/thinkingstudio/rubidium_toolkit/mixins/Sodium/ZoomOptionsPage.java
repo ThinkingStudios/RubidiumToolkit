@@ -82,8 +82,8 @@ public abstract class ZoomOptionsPage
                 .setTooltip(I18n.get("rubidium_toolkit.zoom.transition.tooltip"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.ZoomTransitionOptions.class, new String[] {
-                        I18n.get("rubidium_toolkit.option.off"),
-                        I18n.get("rubidium_toolkit.option.smooth")
+                        I18n.get("rubidium_toolkit.options.off"),
+                        I18n.get("rubidium_toolkit.options.smooth")
                         }
                     )
                 )
@@ -98,9 +98,9 @@ public abstract class ZoomOptionsPage
                 .setTooltip(I18n.get("rubidium_toolkit.zoom.keybind.tooltip"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.ZoomModes.class, new String[] {
-                        I18n.get("rubidium_toolkit.option.hold"),
-                        I18n.get("rubidium_toolkit.option.toggle"),
-                        I18n.get("rubidium_toolkit.option.persistent")
+                        I18n.get("rubidium_toolkit.options.hold"),
+                        I18n.get("rubidium_toolkit.options.toggle"),
+                        I18n.get("rubidium_toolkit.options.persistent")
                         }
                     )
                 )
@@ -114,9 +114,9 @@ public abstract class ZoomOptionsPage
                 .setName(I18n.get("rubidium_toolkit.zoom.cinematic_camera.name"))
                 .setTooltip(I18n.get("rubidium_toolkit.zoom.cinematic_camera.tooltip"))
                 .setControl((option) -> new CyclingControl<>(option, RubidiumToolkitConfig.CinematicCameraOptions.class, new String[] {
-                        I18n.get("rubidium_toolkit.option.off"),
-                        I18n.get("rubidium_toolkit.option.vanilla"),
-                        I18n.get("rubidium_toolkit.option.multiplied")
+                        I18n.get("rubidium_toolkit.options.off"),
+                        I18n.get("rubidium_toolkit.options.vanilla"),
+                        I18n.get("rubidium_toolkit.options.multiplied")
                         }
                     )
                 )

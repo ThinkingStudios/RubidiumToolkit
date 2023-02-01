@@ -46,12 +46,11 @@ public class DynamiclightsOptionsPage {
                 .setTooltip(I18n.get("rubidium_toolkit.dynlights.speed.tooltip"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, RubidiumToolkitConfig.QualityMode.class, new String[] {
-                                I18n.get("rubidium_toolkit.option.off"),
-                                I18n.get("rubidium_toolkit.option.slow"),
-                                I18n.get("rubidium_toolkit.option.fast"),
-                                I18n.get("rubidium_toolkit.option.realtime")
-                        }
-                        )
+                                I18n.get("rubidium_toolkit.options.off"),
+                                I18n.get("rubidium_toolkit.options.slow"),
+                                I18n.get("rubidium_toolkit.options.fast"),
+                                I18n.get("rubidium_toolkit.options.realtime")
+                        })
                 )
                 .setBinding(
                         (options, value) -> {
