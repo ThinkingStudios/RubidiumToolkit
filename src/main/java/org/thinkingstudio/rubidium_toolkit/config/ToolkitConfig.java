@@ -2,13 +2,12 @@ package org.thinkingstudio.rubidium_toolkit.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import lombok.var;
+import lombok.val;
 import net.minecraftforge.common.ForgeConfigSpec;
-
 import java.nio.file.Path;
 
-public class RubidiumToolkitConfig {
-    public static ForgeConfigSpec SPEC;
+public class ToolkitConfig {
+    public static ForgeConfigSpec ConfigSpec;
 
     public static ForgeConfigSpec.ConfigValue<Integer> maxTileEntityRenderDistanceSquare;
     public static ForgeConfigSpec.ConfigValue<Integer> maxTileEntityRenderDistanceY;
@@ -19,6 +18,7 @@ public class RubidiumToolkitConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean> fog;
     public static ForgeConfigSpec.ConfigValue<Boolean> enableDistanceChecks;
 
+
     // Ok Zoomer
     public static ConfigEnum.ZoomValues zoomValues = new ConfigEnum.ZoomValues();
     public static ForgeConfigSpec.ConfigValue<Boolean> lowerZoomSensitivity;
@@ -28,51 +28,40 @@ public class RubidiumToolkitConfig {
     public static ForgeConfigSpec.ConfigValue<Boolean> zoomScrolling;
     public static ForgeConfigSpec.ConfigValue<Boolean> zoomOverlay;
 
-    // Dynamic Lights
-    public static ForgeConfigSpec.ConfigValue<String> Quality;
-    public static ForgeConfigSpec.ConfigValue<Boolean> EntityLighting;
-    public static ForgeConfigSpec.ConfigValue<Boolean> TileEntityLighting;
-    public static ForgeConfigSpec.ConfigValue<Boolean> OnlyUpdateOnPositionChange;
-
     static {
-        var builder = new ConfigBuilder("Rubidium Toolkit");
-
-        builder.Block("Zoom", b -> {
-            lowerZoomSensitivity = b.define("Lower Zoom Sensitivity", true);
-            zoomScrolling = b.define("Zoom Scrolling Enabled", true);
-            zoomTransition = b.define("Zoom Transition Mode (OFF, LINEAR, SMOOTH)", ConfigEnum.ZoomTransitionOptions.SMOOTH.toString());
-            zoomMode = b.define("Zoom Transition Mode (TOGGLE, HOLD, PERSISTENT)", ConfigEnum.ZoomModes.HOLD.toString());
-            cinematicCameraMode = b.define("Cinematic Camera Mode (OFF, VANILLA, MULTIPLIED)", ConfigEnum.CinematicCameraOptions.OFF.toString());
-            zoomOverlay = b.define("Zoom Overlay", true);
-            //zoomValues = b.define("Zoom Advanced Values", new ZoomValues());
-        });
-
-        builder.Block("Dynamic Lights", b -> {
-            Quality = b.define("Quality Mode (OFF, SLOW, FAST, REALTIME)", "REALTIME");
-            EntityLighting = b.define("Dynamic Entity Lighting", true);
-            TileEntityLighting = b.define("Dynamic TileEntity Lighting", true);
-            OnlyUpdateOnPositionChange = b.define("Only Update On Position Change", true);
-        });
-
-        builder.Block("Entity Distance", b -> {
-            enableDistanceChecks = b.define("Enable Max Distance Checks", true);
-            maxTileEntityRenderDistanceSquare = b.define("(TileEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
-            maxTileEntityRenderDistanceY = b.define("(TileEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
-            maxEntityRenderDistanceSquare = b.define("(Entity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
-            maxEntityRenderDistanceY = b.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
-        });
+        val builder = new ConfigBuilder("RubidiumToolkit");
 
         builder.Block("Misc", b -> {
             fog = b.define("Render Fog", true);
         });
 
-        SPEC = builder.Save();
+        builder.Block("Entity Distance", b -> {
+            enableDistanceChecks = b.define("Enable Max Distance Checks", true);
+
+            maxTileEntityRenderDistanceSquare = b.define("(TileEntity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
+            maxTileEntityRenderDistanceY = b.define("(TileEntity) Max Vertical Render Distance [Raw, Default 32]", 32);
+
+            maxEntityRenderDistanceSquare = b.define("(Entity) Max Horizontal Render Distance [Squared, Default 64^2]", 4096);
+            maxEntityRenderDistanceY = b.define("(Entity) Max Vertical Render Distance [Raw, Default 32]", 32);
+        });
+
+        builder.Block("Zoom", b -> {
+            lowerZoomSensitivity = b.define("Lower zoom Sensitivity", true);
+            zoomScrolling = b.define("zoom Scrolling Enabled", true);
+            zoomTransition = b.define("zoom Transition Mode (OFF, LINEAR, SMOOTH)", ConfigEnum.ZoomTransitionOptions.SMOOTH.toString());
+            zoomMode = b.define("zoom Transition Mode (TOGGLE, HOLD, PERSISTENT)", ConfigEnum.ZoomModes.HOLD.toString());
+            cinematicCameraMode = b.define("Cinematic Camera Mode (OFF, VANILLA, MULTIPLIED)", ConfigEnum.CinematicCameraOptions.OFF.toString());
+            zoomOverlay = b.define("zoom Overlay?", true);
+            //zoomValues = b.define("zoom Advanced Values", new ZoomValues());
+        });
+
+        ConfigSpec = builder.Save();
     }
 
     public static void loadConfig(Path path) {
         final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
 
         configData.load();
-        SPEC.setConfig(configData);
+        ConfigSpec.setConfig(configData);
     }
 }

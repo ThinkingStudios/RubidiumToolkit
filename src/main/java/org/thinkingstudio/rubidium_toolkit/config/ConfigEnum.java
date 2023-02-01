@@ -3,22 +3,6 @@ package org.thinkingstudio.rubidium_toolkit.config;
 import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
 
 public class ConfigEnum {
-    public enum QualityMode implements TextProvider {
-        OFF("Off"),
-        SLOW("Slow"),
-        FAST("Fast"),
-        REALTIME("Realtime");
-
-        private final String name;
-
-        private QualityMode(String name) {
-            this.name = name;
-        }
-
-        public String getLocalizedName() {
-            return this.name;
-        }
-    }
     public static enum Complexity implements TextProvider {
         OFF("Off"),
         SIMPLE("Simple"),
@@ -33,6 +17,41 @@ public class ConfigEnum {
         public String getLocalizedName() {
             return this.name;
         }
+    }
+
+    public static enum Quality implements TextProvider {
+        OFF("Off"),
+        FAST("Fast"),
+        FANCY("Fancy");
+
+        private final String name;
+
+        private Quality(String name) {
+            this.name = name;
+        }
+
+        public String getLocalizedName() {
+            return this.name;
+        }
+    }
+
+    public enum DarknessOption {
+        PITCH_BLACK(0f),
+        REALLY_DARK (0.04f),
+        DARK(0.08f),
+        DIM(0.12f);
+
+        public final float value;
+
+        private DarknessOption(float value) {
+            this.value = value;
+        }
+    }
+
+    public enum FullscreenMode {
+        WINDOWED,
+        BORDERLESS,
+        FULLSCREEN
     }
 
     public enum ZoomTransitionOptions {

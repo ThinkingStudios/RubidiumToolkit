@@ -1,8 +1,7 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.Sodium;
+package org.thinkingstudio.rubidium_toolkit.mixins.sodium;
+
 
 import com.google.common.collect.ImmutableList;
-import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import me.jellysquid.mods.sodium.client.gui.options.*;
@@ -17,6 +16,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import net.minecraft.client.resources.I18n;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.List;
 
 @Pseudo
 @Mixin(SodiumOptionsGUI.class)
-public abstract class ZoomOptionsPage
+public abstract class ZoomSettingsPage
 {
 
     @Shadow
@@ -42,8 +43,8 @@ public abstract class ZoomOptionsPage
                 .setTooltip(I18n.get("rubidium_toolkit.zoom.lower_sensitivity.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.lowerZoomSensitivity.set(value),
-                        (options) -> RubidiumToolkitConfig.lowerZoomSensitivity.get())
+                        (options, value) -> ToolkitConfig.lowerZoomSensitivity.set(value),
+                        (options) -> ToolkitConfig.lowerZoomSensitivity.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -52,8 +53,8 @@ public abstract class ZoomOptionsPage
                 .setTooltip(I18n.get("rubidium_toolkit.zoom.scrolling.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.zoomScrolling.set(value),
-                        (options) -> RubidiumToolkitConfig.zoomScrolling.get())
+                        (options, value) -> ToolkitConfig.zoomScrolling.set(value),
+                        (options) -> ToolkitConfig.zoomScrolling.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -62,8 +63,8 @@ public abstract class ZoomOptionsPage
                 .setTooltip(I18n.get("rubidium_toolkit.zoom.overlay.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.zoomOverlay.set(value),
-                        (options) -> RubidiumToolkitConfig.zoomOverlay.get())
+                        (options, value) -> ToolkitConfig.zoomOverlay.set(value),
+                        (options) -> ToolkitConfig.zoomOverlay.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -79,17 +80,16 @@ public abstract class ZoomOptionsPage
 
         Option<ConfigEnum.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(ConfigEnum.ZoomTransitionOptions.class, sodiumOpts)
                 .setName(I18n.get("rubidium_toolkit.zoom.transition.name"))
-                .setTooltip(I18n.get("rubidium_toolkit.zoom.transition.tooltip"))
+                .setTooltip(I18n.get("rubidium_toolkit.zoom.transition.name"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnum.ZoomTransitionOptions.class, new String[] {
-                        I18n.get("rubidium_toolkit.options.off"),
-                        I18n.get("rubidium_toolkit.options.smooth")
-                        }
-                    )
+                            I18n.get("rubidium_toolkit.options.off"),
+                            I18n.get("rubidium_toolkit.options.smooth")
+                        })
                 )
                 .setBinding(
-                        (opts, value) -> RubidiumToolkitConfig.zoomTransition.set(value.toString()),
-                        (opts) -> ConfigEnum.ZoomTransitionOptions.valueOf(RubidiumToolkitConfig.zoomTransition.get()))
+                        (opts, value) -> ToolkitConfig.zoomTransition.set(value.toString()),
+                        (opts) -> ConfigEnum.ZoomTransitionOptions.valueOf(ToolkitConfig.zoomTransition.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -98,15 +98,14 @@ public abstract class ZoomOptionsPage
                 .setTooltip(I18n.get("rubidium_toolkit.zoom.keybind.tooltip"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnum.ZoomModes.class, new String[] {
-                        I18n.get("rubidium_toolkit.options.hold"),
-                        I18n.get("rubidium_toolkit.options.toggle"),
-                        I18n.get("rubidium_toolkit.options.persistent")
-                        }
-                    )
+                            I18n.get("rubidium_toolkit.options.hold"),
+                            I18n.get("rubidium_toolkit.options.toggle"),
+                            I18n.get("rubidium_toolkit.options.persistent")
+                        })
                 )
                 .setBinding(
-                        (opts, value) -> RubidiumToolkitConfig.zoomMode.set(value.toString()),
-                        (opts) -> ConfigEnum.ZoomModes.valueOf(RubidiumToolkitConfig.zoomMode.get()))
+                        (opts, value) -> ToolkitConfig.zoomMode.set(value.toString()),
+                        (opts) -> ConfigEnum.ZoomModes.valueOf(ToolkitConfig.zoomMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -117,12 +116,10 @@ public abstract class ZoomOptionsPage
                         I18n.get("rubidium_toolkit.options.off"),
                         I18n.get("rubidium_toolkit.options.vanilla"),
                         I18n.get("rubidium_toolkit.options.multiplied")
-                        }
-                    )
-                )
+                }))
                 .setBinding(
-                        (opts, value) -> RubidiumToolkitConfig.cinematicCameraMode.set(value.toString()),
-                        (opts) -> ConfigEnum.CinematicCameraOptions.valueOf(RubidiumToolkitConfig.cinematicCameraMode.get()))
+                        (opts, value) -> ToolkitConfig.cinematicCameraMode.set(value.toString()),
+                        (opts) -> ConfigEnum.CinematicCameraOptions.valueOf(ToolkitConfig.cinematicCameraMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 

@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "package": "org.thinkingstudio.rubidium_toolkit.mixins",
+  "mixins": [
+    "fog.MixinSodiumWorldRenderer",
+    "sodium.SodiumSettingsMixin",
+    "zoom.MouseMixin"
+  ],
+  "client": [
+    "entitydistance.MaxDistanceEntity",
+    "entitydistance.MaxDistanceTileEntity",
+    "sodium.ZoomSettingsPage",
+    "zoom.GameRendererMixin"
+  ]
+}

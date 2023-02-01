@@ -11,7 +11,7 @@ public class ConfigBuilder
 
     public ConfigBuilder(String comment)
     {
-        COMMON_BUILDER.comment(comment).push("Rubidium Toolkit Settings");
+        COMMON_BUILDER.comment(comment).push("Settings");
     }
 
     public ForgeConfigSpec Save()

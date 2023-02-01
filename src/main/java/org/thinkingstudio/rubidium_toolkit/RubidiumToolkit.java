@@ -2,6 +2,7 @@ package org.thinkingstudio.rubidium_toolkit;
 
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.options.storage.SodiumOptionsStorage;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -12,24 +13,22 @@ import net.minecraftforge.fml.network.FMLNetworkConstants;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 
 import java.lang.reflect.Field;
 
 @Mod(RubidiumToolkit.MODID)
-public class RubidiumToolkit
-{
+public class RubidiumToolkit {
     public static final String MODID = "rubidium_toolkit";
-    public static final String MODNAME = "RubidiumToolkit";
-    public static final Logger LOGGER = LogManager.getLogger(MODNAME);
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public RubidiumToolkit() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        MinecraftForge.EVENT_BUS.register(this);
 
-        RubidiumToolkitConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODNAME + ".toml"));
+        ToolkitConfig.loadConfig(FMLPaths.CONFIGDIR.get().resolve(RubidiumToolkit.MODID + ".toml"));
 
-        ModLoadingContext.get()
-                .registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST, () -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 
         try {
             final Field sodiumOptsField = SodiumGameOptionPages.class.getDeclaredField("sodiumOpts");
@@ -48,4 +47,5 @@ public class RubidiumToolkit
     {
 
     }
+
 }

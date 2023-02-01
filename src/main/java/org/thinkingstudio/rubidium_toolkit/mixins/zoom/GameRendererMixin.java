@@ -1,6 +1,7 @@
-package org.thinkingstudio.rubidium_toolkit.mixins.Zoom;
+package org.thinkingstudio.rubidium_toolkit.mixins.zoom;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -8,7 +9,6 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,8 +17,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import net.minecraft.util.math.MathHelper;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.Zoom.ZoomUtils;
 
 //This mixin is responsible for managing the fov-changing part of the zoom.
@@ -26,7 +28,7 @@ import org.thinkingstudio.rubidium_toolkit.features.Zoom.ZoomUtils;
 public class GameRendererMixin {
 	//The zoom overlay's texture identifier.
 	@Unique
-	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation("rubidium_toolkit:textures/misc/zoom/zoom_overlay.png");
+	private static final ResourceLocation ZOOM_OVERLAY = new ResourceLocation("magnesium_extras:textures/misc/zoom_overlay.png");
 
 	@Final
 	@Shadow
@@ -39,12 +41,12 @@ public class GameRendererMixin {
 	)
 	private void zoomTick(CallbackInfo info) {
 		//If zoom transitions are enabled, update the zoom FOV multiplier.
-		if (!RubidiumToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.OFF.toString())) {
+		if (!ToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.OFF.toString())) {
 			ZoomUtils.updateZoomFovMultiplier();
 		}
 
 		//If the zoom overlay is enabled, update the zoom overlay alpha.
-		if (RubidiumToolkitConfig.zoomOverlay.get()) {
+		if (ToolkitConfig.zoomOverlay.get()) {
 			ZoomUtils.updateZoomOverlayAlpha();
 		}
 	}
@@ -58,7 +60,7 @@ public class GameRendererMixin {
 	private void getZoomedFov(ActiveRenderInfo camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> info) {
 		double fov = info.getReturnValue();
 
-		if (!RubidiumToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.OFF.toString())) {
+		if (!ToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.OFF.toString())) {
 			//Handle the zoom with smooth transitions enabled.
 			if (ZoomUtils.zoomFovMultiplier != 1.0F) {
 				fov *= MathHelper.lerp(tickDelta, ZoomUtils.lastZoomFovMultiplier, ZoomUtils.zoomFovMultiplier);
@@ -86,7 +88,7 @@ public class GameRendererMixin {
 		method = "render(FJZ)V"
 	)
 	public void injectZoomOverlay(float tickDelta, long startTime, boolean tick, CallbackInfo info) {
-		if (RubidiumToolkitConfig.zoomOverlay.get()) {
+		if (ToolkitConfig.zoomOverlay.get()) {
 			if (this.minecraft.options.hideGui) {
 				return;
 			}
@@ -94,7 +96,7 @@ public class GameRendererMixin {
 			RenderSystem.defaultAlphaFunc();
 			RenderSystem.enableBlend();
 			//If zoom transitions is on, apply the transition to the overlay.
-			if (!RubidiumToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.OFF.toString())) {
+			if (!ToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.OFF.toString())) {
 				if (ZoomUtils.zoomFovMultiplier != 0.0F) {
 					float transparency = MathHelper.lerp(tickDelta, ZoomUtils.lastZoomOverlayAlpha, ZoomUtils.zoomOverlayAlpha);
 					this.renderZoomOverlay(transparency);

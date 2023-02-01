@@ -1,7 +1,7 @@
 package org.thinkingstudio.rubidium_toolkit.features.Zoom;
 
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 
 //The class that contains most of the logic behind the zoom itself.
 public class ZoomUtils {
@@ -12,7 +12,7 @@ public class ZoomUtils {
 	public static boolean lastZoomState = false;
 
 	//The zoom divisor, managed by the zoom press and zoom scrolling. Used by other mixins.
-	public static double zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
+	public static double zoomDivisor = ToolkitConfig.zoomValues.zoomDivisor;
 
 	//The zoom FOV multipliers. Used by the GameRenderer mixin.
 	public static float zoomFovMultiplier = 1.0F;
@@ -28,28 +28,28 @@ public class ZoomUtils {
 		double lesserChangedZoomDivisor;
 
 		if (increase) {
-			changedZoomDivisor = zoomDivisor + RubidiumToolkitConfig.zoomValues.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor + RubidiumToolkitConfig.zoomValues.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor + ToolkitConfig.zoomValues.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor + ToolkitConfig.zoomValues.lesserScrollStep;
 		} else {
-			changedZoomDivisor = zoomDivisor - RubidiumToolkitConfig.zoomValues.scrollStep;
-			lesserChangedZoomDivisor = zoomDivisor - RubidiumToolkitConfig.zoomValues.lesserScrollStep;
+			changedZoomDivisor = zoomDivisor - ToolkitConfig.zoomValues.scrollStep;
+			lesserChangedZoomDivisor = zoomDivisor - ToolkitConfig.zoomValues.lesserScrollStep;
 			lastZoomState = true;
 		}
 
-		if (lesserChangedZoomDivisor <= RubidiumToolkitConfig.zoomValues.zoomDivisor) {
+		if (lesserChangedZoomDivisor <= ToolkitConfig.zoomValues.zoomDivisor) {
 			changedZoomDivisor = lesserChangedZoomDivisor;
 		}
 
-		if (changedZoomDivisor >= RubidiumToolkitConfig.zoomValues.minimumZoomDivisor) {
-			if (changedZoomDivisor <= RubidiumToolkitConfig.zoomValues.maximumZoomDivisor) {
+		if (changedZoomDivisor >= ToolkitConfig.zoomValues.minimumZoomDivisor) {
+			if (changedZoomDivisor <= ToolkitConfig.zoomValues.maximumZoomDivisor) {
 				zoomDivisor = changedZoomDivisor;
 			}
 		}
 	}
 
-	//The method used by both the "Reset Zoom" keybind and the "Reset Zoom With Mouse" tweak.
+	//The method used by both the "Reset zoom" keybind and the "Reset zoom With Mouse" tweak.
 	public static void resetZoomDivisor() {
-		zoomDivisor = RubidiumToolkitConfig.zoomValues.zoomDivisor;
+		zoomDivisor = ToolkitConfig.zoomValues.zoomDivisor;
 		lastZoomState = true;
 	}
 
@@ -58,15 +58,15 @@ public class ZoomUtils {
 //		if (ZoomKeybinds.zoomKey.isDefault()) {
 //			if (client.options.keySaveHotbarActivator.isDefault()) {
 //				if (userPrompted) {
-//					MagnesiumExtras.LOGGER.info("[Ok Zoomer] The \"Save Toolbar Activator\" keybind was occupying C! Unbinding...");
+//					RubidiumToolkit.LOGGER.info("[Ok Zoomer] The \"Save Toolbar Activator\" keybind was occupying C! Unbinding...");
 //				} else {
-//					MagnesiumExtras.LOGGER.info("[Ok Zoomer] The \"Save Toolbar Activator\" keybind was occupying C! Unbinding... This process won't be repeated until specified in the config.");
+//					RubidiumToolkit.LOGGER.info("[Ok Zoomer] The \"Save Toolbar Activator\" keybind was occupying C! Unbinding... This process won't be repeated until specified in the config.");
 //				}
 //				client.options.keySaveToolbarActivator.setBoundKey(InputUtil.UNKNOWN_KEY);
 //				client.options.write();
 //				KeyBinding.updateKeysByCode();
 //			} else {
-//				MagnesiumExtras.LOGGER.info("[Ok Zoomer] No conflicts with the \"Save Toolbar Activator\" keybind was found!");
+//				RubidiumToolkit.LOGGER.info("[Ok Zoomer] No conflicts with the \"Save Toolbar Activator\" keybind was found!");
 //			}
 //		}
 //	}
@@ -82,8 +82,8 @@ public class ZoomUtils {
 
 		lastZoomFovMultiplier = zoomFovMultiplier;
 		
-		if (RubidiumToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * RubidiumToolkitConfig.zoomValues.smoothMultiplier;
+		if (ToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.SMOOTH.toString())) {
+			zoomFovMultiplier += (zoomMultiplier - zoomFovMultiplier) * ToolkitConfig.zoomValues.smoothMultiplier;
 		}
 	}
 
@@ -97,8 +97,8 @@ public class ZoomUtils {
 
 		lastZoomOverlayAlpha = zoomOverlayAlpha;
 
-		if (RubidiumToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.SMOOTH.toString())) {
-			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * RubidiumToolkitConfig.zoomValues.smoothMultiplier;
+		if (ToolkitConfig.zoomTransition.get().equals(ConfigEnum.ZoomTransitionOptions.SMOOTH.toString())) {
+			zoomOverlayAlpha += (zoomMultiplier - zoomOverlayAlpha) * ToolkitConfig.zoomValues.smoothMultiplier;
 		}
 	}
 }
