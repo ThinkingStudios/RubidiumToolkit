@@ -22,7 +22,6 @@ import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.DynamicLig
 public class RubidiumToolkit {
     public static final String MODID = "rubidium_toolkit";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
-
     public static DynLightsFeatures INSTANCE;
 
     public RubidiumToolkit() {
