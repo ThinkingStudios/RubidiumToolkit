@@ -8,12 +8,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.WiZoom;
 
 @Mixin(MouseHandler.class)
-public class MouseMixin
-{
-    @Inject(at = {@At("RETURN")}, method = {"onScroll(JDD)V"})
-    private void onOnMouseScroll(long long_1, double double_1, double double_2,
-                                 CallbackInfo ci)
-    {
+public class MouseMixin {
+    @Inject(at = @At("RETURN"), method = "onScroll(JDD)V")
+    private void onOnMouseScroll(long long_1, double double_1, double double_2, CallbackInfo ci) {
         WiZoom.INSTANCE.onMouseScroll(double_2);
     }
 }

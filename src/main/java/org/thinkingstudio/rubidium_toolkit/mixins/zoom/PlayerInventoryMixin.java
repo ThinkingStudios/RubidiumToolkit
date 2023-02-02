@@ -8,13 +8,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.thinkingstudio.rubidium_toolkit.features.keybinding.KeyboardInput;
 
 @Mixin(Inventory.class)
-public class PlayerInventoryMixin
-{
-    @Inject(at = {@At("HEAD")},
-            method = {"swapPaint(D)V"},
-            cancellable = true)
-    private void onScrollInHotbar(double scrollAmount, CallbackInfo ci)
-    {
+public class PlayerInventoryMixin {
+    @Inject(at = @At("HEAD"), method = "swapPaint(D)V", cancellable = true)
+    private void onScrollInHotbar(double scrollAmount, CallbackInfo ci) {
         if(KeyboardInput.zoomKey.isDown())
             ci.cancel();
     }

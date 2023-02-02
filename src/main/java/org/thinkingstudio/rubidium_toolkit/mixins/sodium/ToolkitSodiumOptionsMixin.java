@@ -31,7 +31,7 @@ public class ToolkitSodiumOptionsMixin {
     private static final SodiumOptionsStorage sodiumOpts = new SodiumOptionsStorage();
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void RubidiumToolkitOption(Screen prevScreen, CallbackInfo ci) {
+    private void Toolkit(Screen prevScreen, CallbackInfo ci) {
 
         List<OptionGroup> groups = new ArrayList<>();
 

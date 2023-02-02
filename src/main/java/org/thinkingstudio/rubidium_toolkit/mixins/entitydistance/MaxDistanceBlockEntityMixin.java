@@ -12,12 +12,10 @@ import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.entitydistance.DistanceUtility;
 
 @Mixin(BlockEntityRenderDispatcher.class)
-public class MaxDistanceBlockEntityMixin
-{
+public class MaxDistanceBlockEntityMixin {
 
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
-    public <E extends BlockEntity> void render(E entity, float val, PoseStack matrix, MultiBufferSource p_228850_4_, CallbackInfo ci)
-    {
+    public <E extends BlockEntity> void render(E entity, float val, PoseStack matrix, MultiBufferSource p_228850_4_, CallbackInfo ci) {
         if (!RubidiumToolkitConfig.enableDistanceChecks.get())
             return;
 

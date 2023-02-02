@@ -10,8 +10,7 @@ import org.lwjgl.glfw.GLFW;
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
-public class KeyboardInput
-{
+public class KeyboardInput {
     public static final KeyMapping zoomKey = new KeyMapping("key.rubidium_toolkit.zoom" ,
             KeyConflictContext.IN_GAME,
             KeyModifier.NONE,

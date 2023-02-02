@@ -7,8 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(SodiumOptionsGUI.class)
-public class SodiumGUIMixin
-{
+public class SodiumGUIMixin {
 
     @Redirect(
             method = "rebuildGUI",
@@ -17,8 +16,7 @@ public class SodiumGUIMixin
                     ordinal = 3),
             remap = false
     )
-    private GuiEventListener Inject(SodiumOptionsGUI instance, GuiEventListener guiEventListener)
-    {
+    private GuiEventListener Inject(SodiumOptionsGUI instance, GuiEventListener guiEventListener) {
         return null;
     }
 
@@ -29,8 +27,7 @@ public class SodiumGUIMixin
                     ordinal = 4),
             remap = false
     )
-    private GuiEventListener InjectTwo(SodiumOptionsGUI instance, GuiEventListener guiEventListener)
-    {
+    private GuiEventListener InjectTwo(SodiumOptionsGUI instance, GuiEventListener guiEventListener) {
         return null;
     }
 }

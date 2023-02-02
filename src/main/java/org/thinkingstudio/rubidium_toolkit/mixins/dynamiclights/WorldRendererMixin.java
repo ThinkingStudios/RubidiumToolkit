@@ -14,11 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 
 @Mixin(LevelRenderer.class)
-public class WorldRendererMixin
-{
+public class WorldRendererMixin {
     @Inject(at = @At("HEAD"), method = "renderLevel")
-    public void render(PoseStack outlinebuffersource, float i, long j, boolean k, Camera l, GameRenderer i1, LightTexture lightTexture, Matrix4f multibuffersource, CallbackInfo ci)
-    {
+    public void render(PoseStack outlinebuffersource, float i, long j, boolean k, Camera l, GameRenderer i1, LightTexture lightTexture, Matrix4f multibuffersource, CallbackInfo ci) {
         Minecraft.getInstance().getProfiler().popPush("dynamic_lighting");
         DynLightsFeatures.get().updateAll((LevelRenderer) (Object) this);
     }

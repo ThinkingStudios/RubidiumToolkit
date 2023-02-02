@@ -36,8 +36,7 @@ public abstract class CommonWorldRendererMixin implements WorldRendererAccessor 
 			cancellable = true
 	)
 	private static void onGetLightmapCoordinates(BlockAndTintGetter world, BlockState j, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
-		if (!world.getBlockState(pos).isSolidRender(world, pos) && RubidiumToolkitConfig.quality.get() != ConfigEnum.QualityMode.OFF)
-		{
+		if (!world.getBlockState(pos).isSolidRender(world, pos) && RubidiumToolkitConfig.quality.get() != ConfigEnum.QualityMode.OFF) {
 			int vanilla = cir.getReturnValue();
 			int value = DynLightsFeatures.get().getLightmapWithDynamicLight(pos, vanilla);
 

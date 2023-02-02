@@ -8,14 +8,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.thinkingstudio.rubidium_toolkit.features.zoom.WiZoom;
 
 @Mixin(GameRenderer.class)
-public class GameRendererMixin
-{
+public class GameRendererMixin {
 
-    @Redirect(
-            at = @At(value = "FIELD", target = "Lnet/minecraft/client/Options;fov:D"),
-            method = "getFov")
-    private double getFov(Options instance)
-    {
+    @Redirect(at = @At(value = "FIELD", target = "Lnet/minecraft/client/Options;fov:D"), method = "getFov")
+    private double getFov(Options instance) {
         return WiZoom.INSTANCE.changeFovBasedOnZoom(instance.fov);
     }
 }

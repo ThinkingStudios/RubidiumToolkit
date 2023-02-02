@@ -14,15 +14,13 @@ public enum WiZoom {
     private Double currentLevel;
     private Double defaultMouseSensitivity;
 
-    public double changeFovBasedOnZoom(double fov)
-    {
+    public double changeFovBasedOnZoom(double fov) {
         Options gameOptions = MC.options;
 
         if(currentLevel == null)
             currentLevel = defaultLevel;
 
-        if(!KeyboardInput.zoomKey.isDown())
-        {
+        if(!KeyboardInput.zoomKey.isDown()) {
             currentLevel = defaultLevel;
 
             if(defaultMouseSensitivity != null)
@@ -46,8 +44,7 @@ public enum WiZoom {
         return fov / currentLevel;
     }
 
-    public void onMouseScroll(double amount)
-    {
+    public void onMouseScroll(double amount) {
         if(!KeyboardInput.zoomKey.isDown())
             return;
 

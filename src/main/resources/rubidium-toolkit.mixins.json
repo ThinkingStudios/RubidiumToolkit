@@ -10,8 +10,8 @@
     "zoom.PlayerInventoryMixin"
   ],
   "client": [
-    "entitydistance.MaxDistanceEntity",
-    "entitydistance.MaxDistanceBlockEntity",
+    "entitydistance.MaxDistanceEntityMixin",
+    "entitydistance.MaxDistanceBlockEntityMixin",
     "sodium.SodiumGUIMixin",
     "zoom.GameRendererMixin",
     "zoom.MouseMixin",
