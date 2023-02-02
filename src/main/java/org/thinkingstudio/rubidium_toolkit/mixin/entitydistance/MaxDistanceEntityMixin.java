@@ -11,7 +11,7 @@ import org.thinkingstudio.rubidium_toolkit.toolkit.features.entitydistance.Dista
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 
 @Mixin(EntityRenderDispatcher.class)
-public class MaxDistanceEntity {
+public class MaxDistanceEntityMixin {
     @Inject(at = @At("HEAD"), method = "shouldRender", cancellable = true)
     public <E extends Entity> void shouldDoRender(E entity, Frustum clippingHelper, double cameraX, double cameraY, double cameraZ, CallbackInfoReturnable<Boolean> cir) {
         if (!ToolkitConfig.enableDistanceChecks.get())

@@ -12,7 +12,7 @@ import org.thinkingstudio.rubidium_toolkit.toolkit.features.entitydistance.Dista
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 
 @Mixin(BlockEntityRenderDispatcher.class)
-public class MaxDistanceTileEntity {
+public class MaxDistanceBlockEntityMixin {
 
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     public <E extends BlockEntity> void render(E entity, float val, PoseStack matrix, MultiBufferSource p_228850_4_, CallbackInfo ci) {
