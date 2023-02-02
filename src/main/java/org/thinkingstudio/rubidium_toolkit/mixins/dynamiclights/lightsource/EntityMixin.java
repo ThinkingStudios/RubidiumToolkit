@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.DynamicLightHandlers;
@@ -88,7 +88,7 @@ public abstract class EntityMixin implements DynamicLightSource {
 				this.setDynamicLightEnabled(false);
 			} else {
 				this.dynamicLightTick();
-				if ((!RubidiumToolkitConfig.blockEntityLighting.get() && this.getType() != EntityType.PLAYER)
+				if ((!ToolkitConfig.blockEntityLighting.get() && this.getType() != EntityType.PLAYER)
 						|| !DynamicLightHandlers.canLightUp((Entity) (Object) this))
 					this.lambdynlights$luminance = 0;
 				DynLightsFeatures.updateTracking(this);
@@ -132,7 +132,7 @@ public abstract class EntityMixin implements DynamicLightSource {
 
 	@Override
 	public boolean shouldUpdateDynamicLight() {
-		var mode = RubidiumToolkitConfig.quality.get();
+		var mode = ToolkitConfig.quality.get();
 		if (Objects.equals(mode, ConfigEnum.QualityMode.OFF))
 			return false;
 

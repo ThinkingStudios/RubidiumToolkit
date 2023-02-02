@@ -21,8 +21,8 @@ public abstract class ZoomSettingsPage {
         //        .setTooltip("Lowers your sensitivity when zooming to make it feel more consistent.")
         //        .setControl(TickBoxControl::new)
         //        .setBinding(
-        //                (options, value) -> RubidiumToolkitConfig.lowerZoomSensitivity.set(value),
-        //                (options) -> RubidiumToolkitConfig.lowerZoomSensitivity.get())
+        //                (options, value) -> ToolkitConfig.lowerZoomSensitivity.set(value),
+        //                (options) -> ToolkitConfig.lowerZoomSensitivity.get())
         //        .setImpact(OptionImpact.LOW)
         //        .build();
 
@@ -31,8 +31,8 @@ public abstract class ZoomSettingsPage {
                 .setTooltip("Allows using scroll wheel to adjust zoom amount.")
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.zoomScrolling.set(value),
-                        (options) -> RubidiumToolkitConfig.zoomScrolling.get())
+                        (options, value) -> ToolkitConfig.zoomScrolling.set(value),
+                        (options) -> ToolkitConfig.zoomScrolling.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -41,8 +41,8 @@ public abstract class ZoomSettingsPage {
                 .setTooltip("Renders a vignette overlay when zooming.")
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.zoomOverlay.set(value),
-                        (options) -> RubidiumToolkitConfig.zoomOverlay.get())
+                        (options, value) -> ToolkitConfig.zoomOverlay.set(value),
+                        (options) -> ToolkitConfig.zoomOverlay.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -56,33 +56,33 @@ public abstract class ZoomSettingsPage {
 
 
 
-        Option<RubidiumToolkitConfig.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(RubidiumToolkitConfig.ZoomTransitionOptions.class, sodiumOpts)
+        Option<ToolkitConfig.ZoomTransitionOptions> zoomTransition =  OptionImpl.createBuilder(ToolkitConfig.ZoomTransitionOptions.class, sodiumOpts)
                 .setName("zoom Transition Mode")
                 .setTooltip("Controls how the game changes from normal to zoomed. Off will be an instant transition.")
-                .setControl((option) -> new CyclingControl<>(option, RubidiumToolkitConfig.ZoomTransitionOptions.class, new String[] { "Off", "Smooth" }))
+                .setControl((option) -> new CyclingControl<>(option, ToolkitConfig.ZoomTransitionOptions.class, new String[] { "Off", "Smooth" }))
                 .setBinding(
-                        (opts, value) -> RubidiumToolkitConfig.zoomTransition.set(value.toString()),
-                        (opts) -> RubidiumToolkitConfig.ZoomTransitionOptions.valueOf(RubidiumToolkitConfig.zoomTransition.get()))
+                        (opts, value) -> ToolkitConfig.zoomTransition.set(value.toString()),
+                        (opts) -> ToolkitConfig.ZoomTransitionOptions.valueOf(ToolkitConfig.zoomTransition.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        Option<RubidiumToolkitConfig.ZoomModes> zoomMode =  OptionImpl.createBuilder(RubidiumToolkitConfig.ZoomModes.class, sodiumOpts)
+        Option<ToolkitConfig.ZoomModes> zoomMode =  OptionImpl.createBuilder(ToolkitConfig.ZoomModes.class, sodiumOpts)
                 .setName("zoom Keybind Mode")
                 .setTooltip("Hold - zoom only while the key is down.\nToggle - Lock zoom until you press the key again\nPersistent - Always zoom, if you want that, for some reason.")
-                .setControl((option) -> new CyclingControl<>(option, RubidiumToolkitConfig.ZoomModes.class, new String[] { "Hold", "Toggle", "Persistent"}))
+                .setControl((option) -> new CyclingControl<>(option, ToolkitConfig.ZoomModes.class, new String[] { "Hold", "Toggle", "Persistent"}))
                 .setBinding(
-                        (opts, value) -> RubidiumToolkitConfig.zoomMode.set(value.toString()),
-                        (opts) -> RubidiumToolkitConfig.ZoomModes.valueOf(RubidiumToolkitConfig.zoomMode.get()))
+                        (opts, value) -> ToolkitConfig.zoomMode.set(value.toString()),
+                        (opts) -> ToolkitConfig.ZoomModes.valueOf(ToolkitConfig.zoomMode.get()))
                 .setImpact(OptionImpact.LOW)
                 .build();
 
-        //Option<RubidiumToolkitConfig.CinematicCameraOptions> cinematicCameraMode =  OptionImpl.createBuilder(RubidiumToolkitConfig.CinematicCameraOptions.class, sodiumOpts)
+        //Option<ToolkitConfig.CinematicCameraOptions> cinematicCameraMode =  OptionImpl.createBuilder(ToolkitConfig.CinematicCameraOptions.class, sodiumOpts)
         //        .setName("Cinematic Camera Options")
         //        .setTooltip("Cinematic Camera Mode")
-        //        .setControl((option) -> new CyclingControl<>(option, RubidiumToolkitConfig.CinematicCameraOptions.class, new String[] { "Off", "Vanilla", "Multiplied"}))
+        //        .setControl((option) -> new CyclingControl<>(option, ToolkitConfig.CinematicCameraOptions.class, new String[] { "Off", "Vanilla", "Multiplied"}))
         //        .setBinding(
-        //                (opts, value) -> RubidiumToolkitConfig.cinematicCameraMode.set(value.toString()),
-        //                (opts) -> RubidiumToolkitConfig.CinematicCameraOptions.valueOf(RubidiumToolkitConfig.cinematicCameraMode.get()))
+        //                (opts, value) -> ToolkitConfig.cinematicCameraMode.set(value.toString()),
+        //                (opts) -> ToolkitConfig.CinematicCameraOptions.valueOf(ToolkitConfig.cinematicCameraMode.get()))
         //        .setImpact(OptionImpact.LOW)
         //        .build();
 

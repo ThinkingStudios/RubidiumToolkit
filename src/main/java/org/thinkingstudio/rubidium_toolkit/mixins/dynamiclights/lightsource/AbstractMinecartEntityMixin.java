@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.DynamicLightHandlers;
@@ -51,7 +51,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity implements Dyna
 			if (this.isRemoved()) {
 				this.setDynamicLightEnabled(false);
 			} else {
-				if (!RubidiumToolkitConfig.blockEntityLighting.get() || !DynamicLightHandlers.canLightUp(this))
+				if (!ToolkitConfig.blockEntityLighting.get() || !DynamicLightHandlers.canLightUp(this))
 					this.lambdynlights$luminance = 0;
 				else
 					this.dynamicLightTick();

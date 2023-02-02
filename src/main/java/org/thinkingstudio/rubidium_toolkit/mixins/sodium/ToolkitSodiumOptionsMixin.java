@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +40,8 @@ public class ToolkitSodiumOptionsMixin {
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.fog.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.fog.set(value),
-                        (options) -> RubidiumToolkitConfig.fog.get())
+                        (options, value) -> ToolkitConfig.fog.set(value),
+                        (options) -> ToolkitConfig.fog.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -54,8 +54,8 @@ public class ToolkitSodiumOptionsMixin {
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.enable_max_entity_distance.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.enableDistanceChecks.set(value),
-                        (options) -> RubidiumToolkitConfig.enableDistanceChecks.get())
+                        (options, value) -> ToolkitConfig.enableDistanceChecks.set(value),
+                        (options) -> ToolkitConfig.enableDistanceChecks.get())
                 .setImpact(OptionImpact.LOW)
                 .build();
 
@@ -71,8 +71,8 @@ public class ToolkitSodiumOptionsMixin {
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.max_entity_distance.tooltip"))
                 .setControl((option) -> new SliderControl(option, 16, 192, 8, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.maxEntityRenderDistanceSquare.set(value * value),
-                        (options) ->  Math.toIntExact(Math.round(Math.sqrt(RubidiumToolkitConfig.maxEntityRenderDistanceSquare.get()))))
+                        (options, value) -> ToolkitConfig.maxEntityRenderDistanceSquare.set(value * value),
+                        (options) ->  Math.toIntExact(Math.round(Math.sqrt(ToolkitConfig.maxEntityRenderDistanceSquare.get()))))
                 .setImpact(OptionImpact.HIGH)
                 .build();
 
@@ -81,8 +81,8 @@ public class ToolkitSodiumOptionsMixin {
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.vertical_entity_distance.tooltip"))
                 .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.maxEntityRenderDistanceY.set(value),
-                        (options) -> RubidiumToolkitConfig.maxEntityRenderDistanceY.get())
+                        (options, value) -> ToolkitConfig.maxEntityRenderDistanceY.set(value),
+                        (options) -> ToolkitConfig.maxEntityRenderDistanceY.get())
                 .setImpact(OptionImpact.HIGH)
                 .build();
 
@@ -99,8 +99,8 @@ public class ToolkitSodiumOptionsMixin {
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.max_block_distance.tooltip"))
                 .setControl((option) -> new SliderControl(option, 16, 256, 8, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.maxBlockEntityRenderDistanceSquare.set(value * value),
-                        (options) -> Math.toIntExact(Math.round(Math.sqrt(RubidiumToolkitConfig.maxBlockEntityRenderDistanceSquare.get()))))
+                        (options, value) -> ToolkitConfig.maxBlockEntityRenderDistanceSquare.set(value * value),
+                        (options) -> Math.toIntExact(Math.round(Math.sqrt(ToolkitConfig.maxBlockEntityRenderDistanceSquare.get()))))
                 .setImpact(OptionImpact.HIGH)
                 .build();
 
@@ -109,8 +109,8 @@ public class ToolkitSodiumOptionsMixin {
                 .setTooltip(new TranslatableComponent("rubidium_toolkit.tools.vertical_block_distance.tooltip"))
                 .setControl((option) -> new SliderControl(option, 16, 64, 4, ControlValueFormatter.translateVariable("rubidium_toolkit.options.unit.blocks")))
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.maxBlockEntityRenderDistanceY.set(value),
-                        (options) -> RubidiumToolkitConfig.maxBlockEntityRenderDistanceY.get())
+                        (options, value) -> ToolkitConfig.maxBlockEntityRenderDistanceY.set(value),
+                        (options) -> ToolkitConfig.maxBlockEntityRenderDistanceY.get())
                 .setImpact(OptionImpact.HIGH)
                 .build();
 

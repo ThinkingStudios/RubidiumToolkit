@@ -23,7 +23,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightSource;
 
 @Mixin(Level.class)
@@ -40,7 +40,7 @@ public abstract class WorldMixin {
 			locals = LocalCapture.CAPTURE_FAILEXCEPTION
 	)
 	private void onBlockEntityTick(CallbackInfo ci, ProfilerFiller profiler, Iterator<BlockEntity> iterator, TickingBlockEntity blockEntityTickInvoker) {
-		if (this.isClientSide() && RubidiumToolkitConfig.blockEntityLighting.get()) {
+		if (this.isClientSide() && ToolkitConfig.blockEntityLighting.get()) {
 			var blockEntity = this.getBlockEntity(blockEntityTickInvoker.getPos());
 			if (blockEntity != null)
 				((DynamicLightSource) blockEntity).dynamicLightTick();

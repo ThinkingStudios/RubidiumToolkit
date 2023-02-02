@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 
 import java.util.ArrayList;
@@ -60,10 +60,10 @@ public abstract class DynLightsSodiumOptionsMixin {
                         }))
                 .setBinding(
                         (options, value) -> {
-                            RubidiumToolkitConfig.quality.set(ConfigEnum.QualityMode.valueOf(value.toString()));
+                            ToolkitConfig.quality.set(ConfigEnum.QualityMode.valueOf(value.toString()));
                             DynLightsFeatures.get().clearLightSources();
                         },
-                        (options) -> ConfigEnum.QualityMode.valueOf(String.valueOf(RubidiumToolkitConfig.quality.get())))
+                        (options) -> ConfigEnum.QualityMode.valueOf(String.valueOf(ToolkitConfig.quality.get())))
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 
@@ -76,8 +76,8 @@ public abstract class DynLightsSodiumOptionsMixin {
                         This can drastically increase the amount of lighting updates, even when you're not holding a torch."""))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.entityLighting.set(value),
-                        (options) -> RubidiumToolkitConfig.entityLighting.get())
+                        (options, value) -> ToolkitConfig.entityLighting.set(value),
+                        (options) -> ToolkitConfig.entityLighting.get())
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 
@@ -89,8 +89,8 @@ public abstract class DynLightsSodiumOptionsMixin {
                         This can drastically increase the amount of lighting updates, even when you're not holding a torch."""))
                 .setControl(TickBoxControl::new)
                 .setBinding(
-                        (options, value) -> RubidiumToolkitConfig.blockEntityLighting.set(value),
-                        (options) -> RubidiumToolkitConfig.blockEntityLighting.get())
+                        (options, value) -> ToolkitConfig.blockEntityLighting.set(value),
+                        (options) -> ToolkitConfig.blockEntityLighting.get())
                 .setImpact(OptionImpact.MEDIUM)
                 .build();
 

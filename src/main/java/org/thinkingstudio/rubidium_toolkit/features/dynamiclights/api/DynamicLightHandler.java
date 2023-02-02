@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Function;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Creeper;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 
 /**
@@ -98,7 +98,7 @@ public interface DynamicLightHandler<T> {
 				int luminance = 0;
 
 				if (entity.getSwelling(0.f) > 0.001) {
-					luminance = switch (RubidiumToolkitConfig.quality.get()) {
+					luminance = switch (ToolkitConfig.quality.get()) {
 						case OFF -> 0;
 						case SLOW, FAST -> 10;
 						case REALTIME -> (int) (entity.getSwelling(0.f) * 10.0);

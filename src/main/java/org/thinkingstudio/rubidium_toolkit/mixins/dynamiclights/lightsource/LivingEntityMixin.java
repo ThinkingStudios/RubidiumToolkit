@@ -16,7 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.DynamicLightHandlers;
@@ -32,7 +32,7 @@ public abstract class LivingEntityMixin extends Entity implements DynamicLightSo
 
 	@Override
 	public void dynamicLightTick() {
-		if (!RubidiumToolkitConfig.blockEntityLighting.get() || !DynamicLightHandlers.canLightUp(this)) {
+		if (!ToolkitConfig.blockEntityLighting.get() || !DynamicLightHandlers.canLightUp(this)) {
 			this.lambdynlights$luminance = 0;
 			return;
 		}

@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.accessor.WorldRendererAccessor;
 
@@ -36,7 +36,7 @@ public abstract class CommonWorldRendererMixin implements WorldRendererAccessor 
 			cancellable = true
 	)
 	private static void onGetLightmapCoordinates(BlockAndTintGetter world, BlockState j, BlockPos pos, CallbackInfoReturnable<Integer> cir) {
-		if (!world.getBlockState(pos).isSolidRender(world, pos) && RubidiumToolkitConfig.quality.get() != ConfigEnum.QualityMode.OFF) {
+		if (!world.getBlockState(pos).isSolidRender(world, pos) && ToolkitConfig.quality.get() != ConfigEnum.QualityMode.OFF) {
 			int vanilla = cir.getReturnValue();
 			int value = DynLightsFeatures.get().getLightmapWithDynamicLight(pos, vanilla);
 

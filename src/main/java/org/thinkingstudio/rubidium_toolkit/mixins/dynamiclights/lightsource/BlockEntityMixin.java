@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynamicLightSource;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.DynamicLightHandlers;
@@ -110,7 +110,7 @@ public abstract class BlockEntityMixin implements DynamicLightSource {
 
 	@Override
 	public boolean shouldUpdateDynamicLight() {
-		var mode = RubidiumToolkitConfig.quality.get();
+		var mode = ToolkitConfig.quality.get();
 		if (Objects.equals(mode, ConfigEnum.QualityMode.OFF))
 			return false;
 

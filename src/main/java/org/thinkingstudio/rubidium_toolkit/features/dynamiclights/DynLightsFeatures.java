@@ -21,10 +21,13 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.fml.IExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.network.NetworkConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.accessor.WorldRendererAccessor;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.item.ItemLightSources;
 
@@ -45,11 +48,13 @@ public class DynLightsFeatures {
 	private int lastUpdateCount = 0;
 
 	public static boolean isEnabled() {
-		return !Objects.equals(RubidiumToolkitConfig.quality.get(), "OFF");
+		return !Objects.equals(ToolkitConfig.quality.get(), "OFF");
 	}
 
 	public DynLightsFeatures() {
 		INSTANCE = this;
+		log("Initializing RubidiumToolkit-DynamicLights");
+		ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 	}
 
 

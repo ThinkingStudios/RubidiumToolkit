@@ -15,7 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.Nullable;
-import org.thinkingstudio.rubidium_toolkit.config.RubidiumToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.accessor.DynamicLightHandlerHolder;
 
@@ -123,7 +123,7 @@ public final class DynamicLightHandlers {
 	 * @return {@code true} if the entity can light up, otherwise {@code false}
 	 */
 	public static <T extends Entity> boolean canLightUp(T entity) {
-		return RubidiumToolkitConfig.entityLighting.get();
+		return ToolkitConfig.entityLighting.get();
 	}
 
 	/**
@@ -134,7 +134,7 @@ public final class DynamicLightHandlers {
 	 * @return {@code true} if the block entity can light up, otherwise {@code false}
 	 */
 	public static <T extends BlockEntity> boolean canLightUp(T entity) {
-		return RubidiumToolkitConfig.blockEntityLighting.get();
+		return ToolkitConfig.blockEntityLighting.get();
 	}
 
 	/**
@@ -146,7 +146,7 @@ public final class DynamicLightHandlers {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends Entity> int getLuminanceFrom(T entity) {
-		if (!RubidiumToolkitConfig.entityLighting.get())
+		if (!ToolkitConfig.entityLighting.get())
 			return 0;
 
 		var handler = (DynamicLightHandler<T>) getDynamicLightHandler(entity.getType());
@@ -169,7 +169,7 @@ public final class DynamicLightHandlers {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends BlockEntity> int getLuminanceFrom(T entity) {
-		if (!RubidiumToolkitConfig.blockEntityLighting.get())
+		if (!ToolkitConfig.blockEntityLighting.get())
 			return 0;
 		DynamicLightHandler<T> handler = (DynamicLightHandler<T>) getDynamicLightHandler(entity.getType());
 		if (handler == null)
