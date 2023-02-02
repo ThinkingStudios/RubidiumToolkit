@@ -14,6 +14,7 @@ import net.minecraftforge.network.NetworkConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
+import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsFeatures;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.DynLightsResourceListener;
 import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.DynamicLightHandlers;
 
@@ -21,6 +22,8 @@ import org.thinkingstudio.rubidium_toolkit.features.dynamiclights.api.DynamicLig
 public class RubidiumToolkit {
     public static final String MODID = "rubidium_toolkit";
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
+
+    public static DynLightsFeatures INSTANCE;
 
     public RubidiumToolkit() {
         MinecraftForge.EVENT_BUS.register(this);

@@ -21,9 +21,6 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.fml.IExtensionPoint;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.network.NetworkConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.thinkingstudio.rubidium_toolkit.RubidiumToolkit;
@@ -41,7 +38,6 @@ public class DynLightsFeatures {
 
 	private static final double MAX_RADIUS = 7.75;
 	private static final double MAX_RADIUS_SQUARED = MAX_RADIUS * MAX_RADIUS;
-	private static DynLightsFeatures INSTANCE;
 	private final Set<DynamicLightSource> dynamicLightSources = new HashSet<>();
 	private final ReentrantReadWriteLock lightSourcesLock = new ReentrantReadWriteLock();
 	private long lastUpdate = System.currentTimeMillis();
@@ -50,13 +46,6 @@ public class DynLightsFeatures {
 	public static boolean isEnabled() {
 		return !Objects.equals(ToolkitConfig.quality.get(), "OFF");
 	}
-
-	public DynLightsFeatures() {
-		INSTANCE = this;
-		log("Initializing RubidiumToolkit-DynamicLights");
-		ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
-	}
-
 
 	/**
 	 * Updates all light sources.
@@ -425,6 +414,6 @@ public class DynLightsFeatures {
 	 * @return the mod instance
 	 */
 	public static DynLightsFeatures get() {
-		return INSTANCE;
+		return RubidiumToolkit.INSTANCE;
 	}
 }
