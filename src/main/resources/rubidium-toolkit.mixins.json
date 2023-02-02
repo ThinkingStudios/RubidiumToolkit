@@ -31,5 +31,8 @@
     "dynamiclights.lightsource.LivingEntityMixin",
     "dynamiclights.lightsource.PlayerEntityMixin",
     "dynamiclights.lightsource.TntEntityMixin"
-  ]
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
