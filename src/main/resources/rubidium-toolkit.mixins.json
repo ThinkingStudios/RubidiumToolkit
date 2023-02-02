@@ -3,7 +3,6 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "package": "org.thinkingstudio.rubidium_toolkit.mixins",
-  "refmap": "rubidium-toolkit.mixins.refmap.json",
   "mixins": [
     "sodium.ToolkitSodiumOptionsMixin",
     "sodium.DynLightsSodiumOptionsMixin",
