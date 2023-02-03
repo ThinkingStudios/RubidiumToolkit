@@ -9,7 +9,7 @@ import org.thinkingstudio.rubidium_toolkit.toolkit.keybinding.KeyboardInput;
 
 @Mixin(Inventory.class)
 public class PlayerInventoryMixin {
-    @Inject(at = {@At("HEAD")}, method = {"swapPaint(D)V"}, cancellable = true)
+    @Inject(at = @At("HEAD"), method = "swapPaint(D)V", cancellable = true)
     private void onScrollInHotbar(double scrollAmount, CallbackInfo ci) {
         if(KeyboardInput.zoomKey.isDown())
             ci.cancel();
