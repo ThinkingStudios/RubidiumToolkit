@@ -1,6 +1,7 @@
 package org.thinkingstudio.rubidium_toolkit.mixin.sodium;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.network.chat.TranslatableComponent;
 import org.thinkingstudio.rubidium_toolkit.config.ConfigEnum;
 import org.thinkingstudio.rubidium_toolkit.config.ToolkitConfig;
 import org.thinkingstudio.rubidium_toolkit.dynlights.DynLightsFeatures;
@@ -42,22 +43,14 @@ public abstract class DynLightsOptionsMixin {
         List<OptionGroup> groups = new ArrayList<>();
 
         OptionImpl<SodiumGameOptions, ConfigEnum.QualityMode> qualityMode = OptionImpl.createBuilder(ConfigEnum.QualityMode.class, dynamicLightsOpts)
-                .setName(Component.nullToEmpty("Dynamic Lights Speed"))
-                .setTooltip(Component.nullToEmpty("""
-                        Controls how often dynamic lights will update.\s
-
-                        Lighting recalculation can be expensive, so slower values will give better performance.
-
-                        Off - Self explanatory
-                        Slow - Twice a second
-                        Fast - Five times a second
-                        Realtime - Every tick"""))
+                .setName(new TranslatableComponent("rubidium_toolkit.dynlights.speed.name"))
+                .setTooltip(new TranslatableComponent("rubidium_toolkit.dynlights.speed.tooltip"))
                 .setControl(
                         (option) -> new CyclingControl<>(option, ConfigEnum.QualityMode.class, new Component[] {
-                                Component.nullToEmpty("Off"),
-                                Component.nullToEmpty("Slow"),
-                                Component.nullToEmpty("Fast"),
-                                Component.nullToEmpty("Realtime")
+                                new TranslatableComponent("rubidium_toolkit.options.off"),
+                                new TranslatableComponent("rubidium_toolkit.options.slow"),
+                                new TranslatableComponent("rubidium_toolkit.options.fast"),
+                                new TranslatableComponent("rubidium_toolkit.options.realtime")
                         }))
                 .setBinding(
                         (options, value) -> {
@@ -70,11 +63,8 @@ public abstract class DynLightsOptionsMixin {
 
 
         OptionImpl<SodiumGameOptions, Boolean> entityLighting = OptionImpl.createBuilder(Boolean.class, dynamicLightsOpts)
-                .setName(Component.nullToEmpty("Dynamic Entity Lights"))
-                .setTooltip(Component.nullToEmpty("""
-                        Turning this on will show dynamic lighting on entities (dropped items, mobs, etc).\s
-
-                        This can drastically increase the amount of lighting updates, even when you're not holding a torch."""))
+                .setName(new TranslatableComponent("rubidium_toolkit.dynlights.entity_lights.name"))
+                .setTooltip(new TranslatableComponent("rubidium_toolkit.dynlights.entity_lights.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> ToolkitConfig.EntityLighting.set(value),
@@ -83,11 +73,8 @@ public abstract class DynLightsOptionsMixin {
                 .build();
 
         OptionImpl<SodiumGameOptions, Boolean> tileEntityLighting = OptionImpl.createBuilder(Boolean.class, dynamicLightsOpts)
-                .setName(Component.nullToEmpty("Dynamic Block Lights"))
-                .setTooltip(Component.nullToEmpty("""
-                        Turning this on will show dynamic lighting on tile entities (furnaces, modded machines, etc).\s
-
-                        This can drastically increase the amount of lighting updates, even when you're not holding a torch."""))
+                .setName(new TranslatableComponent("rubidium_toolkit.dynlights.block_lights.name"))
+                .setTooltip(new TranslatableComponent("rubidium_toolkit.dynlights.block_lights.tooltip"))
                 .setControl(TickBoxControl::new)
                 .setBinding(
                         (options, value) -> ToolkitConfig.TileEntityLighting.set(value),
@@ -103,7 +90,7 @@ public abstract class DynLightsOptionsMixin {
                 .build()
         );
 
-        pages.add(new OptionPage(Component.nullToEmpty("Dynamic Lights"), ImmutableList.copyOf(groups)));
+        pages.add(new OptionPage(new TranslatableComponent("rubidium_toolkit.dynlights.option.name"), ImmutableList.copyOf(groups)));
     }
 
 

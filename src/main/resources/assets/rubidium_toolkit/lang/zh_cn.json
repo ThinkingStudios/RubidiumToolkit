@@ -1,8 +1,5 @@
 {
   "toast.rubidium_toolkit.title": "铷 · 工具",
-  "toast.rubidium_toolkit.acknowledge_mod": "此服务器允许该模组",
-  "toast.rubidium_toolkit.acknowledge_mod_restrictions": "此服务器限制此 mod",
-  "command.rubidium_toolkit.client.config_present": "配置已重置为预设 %s!",
 
   "key.rubidium_toolkit.category": "铷 · 工具",
   "key.rubidium_toolkit.zoom": "缩放",
@@ -26,7 +23,9 @@
   "rubidium_toolkit.options.both": "都有",
   "rubidium_toolkit.options.simple" : "简略",
   "rubidium_toolkit.options.advanced" : "高级",
-  "rubidium_toolkit.options.unit.pixels": "%s 像素",
+  "rubidium_toolkit.options.slow": "慢",
+  "rubidium_toolkit.options.fast": "快",
+  "rubidium_toolkit.options.realtime": "实时",
   "rubidium_toolkit.options.unit.blocks": "%s 方块",
 
   "rubidium_toolkit.tools.fog.name": "雾",
